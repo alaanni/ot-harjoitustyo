@@ -1,0 +1,114 @@
+alaanni@lx0-fuxi187:~/ot_viikko1/tiedostoja$ git log --stat | cat
+commit 99dccffd9e0c8acbbb66d8760ffbcdbe9cd7d1d2
+Author: Anni Ala-Mattinen <anni.alamattinen@gmail.com>
+Date:   Wed Mar 17 12:09:57 2021 +0200
+
+    poistettu file 1 ja muokattu file 2 nimeksi file22
+
+ tiedostoja/file2             | 0
+ tiedostoja/{file1 => file22} | 0
+ 2 files changed, 0 insertions(+), 0 deletions(-)
+
+commit 97e6f31a5ca562cb09f6683849237d8f991aa040
+Author: Anni Ala-Mattinen <anni.alamattinen@gmail.com>
+Date:   Wed Mar 17 12:06:06 2021 +0200
+
+    lisätty hakemisto tiedostoja
+
+ tiedostoja/file1 | 0
+ tiedostoja/file2 | 0
+ tiedostoja/file3 | 0
+ 3 files changed, 0 insertions(+), 0 deletions(-)
+
+commit 36f8af9ea1bece598faf0f6416cb92db47c423ec
+Author: Anni Ala-Mattinen <anni.alamattinen@gmail.com>
+Date:   Wed Mar 17 11:57:12 2021 +0200
+
+    muutoksia ekaan ja tokaan tiedostoon
+
+ eka.txt    | 8 +-------
+ kolmas.txt | 3 ++-
+ 2 files changed, 3 insertions(+), 8 deletions(-)
+
+commit 9b289905d4717254e66481baffc915596dc24968
+Author: Anni Ala-Mattinen <anni.alamattinen@gmail.com>
+Date:   Wed Mar 17 11:55:18 2021 +0200
+
+    muutettu tiedosto.txt nimi eka.txt
+
+ tiedosto.txt => eka.txt | 0
+ 1 file changed, 0 insertions(+), 0 deletions(-)
+
+commit a15c34c7be928fe30507e59892a06d9ab17216e2
+Author: Anni Ala-Mattinen <anni.alamattinen@gmail.com>
+Date:   Wed Mar 17 11:53:24 2021 +0200
+
+    poistettu toinen.txt
+
+ toinen.txt | 1 -
+ 1 file changed, 1 deletion(-)
+
+commit a446aeeb641e95f84c25c6f8b34fcf14a6789f28
+Author: Anni Ala-Mattinen <anni.alamattinen@gmail.com>
+Date:   Wed Mar 17 11:52:03 2021 +0200
+
+    tiedosto.txt poistettu ja lisätty tekstiä
+
+ tiedosto.txt | 7 ++-----
+ 1 file changed, 2 insertions(+), 5 deletions(-)
+
+commit 2d8111dd9c6bad2fb0446f47a2d86bcec6f053a0
+Author: Anni Ala-Mattinen <anni.alamattinen@gmail.com>
+Date:   Wed Mar 17 11:50:21 2021 +0200
+
+    lisätty tekstiä tiedosto.txt
+
+ tiedosto.txt | 11 ++++++++++-
+ 1 file changed, 10 insertions(+), 1 deletion(-)
+
+commit 7cbb338bba0ec5adaf6145be09eca11e9a276d88
+Author: Anni Ala-Mattinen <anni.alamattinen@gmail.com>
+Date:   Wed Mar 17 11:45:56 2021 +0200
+
+    lisätty stuff
+
+ stuff/somestuff.txt | 0
+ 1 file changed, 0 insertions(+), 0 deletions(-)
+
+commit b5d434ac0c1456548842360b095e1ace5425eb21
+Author: Anni Ala-Mattinen <anni.alamattinen@gmail.com>
+Date:   Wed Mar 17 11:42:47 2021 +0200
+
+    muokattu toinen.txt ja kolmas.txt
+
+ kolmas.txt | 1 +
+ toinen.txt | 1 +
+ 2 files changed, 2 insertions(+)
+
+commit 0b9496ecbd6b86199690106fb1098b3fab13a299
+Author: Anni Ala-Mattinen <anni.alamattinen@gmail.com>
+Date:   Wed Mar 17 11:41:23 2021 +0200
+
+    kolmas.txt luotu
+
+ kolmas.txt | 0
+ 1 file changed, 0 insertions(+), 0 deletions(-)
+
+commit f0a259978175be4990407bfaf8e352d3c232d371
+Author: Anni Ala-Mattinen <anni.alamattinen@gmail.com>
+Date:   Wed Mar 17 11:36:58 2021 +0200
+
+    muutos ja lisäys
+
+ tiedosto.txt | 1 +
+ toinen.txt   | 0
+ 2 files changed, 1 insertion(+)
+
+commit 0cb535dbc8e3a2ef47e340a2abfc01f4c75f14d7
+Author: Anni Ala-Mattinen <anni.alamattinen@gmail.com>
+Date:   Wed Mar 17 11:35:08 2021 +0200
+
+    tiedosto.txt luotu
+
+ tiedosto.txt | 0
+ 1 file changed, 0 insertions(+), 0 deletions(-)
