@@ -8,3 +8,6 @@
 
 [komentorivi.txt](laskarit/viikko1/komentorivi.txt)
 
+### Viikko 2
+
+[testikattavuusUnicafe.png](laskarit/viikko2/testikattavuusUnicafe.png)
