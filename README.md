@@ -14,6 +14,6 @@
 
 ## Harjoitustyö
 
-[Vaatimusmäärittely](Budjetointisovellus/dokumentaatio/vaatimusmaarittely.md)
+[Vaatimusmäärittely](dokumentaatio/vaatimusmaarittely.md)
 
-[Työaikakirjanpito](Budjetointisovellus/dokumentaatio/tyoaikakirjanpito.md)
+[Työaikakirjanpito](dokumentaatio/tyoaikakirjanpito.md)
