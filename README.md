@@ -1,5 +1,7 @@
 # Ohjelmistotekniikka, harjoitustyö
 
+Sovellus rakennusprojektin budjetointiin ja kulujen hallintaan
+
 ## Tehtävät
 
 ### Viikko 1
