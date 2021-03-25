@@ -10,8 +10,9 @@
 
 ### Viikko 2
 
-[testikattavuusUnicafe.png](laskarit/viikko2/testikattavuusUnicafe.png)
+[Testikattavuus](laskarit/viikko2/testikattavuusUnicafe.png)
 
-### Harjoitustyö
+## Harjoitustyö
 
-[vaatimusmaarittely.md](vaatimusmaarittely.md)
+[Vaatimusmaarittely](Budjetointisovellus/dokumentaatio/vaatimusmaarittely.md)
+[Työaikakirjanpito](Budjetointisovellus/dokumentaatio/tyoaikakirjanpito.md)
