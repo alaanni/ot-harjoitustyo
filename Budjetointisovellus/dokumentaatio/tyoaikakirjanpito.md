@@ -4,4 +4,4 @@
 | :----:|:-----| :-----|
 | 24.3. | 3    | vaatimusmäärittely |
 | 25.2. | 1    | projektin luominen ja työaikakirjanpidon aloitus |
-| yht   | 4   | | 
+| yhteensä   | 4   | | 
