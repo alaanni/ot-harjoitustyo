@@ -11,3 +11,7 @@
 ### Viikko 2
 
 [testikattavuusUnicafe.png](laskarit/viikko2/testikattavuusUnicafe.png)
+
+### Harjoitustyö
+
+[vaatimusmaarittely.md](vaatimusmaarittely.md)
