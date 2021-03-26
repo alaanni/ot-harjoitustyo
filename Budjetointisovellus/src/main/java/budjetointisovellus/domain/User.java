@@ -1,5 +1,8 @@
 package budjetointisovellus.domain;
 
+/**
+ * Käyttäjää edustava luokka 
+ */
 
 public class User {
     private String name;
