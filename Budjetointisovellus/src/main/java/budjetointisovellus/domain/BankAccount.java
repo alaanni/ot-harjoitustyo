@@ -8,27 +8,27 @@ package budjetointisovellus.domain;
 public class BankAccount {
     private int id;
     private User user;
-    private double amount;
+    private double balance;
     
-    public BankAccount(int id, User user, double amount) {
+    public BankAccount(int id, User user, double saldo) {
         this.id = id;
         this.user = user;
-        this.amount = amount;
+        this.balance = saldo;
     }
     
-    public void setAmount(double newAmount) {
-        this.amount = amount;
+    public void setBalance(double newSaldo) {
+        this.balance = newSaldo;
     }
             
-    public double getAmount() {
-        return amount;
+    public double getBalance() {
+        return balance;
     }
     
     public void addMoney(double money) {
-        this.amount += money;
+        this.balance += money;
     }
     
     public void takeMoney(double money) {
-        this.amount -= money;
+        this.balance -= money;
     }
 }
