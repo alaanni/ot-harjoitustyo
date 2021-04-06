@@ -7,5 +7,5 @@
 | 26.3. | 3    | aloitettu sovelluslogiikan toteutusta |
 | 28.3. | 3    | luotu lisää luokkia, ensimmäiset toiminnallisuudet ja muutama testi |
 | 5.4.  | 3    | toteutettu käyttöliittymää |
-| 6.4.  | 4    | yritetty toteuttaa SQLite yhteyttä |
-| yht.  | 17   | | 
+| 6.4.  | 6    | toteutettu SQLite yhteys, uuden käyttäjän luominen, sisään- ja uloskirjautuminen |
+| yht.  | 19   | | 
