@@ -13,9 +13,8 @@ public class SQLUserDao implements UserDao<User, Integer> {
     private List<User> users;
     private Connection connection;
     
-    public SQLUserDao() throws SQLException {
-        connection = DriverManager.getConnection("jdbc:sqlite:budgetapp.db");
-        initTables();
+    public SQLUserDao(String url) throws SQLException {
+        connection = DriverManager.getConnection("jdbc:sqlite:"+url);
     }
     
     public void initTables() throws SQLException {

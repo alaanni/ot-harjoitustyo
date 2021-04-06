@@ -33,9 +33,13 @@ public class BudjetUi extends Application {
     private Label topLabel = new Label();
     
     @Override
-    public void init() throws FileNotFoundException, IOException {
+    public void init() throws FileNotFoundException, IOException, SQLException {
         Properties properties = new Properties();
         properties.load(new FileInputStream("config.properties"));
+        
+        String dbAddr = properties.getProperty("db");
+        
+        userDao = new SQLUserDao(dbAddr);
 
     }
     
@@ -70,6 +74,17 @@ public class BudjetUi extends Application {
         newPassword.setPromptText("Salasana");
         
         Button createNewUser = new Button("Rekisteröidy");
+        createNewUser.setOnAction(e -> {
+            String name = newName.getText();
+            String username = newUsername.getText();
+            String password = newPassword.getText();
+            User user = new User(name, username, password);
+            try {
+                userDao.create(user);
+            } catch (SQLException ex) {
+                Logger.getLogger(BudjetUi.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        });
         
         registerPane.getChildren().addAll(registerLabel, newName, newUsername, 
                 newPassword, createNewUser);
