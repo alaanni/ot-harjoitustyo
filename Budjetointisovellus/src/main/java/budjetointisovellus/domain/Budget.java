@@ -5,7 +5,7 @@ import java.util.*;
 
 /**
  *
- * Suunniteltua budgettia edustava luokka
+ * Suunniteltua budjettia edustava luokka
  */
 
 public class Budget {
@@ -20,18 +20,18 @@ public class Budget {
     
     public void addCost(Cost cost) {
         costs.add(cost);
-        this.moneyToUse -= cost.getCost();
+        this.moneyToUse -= cost.getAmount();
     }
     
     public void removeCost(Cost cost) {
-        this.moneyToUse += cost.getCost();
+        this.moneyToUse += cost.getAmount();
         costs.remove(cost);
     }
     
     public double getTotalPlanned() {
         double total = 0;
         for(Cost cost: costs) {
-            total += cost.getCost();
+            total += cost.getAmount();
         }
         return total;
     }

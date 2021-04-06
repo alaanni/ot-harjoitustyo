@@ -4,28 +4,37 @@ import java.util.*;
 
 /**
  *
- * Suunniteltua kulua edustava luokka
+ * Kulua edustava luokka
  */
 
 public class Cost {
     
     private int id;
     private String name;
-    private double cost;
+    private double amount;
     private Category category;
+    private Date date;
     
-    public Cost(int id, String name, double cost, Category category) {
+    public Cost(int id, String name, double amount, Category category, Date date) {
         this.id = id;
         this.name = name;
-        this.cost = cost;
+        this.amount = amount;
+        this.category = category;
+        this.date = date;
+    }
+    
+    public Cost(int id, String name, double amount, Category category) {
+        this.id = id;
+        this.name = name;
+        this.amount = amount;
         this.category = category;
     }
     
-    public void setCost(double cost) {
-        this.cost = cost;
+    public void setAmount(double amount) {
+        this.amount = amount;
     }
     
-    public double getCost() {
-        return cost;
+    public double getAmount() {
+        return amount;
     }
 }

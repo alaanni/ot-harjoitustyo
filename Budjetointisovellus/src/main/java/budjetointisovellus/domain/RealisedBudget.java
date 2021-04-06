@@ -9,7 +9,7 @@ import java.util.*;
 
 public class RealisedBudget {
     private User user;
-    private ArrayList<ActualCost> costs;
+    private ArrayList<Cost> costs;
     private BankAccount account;
     
     public RealisedBudget(User user, BankAccount account) {
@@ -17,19 +17,19 @@ public class RealisedBudget {
         this.account = account;
     }
     
-    public void addCost(ActualCost cost) {
+    public void addCost(Cost cost) {
     costs.add(cost);
-    this.account.takeMoney(cost.getCost());
+    this.account.takeMoney(cost.getAmount());
     }
     
-    public void removeCost(ActualCost cost) {
-        this.account.addMoney(cost.getCost());
+    public void removeCost(Cost cost) {
+        this.account.addMoney(cost.getAmount());
         costs.remove(cost);
     }
     public double getTotal() {
         double total = 0;
-        for(ActualCost cost: costs) {
-            total += cost.getCost();
+        for(Cost cost: costs) {
+            total += cost.getAmount();
         }
         return total;
     }
