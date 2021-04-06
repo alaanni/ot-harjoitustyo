@@ -3,6 +3,9 @@ package budjetointisovellus.ui;
 import budjetointisovellus.domain.BudgetService;
 import budjetointisovellus.dao.SQLUserDao;
 import budjetointisovellus.domain.User;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.sql.SQLException;
 import java.util.Properties;
 import java.util.logging.Level;
@@ -30,9 +33,9 @@ public class BudjetUi extends Application {
     private Label topLabel = new Label();
     
     @Override
-    public void init() {
+    public void init() throws FileNotFoundException, IOException {
         Properties properties = new Properties();
-        
+        properties.load(new FileInputStream("config.properties"));
 
     }
     
