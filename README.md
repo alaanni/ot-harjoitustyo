@@ -12,10 +12,10 @@ Sovellus on Helsingin yliopiston Ohjelmistotekniikka, kevät 2021 -kurssin harjo
 
 ### Viikko 3
 
-Kuvat viikon kolme laskareihin liittyen:
-
 [Tehtävät 1-2: luokkakaavio](laskarit/viikko3/monopoliLuokkakaavio.jpg)
+
 [Tehtävä 3: sekvenssikaavio](laskarit/viikko3/sekvenssikaavio3.jpg)
+
 [Tehtävä 4: sekvenssikaavio](laskarit/viikko3/sekvenssikaavio4.jpg)
 
 ## Dokumentaatio
