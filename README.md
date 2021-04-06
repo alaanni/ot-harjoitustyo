@@ -26,6 +26,13 @@ Sovellus on Helsingin yliopiston Ohjelmistotekniikka, kevät 2021 -kurssin harjo
 
 ## Komentorivitoiminnot
 
+### Suoritus
+
+```
+mvn compile exec:java -Dexec.mainClass=budjetointisovellus.Main
+
+```
+
 ### Testaus
 
 Sovelluksen testit suoritetaan komennolla
