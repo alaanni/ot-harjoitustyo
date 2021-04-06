@@ -18,6 +18,7 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
@@ -40,7 +41,7 @@ public class BudjetUi extends Application {
         String dbAddr = properties.getProperty("db");
         
         userDao = new SQLUserDao(dbAddr);
-
+        budgetService = new BudgetService(userDao);
     }
     
     @Override
@@ -50,6 +51,32 @@ public class BudjetUi extends Application {
         
         //budget scene
         
+        VBox budgetPane = new VBox();
+        HBox logoutAndInfo = new HBox();
+        
+        Label userInfo = new Label("Tervetuloa "+budgetService.getLoggedUser());
+        Button logoutBtn = new Button("Kirjaudu ulos");
+        
+        logoutBtn.setOnAction(e -> {
+            budgetService.logout();
+            primaryStage.setScene(loginScene);
+            try {
+                init();
+            } catch (IOException | SQLException ex) {
+                Logger.getLogger(BudjetUi.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        });
+        
+        logoutAndInfo.getChildren().addAll(userInfo, logoutBtn);
+        
+        //User loggedUser = budgetService.getLoggedUser();
+        //String loggedName = loggedUser.getName();
+        
+        Label budgetLabel = new Label("Sinun budjettisi");
+        GridPane budget = new GridPane();
+        
+        budgetPane.getChildren().addAll(logoutAndInfo, budgetLabel);
+        budgetScene = new Scene(budgetPane, 300, 300);
         
         //create new user scene
         
@@ -73,25 +100,45 @@ public class BudjetUi extends Application {
         newPassword.setPrefColumnCount(20);
         newPassword.setPromptText("Salasana");
         
+        HBox createAndCancelBtns = new HBox();
+        
         Button createNewUser = new Button("Rekisteröidy");
         createNewUser.setOnAction(e -> {
             String name = newName.getText();
             String username = newUsername.getText();
             String password = newPassword.getText();
             User user = new User(name, username, password);
+            System.out.println("user: "+user.getName()+", "+user.getUsername()+", "+user.getPassword());
             try {
                 userDao.create(user);
             } catch (SQLException ex) {
                 Logger.getLogger(BudjetUi.class.getName()).log(Level.SEVERE, null, ex);
             }
+            primaryStage.setScene(loginScene);
+            newName.setText("");
+            newUsername.setText("");
+            newPassword.setText("");
+            try {
+                init();
+            } catch (IOException | SQLException ex) {
+                Logger.getLogger(BudjetUi.class.getName()).log(Level.SEVERE, null, ex);
+            }
         });
         
+        Button cancel = new Button("Peruuta");
+        cancel.setOnAction(e -> {
+            primaryStage.setScene(loginScene);
+        });
+        
+        createAndCancelBtns.getChildren().addAll(createNewUser, cancel);
+        
         registerPane.getChildren().addAll(registerLabel, newName, newUsername, 
-                newPassword, createNewUser);
+                newPassword, createAndCancelBtns);
         
         createUserScene = new Scene(registerPane, 300, 300);
  
         //login scene
+        
         topLabel.setText("Kirjaudu sisään");
         
         VBox loginPane = new VBox();
@@ -116,8 +163,9 @@ public class BudjetUi extends Application {
             
             try {
                 if (budgetService.login(username)) {
-                    topLabel.setText("Tervetuloa "+username+"!");
                     primaryStage.setScene(budgetScene);
+                    usernameTxt.setText("");
+                    passwordTxt.setText("");
                 }
             } catch (SQLException ex) {
                 Logger.getLogger(BudjetUi.class.getName()).log(Level.SEVERE, null, ex);

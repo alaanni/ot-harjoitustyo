@@ -14,6 +14,7 @@ public class SQLUserDao implements UserDao<User, Integer> {
     private Connection connection;
     
     public SQLUserDao(String url) throws SQLException {
+        System.out.println("url: "+url);
         connection = DriverManager.getConnection("jdbc:sqlite:"+url);
     }
     
@@ -32,6 +33,7 @@ public class SQLUserDao implements UserDao<User, Integer> {
     
     @Override
     public void create(User user) throws SQLException {
+        System.out.println("Create(user): "+user.getName());
         PreparedStatement stmt = connection.prepareStatement("INSERT INTO User"
             + " (name, username, password)"
             + " VALUES (?, ?, ?)");
