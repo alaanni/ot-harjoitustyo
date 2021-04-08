@@ -8,4 +8,5 @@
 | 28.3. | 3    | luotu lisää luokkia, ensimmäiset toiminnallisuudet ja muutama testi |
 | 5.4.  | 3    | toteutettu käyttöliittymää |
 | 6.4.  | 6    | toteutettu SQLite yhteys, uuden käyttäjän luominen, sisään- ja uloskirjautuminen |
-| yht.  | 19   | | 
+| 8.4.  | 5    | lisätty metodeja luokille ja laajennettu testausta |
+| yht.  | 24   | | 
