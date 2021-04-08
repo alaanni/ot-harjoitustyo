@@ -67,5 +67,14 @@ public class BudgetService {
         User user = new User(name, username, password);
         userDao.create(user);
     }
+    
+    /**
+    * Luo uusi suunnitelma (budjetti)
+    * 
+    */ 
+    
+    public void createNewBudget() {
+        
+    }
 
 }

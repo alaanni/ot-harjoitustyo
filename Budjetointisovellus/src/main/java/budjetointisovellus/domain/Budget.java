@@ -10,29 +10,45 @@ import java.util.*;
 
 public class Budget {
     private User user;
-    private ArrayList<Cost> costs;
+    private ArrayList<Category> categories;
     private double moneyToUse;
     
     public Budget(User user, double moneyToUse) {
         this.user = user;
+        this.categories = new ArrayList();
         this.moneyToUse = moneyToUse;
     }
     
-    public void addCost(Cost cost) {
-        costs.add(cost);
+    public User getBudgetUser() {
+        return this.user;
+    }
+    
+    public void addCost(Cost cost, Category category) {
+        boolean found = false;
+        for(Category c : categories) {
+            if(c.getName().equals(category.getName())) {
+                c.addCost(cost);
+                found = true;
+            }
+        }
+        if(!found) {
+            categories.add(category);
+            category.addCost(cost);
+        }
+        
         this.moneyToUse -= cost.getAmount();
     }
     
-    public void removeCost(Cost cost) {
+    public void removeCost(Cost cost, Category category) {
         this.moneyToUse += cost.getAmount();
-        costs.remove(cost);
+        categories.stream().filter((c) -> (c.getName().equals(category.getName()))).forEachOrdered((c) -> {
+            c.removeCost(cost);
+        });
     }
     
     public double getTotalPlanned() {
         double total = 0;
-        for(Cost cost: costs) {
-            total += cost.getAmount();
-        }
+        total = categories.stream().map((c) -> c.getSum()).reduce(total, (accumulator, _item) -> accumulator + _item);
         return total;
     }
     

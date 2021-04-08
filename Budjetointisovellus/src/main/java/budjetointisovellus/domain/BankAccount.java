@@ -6,12 +6,10 @@ package budjetointisovellus.domain;
  */
 
 public class BankAccount {
-    private int id;
     private User user;
     private double balance;
     
-    public BankAccount(int id, User user, double saldo) {
-        this.id = id;
+    public BankAccount(User user, double saldo) {
         this.user = user;
         this.balance = saldo;
     }

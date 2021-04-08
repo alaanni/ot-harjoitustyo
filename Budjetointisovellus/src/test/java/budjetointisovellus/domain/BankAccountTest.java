@@ -1,18 +1,15 @@
 package budjetointisovellus.domain;
 
-import org.junit.After;
-import org.junit.AfterClass;
 import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
 /**
  *
- * Luokka sovelluksen testaamiseen 
+ * Luokka pankkitilin toiminnan testaamiseen 
  */
 
-public class BudgetAppTest {
+public class BankAccountTest {
     
     User user;
     BankAccount account;
@@ -20,7 +17,7 @@ public class BudgetAppTest {
     @Before
     public void setUp() {
         user = new User("test", "test", "test");
-        account = new BankAccount(1, user, 0);
+        account = new BankAccount(user, 0);
     }
 
     @Test

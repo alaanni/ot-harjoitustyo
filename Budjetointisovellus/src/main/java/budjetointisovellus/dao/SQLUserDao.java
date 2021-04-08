@@ -14,7 +14,6 @@ public class SQLUserDao implements UserDao<User, Integer> {
     private Connection connection;
     
     public SQLUserDao(String url) throws SQLException {
-        System.out.println("url: "+url);
         connection = DriverManager.getConnection("jdbc:sqlite:"+url);
     }
     

@@ -10,5 +10,4 @@ public interface UserDao<User, Integer> {
     User update(User user) throws SQLException;
     void delete(Integer key) throws SQLException;
     List<User> getAll() throws SQLException;
-
 }
