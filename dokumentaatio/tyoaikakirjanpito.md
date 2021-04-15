@@ -9,4 +9,6 @@
 | 5.4.  | 3    | toteutettu käyttöliittymää |
 | 6.4.  | 6    | toteutettu SQLite yhteys, uuden käyttäjän luominen, sisään- ja uloskirjautuminen |
 | 8.4.  | 5    | lisätty metodeja luokille ja laajennettu testausta |
-| yht.  | 24   | | 
+| 14.4. | 5    | budjetit taulun alustus ja siihen liittyvät metodit |
+| 15.4. | 2    | käyttöliittymän korjailua |
+| yht.  | 31   | | 
