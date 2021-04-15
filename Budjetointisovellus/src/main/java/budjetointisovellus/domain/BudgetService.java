@@ -1,5 +1,6 @@
 package budjetointisovellus.domain;
 
+import budjetointisovellus.dao.BudgetDao;
 import java.util.*;
 import budjetointisovellus.dao.UserDao;
 import java.sql.SQLException;
@@ -11,10 +12,12 @@ import java.sql.SQLException;
 
 public class BudgetService {
     private UserDao userDao;
+    private BudgetDao budgetDao;
     private User logged;
     
-    public BudgetService(UserDao userdao) {
+    public BudgetService(UserDao userdao, BudgetDao budgetdao) {
         this.userDao = userdao;
+        this.budgetDao = budgetdao;
     }
 
 
@@ -22,18 +25,27 @@ public class BudgetService {
     * sisäänkirjautuminen
     * 
     * @param   username käyttäjätunnus
+     * @param password  salasana
     * 
     * @return true jos käyttätunnus olemassa 
          * @throws java.sql.SQLException 
     * 
     */ 
 
-    public boolean login(String username) throws SQLException {
+    public boolean login(String username, String password) throws SQLException {
+        System.out.println("Kirjaudutaan sisään!");
         User user = (User) userDao.findByUsername(username);
         if (user == null) {
+            System.out.println("Ei löydy");
             return false;
         }
+        
+        /*if (!user.checkPassword(password, user.getPassword())) {
+            return false;
+        }*/
+
         logged = user;
+        System.out.println("Kirjautuneena: "+logged.getName());
         return true;
     }
 
@@ -61,6 +73,7 @@ public class BudgetService {
          * @param name nimi
          * @param username käyttäjätunnus
          * @param password salasana
+     * @throws java.sql.SQLException
     */ 
 
     public void createUser(String name, String username, String password) throws SQLException {

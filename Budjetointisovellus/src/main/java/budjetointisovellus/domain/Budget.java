@@ -9,9 +9,10 @@ import java.util.*;
  */
 
 public class Budget {
+    private String name;
+    private double moneyToUse;
     private User user;
     private ArrayList<Category> categories;
-    private double moneyToUse;
     
     public Budget(User user, double moneyToUse) {
         this.user = user;
@@ -21,6 +22,10 @@ public class Budget {
     
     public User getBudgetUser() {
         return this.user;
+    }
+    
+    public String getName() {
+        return this.name;
     }
     
     public void addCost(Cost cost, Category category) {

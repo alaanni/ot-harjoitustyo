@@ -8,6 +8,7 @@ import org.mindrot.jbcrypt.BCrypt;
  */
 
 public class User {
+    private int id;
     private String name;
     private String username;
     private String password;
@@ -19,6 +20,10 @@ public class User {
     }
     
     public User() {}
+    
+    public int getId() {
+        return this.id;
+    }
     
     public String getName() {
         return this.name;
@@ -48,7 +53,7 @@ public class User {
         return BCrypt.hashpw(password, BCrypt.gensalt());
     }
     
-    public static Boolean checkPassword(String password, String passwordDB){
+    public Boolean checkPassword(String password, String passwordDB){
         return BCrypt.checkpw(password, passwordDB);
     }
 

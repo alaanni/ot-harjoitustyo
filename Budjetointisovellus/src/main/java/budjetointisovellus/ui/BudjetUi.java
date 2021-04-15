@@ -1,5 +1,6 @@
 package budjetointisovellus.ui;
 
+import budjetointisovellus.dao.SQLBudgetDao;
 import budjetointisovellus.domain.BudgetService;
 import budjetointisovellus.dao.SQLUserDao;
 import budjetointisovellus.domain.User;
@@ -26,6 +27,7 @@ import javafx.scene.layout.VBox;
 public class BudjetUi extends Application {
     private BudgetService budgetService;
     private SQLUserDao userDao;
+    private SQLBudgetDao budgetDao;
     
     private Scene loginScene;
     private Scene createUserScene;
@@ -41,13 +43,14 @@ public class BudjetUi extends Application {
         String dbAddr = properties.getProperty("db");
         
         userDao = new SQLUserDao(dbAddr);
-        budgetService = new BudgetService(userDao);
+        budgetDao = new SQLBudgetDao(dbAddr);
+        budgetService = new BudgetService(userDao, budgetDao);
     }
     
     @Override
     public void start(Stage primaryStage) {
-        
         primaryStage.setTitle("Budjetointisovellus");
+        
         
         //budget scene
         
@@ -69,14 +72,12 @@ public class BudjetUi extends Application {
         
         logoutAndInfo.getChildren().addAll(userInfo, logoutBtn);
         
-        //User loggedUser = budgetService.getLoggedUser();
-        //String loggedName = loggedUser.getName();
-        
         Label budgetLabel = new Label("Sinun budjettisi");
         GridPane budget = new GridPane();
         
         budgetPane.getChildren().addAll(logoutAndInfo, budgetLabel);
-        budgetScene = new Scene(budgetPane, 300, 300);
+        budgetScene = new Scene(budgetPane, 500, 300);
+        
         
         //create new user scene
         
@@ -108,7 +109,6 @@ public class BudjetUi extends Application {
             String username = newUsername.getText();
             String password = newPassword.getText();
             User user = new User(name, username, password);
-            System.out.println("user: "+user.getName()+", "+user.getUsername()+", "+user.getPassword());
             try {
                 userDao.create(user);
             } catch (SQLException ex) {
@@ -135,7 +135,7 @@ public class BudjetUi extends Application {
         registerPane.getChildren().addAll(registerLabel, newName, newUsername, 
                 newPassword, createAndCancelBtns);
         
-        createUserScene = new Scene(registerPane, 300, 300);
+        createUserScene = new Scene(registerPane, 500, 300);
  
         //login scene
         
@@ -162,7 +162,7 @@ public class BudjetUi extends Application {
             String password = passwordTxt.getText();
             
             try {
-                if (budgetService.login(username)) {
+                if (budgetService.login(username, password)) {
                     primaryStage.setScene(budgetScene);
                     usernameTxt.setText("");
                     passwordTxt.setText("");
@@ -171,6 +171,7 @@ public class BudjetUi extends Application {
                 Logger.getLogger(BudjetUi.class.getName()).log(Level.SEVERE, null, ex);
             }
         });
+        
         Button registerButton = new Button("Luo käyttäjätunnus");
         registerButton.setOnAction(e -> {
             primaryStage.setScene(createUserScene);
@@ -180,10 +181,9 @@ public class BudjetUi extends Application {
 
         loginPane.getChildren().addAll(topLabel, usernameTxt, passwordTxt, buttonPane);
         
-        loginScene = new Scene(loginPane, 300, 300);
+        loginScene = new Scene(loginPane, 500, 300);
         
         primaryStage.setScene(loginScene);
-        
         
         primaryStage.show();
     }
