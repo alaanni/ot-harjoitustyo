@@ -42,7 +42,6 @@ public class SQLUserDao implements UserDao<User, Integer> {
         }
         
         stmt.close();
-        connection.close();
     }
     
     @Override
@@ -59,8 +58,7 @@ public class SQLUserDao implements UserDao<User, Integer> {
         
         stmt.close();
         rs.close();
-        connection.close();
-
+        
         return u;
     }
     

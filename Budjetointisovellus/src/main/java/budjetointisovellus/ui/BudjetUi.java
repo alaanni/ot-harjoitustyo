@@ -48,7 +48,7 @@ public class BudjetUi extends Application {
     }
     
     @Override
-    public void start(Stage primaryStage) {
+    public void start(Stage primaryStage) throws IOException, FileNotFoundException, SQLException {
         primaryStage.setTitle("Budjetointisovellus");
         
         
@@ -57,17 +57,12 @@ public class BudjetUi extends Application {
         VBox budgetPane = new VBox();
         HBox logoutAndInfo = new HBox();
         
-        Label userInfo = new Label("Tervetuloa "+budgetService.getLoggedUser());
+        Label userInfo = new Label();
         Button logoutBtn = new Button("Kirjaudu ulos");
         
         logoutBtn.setOnAction(e -> {
             budgetService.logout();
             primaryStage.setScene(loginScene);
-            try {
-                init();
-            } catch (IOException | SQLException ex) {
-                Logger.getLogger(BudjetUi.class.getName()).log(Level.SEVERE, null, ex);
-            }
         });
         
         logoutAndInfo.getChildren().addAll(userInfo, logoutBtn);
@@ -108,9 +103,8 @@ public class BudjetUi extends Application {
             String name = newName.getText();
             String username = newUsername.getText();
             String password = newPassword.getText();
-            User user = new User(name, username, password);
             try {
-                userDao.create(user);
+                budgetService.createUser(name, username, password);
             } catch (SQLException ex) {
                 Logger.getLogger(BudjetUi.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -118,11 +112,6 @@ public class BudjetUi extends Application {
             newName.setText("");
             newUsername.setText("");
             newPassword.setText("");
-            try {
-                init();
-            } catch (IOException | SQLException ex) {
-                Logger.getLogger(BudjetUi.class.getName()).log(Level.SEVERE, null, ex);
-            }
         });
         
         Button cancel = new Button("Peruuta");
@@ -166,6 +155,7 @@ public class BudjetUi extends Application {
                     primaryStage.setScene(budgetScene);
                     usernameTxt.setText("");
                     passwordTxt.setText("");
+                    userInfo.setText("Tervetuloa "+budgetService.getLoggedUser().getName());
                 }
             } catch (SQLException ex) {
                 Logger.getLogger(BudjetUi.class.getName()).log(Level.SEVERE, null, ex);
