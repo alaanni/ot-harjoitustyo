@@ -1,6 +1,7 @@
 package budjetointisovellus.ui;
 
 import budjetointisovellus.dao.SQLBudgetDao;
+import budjetointisovellus.dao.SQLCategoryDao;
 import budjetointisovellus.domain.BudgetService;
 import budjetointisovellus.dao.SQLUserDao;
 import budjetointisovellus.domain.User;
@@ -28,10 +29,12 @@ public class BudgetUi extends Application {
     private BudgetService budgetService;
     private SQLUserDao userDao;
     private SQLBudgetDao budgetDao;
+    private SQLCategoryDao  categoryDao;
     
     private Scene loginScene;
     private Scene createUserScene;
     private Scene budgetScene;
+    private Scene newBudgetScene;
     
     private Label topLabel = new Label();
     
@@ -44,6 +47,7 @@ public class BudgetUi extends Application {
         
         userDao = new SQLUserDao(dbAddr);
         budgetDao = new SQLBudgetDao(dbAddr);
+        categoryDao = new SQLCategoryDao(dbAddr);
         budgetService = new BudgetService(userDao, budgetDao);
     }
     
@@ -69,11 +73,22 @@ public class BudgetUi extends Application {
         logoutAndInfo.getChildren().addAll(userInfo, logoutBtn);
         
         Label budgetLabel = new Label("Sinun budjettisi");
+        Button newBudget = new Button("Aloita budjetointi");
+        
+        newBudget.setOnAction(e -> {
+            primaryStage.setScene(newBudgetScene);
+            topLabel.setText("Luo uusi budjetti");
+        });
+        
         GridPane budget = new GridPane();
         
-        budgetPane.getChildren().addAll(logoutAndInfo, budgetLabel);
+        
+        budgetPane.getChildren().addAll(logoutAndInfo, budgetLabel, newBudget);
         budgetScene = new Scene(budgetPane, 500, 300);
         
+        //create new budget scene
+        
+        newBudgetScene = new Scene(topLabel, 500, 300);
         
         //create new user scene
         
