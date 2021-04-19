@@ -11,4 +11,5 @@
 | 8.4.  | 5    | lisätty metodeja luokille ja laajennettu testausta |
 | 14.4. | 5    | budjetit taulun alustus ja siihen liittyvät metodit |
 | 15.4. | 2    | käyttöliittymän korjailua |
-| yht.  | 31   | | 
+| 19.4. | 3    | chekstyle käyttöönotto, Category toteutusta |
+| yht.  | 34   | | 

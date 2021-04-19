@@ -21,7 +21,7 @@ public class BudgetTest {
     public void setUp() {
         user = new User("test", "test", "test");
         budget = new Budget(user, 1000);
-        category = new Category("testCategory");
+        category = new Category(budget, "testCategory");
         cost1 = new Cost("testCost1", 1, category);
         cost2 = new Cost("testCost2", 10, category);
     }

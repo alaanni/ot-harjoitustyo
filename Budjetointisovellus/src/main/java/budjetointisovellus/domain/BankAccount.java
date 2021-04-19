@@ -6,7 +6,7 @@ package budjetointisovellus.domain;
  */
 
 public class BankAccount {
-    private User user;
+    private final User user;
     private double balance;
     
     public BankAccount(User user, double saldo) {

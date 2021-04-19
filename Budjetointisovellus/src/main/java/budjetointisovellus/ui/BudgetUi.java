@@ -24,7 +24,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
 
-public class BudjetUi extends Application {
+public class BudgetUi extends Application {
     private BudgetService budgetService;
     private SQLUserDao userDao;
     private SQLBudgetDao budgetDao;
@@ -63,6 +63,7 @@ public class BudjetUi extends Application {
         logoutBtn.setOnAction(e -> {
             budgetService.logout();
             primaryStage.setScene(loginScene);
+            topLabel.setText("Kirjaudu sisään");
         });
         
         logoutAndInfo.getChildren().addAll(userInfo, logoutBtn);
@@ -106,9 +107,10 @@ public class BudjetUi extends Application {
             try {
                 budgetService.createUser(name, username, password);
             } catch (SQLException ex) {
-                Logger.getLogger(BudjetUi.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(BudgetUi.class.getName()).log(Level.SEVERE, null, ex);
             }
             primaryStage.setScene(loginScene);
+            topLabel.setText("Kirjaudu sisään");
             newName.setText("");
             newUsername.setText("");
             newPassword.setText("");
@@ -156,9 +158,11 @@ public class BudjetUi extends Application {
                     usernameTxt.setText("");
                     passwordTxt.setText("");
                     userInfo.setText("Tervetuloa "+budgetService.getLoggedUser().getName());
+                } else {
+                    topLabel.setText("Anna käyttäjätunnus ja salasana tai luo uusi käyttäjä ");
                 }
             } catch (SQLException ex) {
-                Logger.getLogger(BudjetUi.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(BudgetUi.class.getName()).log(Level.SEVERE, null, ex);
             }
         });
         

@@ -49,11 +49,11 @@ public class User {
         this.password = encryptPassword(password);
     }
     
-    public static String encryptPassword(String password){
+    public static String encryptPassword(String password) {
         return BCrypt.hashpw(password, BCrypt.gensalt());
     }
     
-    public Boolean checkPassword(String password, String passwordDB){
+    public Boolean checkPassword(String password, String passwordDB) {
         return BCrypt.checkpw(password, passwordDB);
     }
 

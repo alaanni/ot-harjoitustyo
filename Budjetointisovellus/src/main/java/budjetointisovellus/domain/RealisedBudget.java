@@ -8,9 +8,9 @@ import java.util.*;
  */
 
 public class RealisedBudget {
-    private User user;
-    private ArrayList<Category> categories;
-    private BankAccount account;
+    private final User user;
+    private final ArrayList<Category> categories;
+    private final BankAccount account;
     
     public RealisedBudget(User user, BankAccount account) {
         this.user = user;
@@ -20,13 +20,13 @@ public class RealisedBudget {
     
     public void addCost(Cost cost, Category category) {
         boolean found = false;
-        for(Category c : categories) {
-            if(c.getName().equals(category.getName())) {
+        for (Category c : categories) {
+            if (c.getName().equals(category.getName())) {
                 c.addCost(cost);
                 found = true;
             }
         }
-        if(!found) {
+        if (!found) {
             categories.add(category);
             category.addCost(cost);
         }
@@ -42,7 +42,7 @@ public class RealisedBudget {
     }
     public double getTotal() {
         double total = 0;
-        total = categories.stream().map((c) -> c.getSum()).reduce(total, (accumulator, _item) -> accumulator + _item);
+        total = categories.stream().map((c) -> c.getSum()).reduce(total, (accumulator, item) -> accumulator + item);
         return total;
     }
 }

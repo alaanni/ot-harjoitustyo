@@ -13,11 +13,15 @@ import org.junit.Test;
 public class CategoryTest {
     
     Category category;
+    Budget budget;
     Cost cost1, cost2, cost3;
+    User user;
     
     @Before
     public void setUp() {
-        category = new Category("testCategory");
+        user = new User("testi", "testi", "testi");
+        budget = new Budget(user, 1000);
+        category = new Category(budget ,"testCategory");
         cost1 = new Cost("testCost1", 1, category);
         cost2 = new Cost("testCost2", 10, category);
         cost3 = new Cost("testCost3", 100, category);

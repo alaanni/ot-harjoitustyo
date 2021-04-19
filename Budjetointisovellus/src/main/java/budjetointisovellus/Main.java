@@ -1,9 +1,9 @@
 package budjetointisovellus;
 
-import budjetointisovellus.ui.BudjetUi;
+import budjetointisovellus.ui.BudgetUi;
 
 public class Main {
     public static void main(String[] args) {
-        BudjetUi.main(args);
+        BudgetUi.main(args);
     }
 }

@@ -9,37 +9,36 @@ import java.sql.*;
  */
 
 public class SQLBudgetDao implements BudgetDao<Budget, Integer> {
-    private Connection connection;
+    private final Connection connection;
     
     public SQLBudgetDao(String url) throws SQLException {
-        connection = DriverManager.getConnection("jdbc:sqlite:"+url);
+        connection = DriverManager.getConnection("jdbc:sqlite:" + url);
         initTables();
     }
     
-    public void initTables() throws SQLException {
-        PreparedStatement stmt = connection.prepareStatement("CREATE TABLE IF NOT EXISTS budgets "
+    public final void initTables() throws SQLException {
+        try (PreparedStatement stmt = connection.prepareStatement("CREATE TABLE IF NOT EXISTS budgets "
                 + "(id INTEGER PRIMARY KEY AUTOINCREMENT, "
-                + "name    VARCHAR(255)  NOT NULL, "
+                + "name    VARCHAR(255)  UNIQUE, "
                 + "moneyToUse   FLOAT, "
                 + "user_id INTEGER,"
-                + "FOREIGN KEY (user_id) REFERENCES users (user_id))");
-        stmt.executeUpdate();
-        stmt.close();
+                + "FOREIGN KEY (user_id) REFERENCES users (user_id))")) {
+            stmt.executeUpdate();
+        }
     }
     
     @Override
     public void create(Budget budget) throws SQLException {
-        System.out.println("Create(budget) for "+budget.getBudgetUser().getName());
-        PreparedStatement stmt = connection.prepareStatement("INSERT INTO Budget"
-            + " (name, moneyToUse, user_id)"
-            + " VALUES (?, ?, ?)");
-        stmt.setString(1, budget.getName());
-        stmt.setDouble(2, budget.getMoneyToUse());
-        stmt.setInt(3, budget.getBudgetUser().getId());
-
-        stmt.executeUpdate();
-        stmt.close();
-        connection.close();
+        System.out.println("Create(budget) for " + budget.getBudgetUser().getName());
+        try (PreparedStatement stmt = connection.prepareStatement("INSERT INTO Budget"
+                + " (name, moneyToUse, user_id)"
+                + " VALUES (?, ?, ?)")) {
+            stmt.setString(1, budget.getName());
+            stmt.setDouble(2, budget.getMoneyToUse());
+            stmt.setInt(3, budget.getBudgetUser().getId());
+            
+            stmt.executeUpdate();
+        }
     }
 
     @Override
@@ -48,6 +47,7 @@ public class SQLBudgetDao implements BudgetDao<Budget, Integer> {
     }
 
     @Override
+    @SuppressWarnings("empty-statement")
     public void update(Budget budget) throws SQLException {
         String sql = "UPDATE Budget SET moneyToUse=? WHERE name=?";
  
@@ -58,7 +58,7 @@ public class SQLBudgetDao implements BudgetDao<Budget, Integer> {
         int rowsUpdated = statement.executeUpdate();
         if (rowsUpdated > 0) {
             System.out.println("An existing budget was updated successfully!");
-        };
+        }
     }
 
     @Override

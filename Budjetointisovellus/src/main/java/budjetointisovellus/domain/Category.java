@@ -8,12 +8,18 @@ import java.util.ArrayList;
  */
 
 public class Category {
-    private String name;
+    private final Budget budget;
+    private final String name;
     ArrayList<Cost> costs;
     
-    public Category(String name) {
+    public Category(Budget budget, String name) {
+        this.budget = budget;
         this.name = name;
         costs = new ArrayList();
+    }
+    
+    public Budget getBudget() {
+        return this.budget;
     }
     
     public String getName() {
@@ -26,8 +32,8 @@ public class Category {
     
     public void removeCost(Cost cost) {
         ArrayList<Cost> toRemove = new ArrayList();
-        for(Cost c : costs) {
-            if(c.getName().equals(cost.getName())) {
+        for (Cost c : costs) {
+            if (c.getName().equals(cost.getName())) {
                 toRemove.add(c);
             }
         }
@@ -35,7 +41,7 @@ public class Category {
     }
     public double getSum() {
         double sum = 0;
-        sum = costs.stream().map((c) -> c.getAmount()).reduce(sum, (accumulator, _item) -> accumulator + _item);
+        sum = costs.stream().map((c) -> c.getAmount()).reduce(sum, (accumulator, item) -> accumulator + item);
         return sum;
     }
 }

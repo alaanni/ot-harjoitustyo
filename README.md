@@ -10,6 +10,8 @@ Sovellus on Helsingin yliopiston Ohjelmistotekniikka, kevät 2021 -kurssin harjo
 
 [Työaikakirjanpito](dokumentaatio/tyoaikakirjanpito.md)
 
+[Arkkitehtuuri](dokumentaatio/arkkitehtuuri.md)
+
 ## Komentorivitoiminnot
 
 ### Suoritus
