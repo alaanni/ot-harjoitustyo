@@ -12,5 +12,5 @@
 | 14.4. | 5    | budjetit taulun alustus ja siihen liittyvät metodit |
 | 15.4. | 2    | käyttöliittymän korjailua |
 | 19.4. | 3    | chekstyle käyttöönotto, Category toteutusta |
-| 20.4. | 3    | suunniteltu rakennetta, ohjelman toteutusta |
-| yht.  | 37   | | 
+| 20.4. | 8    | suunniteltu rakennetta, ohjelman toteutusta, metodeja BudgetServiceen |
+| yht.  | 42   | | 
