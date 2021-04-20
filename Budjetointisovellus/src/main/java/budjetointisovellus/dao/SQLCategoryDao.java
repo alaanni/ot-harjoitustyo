@@ -15,7 +15,7 @@ import java.util.List;
  *
  * @author alaanni
  */
-public class SQLCategoryDao implements CategoryDao {
+public class SQLCategoryDao implements CategoryDao<Category, Integer> {
     private final Connection connection;
     
     public SQLCategoryDao(String url) throws SQLException {
@@ -34,7 +34,7 @@ public class SQLCategoryDao implements CategoryDao {
     }
 
     @Override
-    public void create(Object category) throws SQLException {
+    public void create(Category category) throws SQLException {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
@@ -63,7 +63,7 @@ public class SQLCategoryDao implements CategoryDao {
         
         String sql = "SELECT * FROM categories WHERE budget_id = ?";
         
-        try (PreparedStatement stmt  = connection.prepareStatement(sql)){
+        try (PreparedStatement stmt  = connection.prepareStatement(sql)) {
             stmt.setInt(1, budget.getId());
             
             ResultSet rs  = stmt.executeQuery();
@@ -79,12 +79,12 @@ public class SQLCategoryDao implements CategoryDao {
     }
 
     @Override
-    public void update(Object category) throws SQLException {
+    public void update(Category category) throws SQLException {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public void delete(Object category) throws SQLException {
+    public void delete(Category category) throws SQLException {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }
