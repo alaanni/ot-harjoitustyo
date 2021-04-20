@@ -13,13 +13,18 @@ public class User {
     private String username;
     private String password;
     
+    public User(int id, String name, String userName, String password) {
+        this.id = id;
+        this.name = name;
+        this.username = userName;
+        this.password = password;
+    }
+    
     public User(String name, String userName, String password) {
         this.name = name;
         this.username = userName;
         this.password = encryptPassword(password); //Encrypt the password
     }
-    
-    public User() {}
     
     public int getId() {
         return this.id;

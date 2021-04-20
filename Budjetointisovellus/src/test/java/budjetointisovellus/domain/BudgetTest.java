@@ -20,7 +20,7 @@ public class BudgetTest {
     @Before
     public void setUp() {
         user = new User("test", "test", "test");
-        budget = new Budget(user, 1000);
+        budget = new Budget("testBudget", 1000, user);
         category = new Category(budget, "testCategory");
         cost1 = new Cost("testCost1", 1, category);
         cost2 = new Cost("testCost2", 10, category);

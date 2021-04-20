@@ -5,11 +5,10 @@
  */
 package budjetointisovellus.dao;
 
+import budjetointisovellus.domain.Budget;
 import budjetointisovellus.domain.Category;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
+import java.sql.*;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -26,7 +25,7 @@ public class SQLCategoryDao implements CategoryDao {
     
     public final void initTables() throws SQLException {
         try (PreparedStatement stmt = connection.prepareStatement("CREATE TABLE IF NOT EXISTS categories "
-                + "(id INTEGER PRIMARY KEY AUTOINCREMENT, "
+                + "(category_id INTEGER PRIMARY KEY AUTOINCREMENT, "
                 + "name    VARCHAR(255)  NOT NULL, "
                 + "budget_id INTEGER,"
                 + "FOREIGN KEY (budget_id) REFERENCES budgets (budget_id))")) {
@@ -40,13 +39,43 @@ public class SQLCategoryDao implements CategoryDao {
     }
 
     @Override
-    public Category findOneByBudget(String budgetName) throws SQLException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public Category findOneByBudget(String categoryName, Budget budget) throws SQLException {
+        ResultSet rs;
+        Category c;
+        try (PreparedStatement stmt = connection.prepareStatement("SELECT * FROM categories WHERE name = ? AND budget_id = ?")) {
+            stmt.setString(1, categoryName);
+            stmt.setInt(2, budget.getId());
+            rs = stmt.executeQuery();
+            if (!rs.next()) {
+                return null;
+            }
+            c = new Category(rs.getInt("category_id"), budget, rs.getString("name"));
+        }
+        rs.close();
+        
+        return c;
     }
 
     @Override
-    public List findAllByBudget(String budgetName) throws SQLException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public List findAllByBudget(Budget budget) throws SQLException {
+        List<Category> categories = new ArrayList<>();
+        Category c;
+        
+        String sql = "SELECT * FROM categories WHERE budget_id = ?";
+        
+        try (PreparedStatement stmt  = connection.prepareStatement(sql)){
+            stmt.setInt(1, budget.getId());
+            
+            ResultSet rs  = stmt.executeQuery();
+            
+            while (rs.next()) {
+                c = new Category(rs.getInt("category_id"), budget, rs.getString("name"));
+                categories.add(c);
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        return categories;
     }
 
     @Override

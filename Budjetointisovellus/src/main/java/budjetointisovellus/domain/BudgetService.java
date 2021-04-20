@@ -1,8 +1,10 @@
 package budjetointisovellus.domain;
 
 import budjetointisovellus.dao.BudgetDao;
+import budjetointisovellus.dao.CategoryDao;
 import budjetointisovellus.dao.UserDao;
 import java.sql.SQLException;
+import java.util.*;
 
 /**
  *
@@ -12,11 +14,15 @@ import java.sql.SQLException;
 public class BudgetService {
     private final UserDao userDao;
     private final BudgetDao budgetDao;
+    private final CategoryDao categoryDao;
     private User logged;
+    private Budget usersBudget;
+    private List<Category> categories = new ArrayList<>();
     
-    public BudgetService(UserDao userdao, BudgetDao budgetdao) {
+    public BudgetService(UserDao userdao, BudgetDao budgetdao, CategoryDao categorydao) {
         this.userDao = userdao;
         this.budgetDao = budgetdao;
+        this.categoryDao = categorydao;
     }
 
 
@@ -62,6 +68,16 @@ public class BudgetService {
     public User getLoggedUser() {
         return logged;
     }
+    
+        /**
+    * kirjautuneen käyttäjän budjetti
+    * 
+    * @return kirjautuneen käyttäjän budjetti
+    */   
+
+    public Budget getUsersBudget() {
+        return usersBudget;
+    }
 
     /**
     * uloskirjautuminen
@@ -69,6 +85,8 @@ public class BudgetService {
 
     public void logout() {
         logged = null;  
+        usersBudget = null;
+        categories.clear();
     }
 
     /**
@@ -88,10 +106,56 @@ public class BudgetService {
     /**
     * Luo uusi suunnitelma (budjetti)
     * 
+     * @param name
+     * @param moneyToUse
+     * @param username
+     * @throws java.sql.SQLException
     */ 
     
-    public void createNewBudget() {
+    public void createNewBudget(String name, Double moneyToUse, String username) throws SQLException {
+        User user = (User) userDao.findByUsername(username);
+        Budget budget = new Budget(name, moneyToUse, user);
+        budgetDao.create(budget);
+    }
+    
+    /**
+    * Etsi käyttäjän budjetti
+    * 
+    * @throws java.sql.SQLException 
+    */ 
+    
+    public boolean findUsersBudget() throws SQLException {
+        User user = (User) userDao.findByUsername(logged.getName());
+        Budget budget = (Budget) budgetDao.findByUser(user);
+        
+        if (budget == null) {
+            System.out.println("Ei löydy");
+            return false;
+        }
+        usersBudget = budget;
+        return true;
+    }
+    
+    
+    /**
+    * Etsi käyttäjän budjetin kategoriat
+    * 
+     * @return lista budjettiin sisältyvistä kategorioista
+    * @throws java.sql.SQLException 
+    */ 
+    
+    public List findBudgetCategories() throws SQLException {
+        categories = categoryDao.findAllByBudget(usersBudget);
+        return categories;
+    }
+    
+    /**
+    * Etsi kategoriaan kuuluvat kulut
+    * 
+    * @throws java.sql.SQLException 
+    */ 
+    
+    public void findCategorysCosts() throws SQLException {
         
     }
-
 }

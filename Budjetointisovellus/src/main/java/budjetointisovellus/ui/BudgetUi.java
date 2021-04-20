@@ -4,7 +4,7 @@ import budjetointisovellus.dao.SQLBudgetDao;
 import budjetointisovellus.dao.SQLCategoryDao;
 import budjetointisovellus.domain.BudgetService;
 import budjetointisovellus.dao.SQLUserDao;
-import budjetointisovellus.domain.User;
+import budjetointisovellus.domain.Budget;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -37,6 +37,7 @@ public class BudgetUi extends Application {
     private Scene newBudgetScene;
     
     private Label topLabel = new Label();
+    private VBox budgetLines;
     
     @Override
     public void init() throws FileNotFoundException, IOException, SQLException {
@@ -48,8 +49,19 @@ public class BudgetUi extends Application {
         userDao = new SQLUserDao(dbAddr);
         budgetDao = new SQLBudgetDao(dbAddr);
         categoryDao = new SQLCategoryDao(dbAddr);
-        budgetService = new BudgetService(userDao, budgetDao);
+        budgetService = new BudgetService(userDao, budgetDao, categoryDao);
     }
+    
+    public void redrawBudgetLines() {
+        System.out.println("Täällä renderöidään budjetti");
+        budgetLines.getChildren().clear();
+        
+        if (budgetService.getUsersBudget() != null) {
+            budgetLines.getChildren().add(new Label("Olet jo luonut yhden budjetin"));
+            Budget budgetCategories = budgetService.getUsersBudget();
+        }        
+    }
+    
     
     @Override
     public void start(Stage primaryStage) throws IOException, FileNotFoundException, SQLException {
@@ -72,23 +84,69 @@ public class BudgetUi extends Application {
         
         logoutAndInfo.getChildren().addAll(userInfo, logoutBtn);
         
+        budgetLines = new VBox();
+        redrawBudgetLines();
+        
         Label budgetLabel = new Label("Sinun budjettisi");
         Button newBudget = new Button("Aloita budjetointi");
-        
         newBudget.setOnAction(e -> {
             primaryStage.setScene(newBudgetScene);
-            topLabel.setText("Luo uusi budjetti");
-        });
+        }); 
         
-        GridPane budget = new GridPane();
-        
-        
-        budgetPane.getChildren().addAll(logoutAndInfo, budgetLabel, newBudget);
+        budgetPane.getChildren().addAll(logoutAndInfo, budgetLabel, budgetLines, newBudget);
         budgetScene = new Scene(budgetPane, 500, 300);
+        
         
         //create new budget scene
         
-        newBudgetScene = new Scene(topLabel, 500, 300);
+        VBox newBudgetPane = new VBox();
+
+        TextField budgetName = new TextField();
+        TextField budgetMoneyToUse = new TextField();
+        
+        budgetName.getStyleClass().add("textbox-normal");
+        budgetName.setPrefColumnCount(20);
+        budgetName.setPromptText("Budjetin nimi");
+
+        budgetMoneyToUse.getStyleClass().add("textbox-normal");
+        budgetMoneyToUse.setPrefColumnCount(20);
+        budgetMoneyToUse.setPromptText("Rahaa käytettävissä");
+        
+        HBox btns = new HBox();
+        Button createNewBudget = new Button("Luo budjetti");
+        createNewBudget.setOnAction(e -> {
+            String bName = budgetName.getText();
+            double moneyToUse = Double.parseDouble(budgetMoneyToUse.getText());
+            try {
+                budgetService.createNewBudget(bName, moneyToUse, budgetService.getLoggedUser().getName());
+            } catch (SQLException ex) {
+                Logger.getLogger(BudgetUi.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            primaryStage.setScene(budgetScene);
+            topLabel.setText("");
+            budgetName.setText("");
+            budgetMoneyToUse.setText("");
+            try {
+                budgetService.findUsersBudget();
+            } catch (SQLException ex) {
+                Logger.getLogger(BudgetUi.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            redrawBudgetLines();
+        });
+        
+        Button canc = new Button("Peruuta");
+        canc.setOnAction(e -> {
+            primaryStage.setScene(budgetScene);
+        });
+        
+        btns.getChildren().addAll(createNewBudget, canc);
+        
+        newBudgetPane.getChildren().addAll(topLabel, budgetName, 
+                budgetMoneyToUse, btns);
+        
+        
+        newBudgetScene = new Scene(newBudgetPane,  500, 300);
+        
         
         //create new user scene
         
@@ -142,6 +200,7 @@ public class BudgetUi extends Application {
                 newPassword, createAndCancelBtns);
         
         createUserScene = new Scene(registerPane, 500, 300);
+        
  
         //login scene
         
@@ -173,6 +232,10 @@ public class BudgetUi extends Application {
                     usernameTxt.setText("");
                     passwordTxt.setText("");
                     userInfo.setText("Tervetuloa "+budgetService.getLoggedUser().getName());
+                    if (budgetService.findUsersBudget()) {
+                        System.out.println("Käyttäjälle löytyi budjetti");
+                    }
+                    redrawBudgetLines();
                 } else {
                     topLabel.setText("Anna käyttäjätunnus ja salasana tai luo uusi käyttäjä ");
                 }

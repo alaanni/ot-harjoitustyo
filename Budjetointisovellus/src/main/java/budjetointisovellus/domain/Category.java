@@ -8,9 +8,17 @@ import java.util.ArrayList;
  */
 
 public class Category {
+    private int id;
     private final Budget budget;
     private final String name;
     ArrayList<Cost> costs;
+    
+    public Category(int id, Budget budget, String name) {
+        this.id = id;
+        this.budget = budget;
+        this.name = name;
+        costs = new ArrayList();
+    }
     
     public Category(Budget budget, String name) {
         this.budget = budget;

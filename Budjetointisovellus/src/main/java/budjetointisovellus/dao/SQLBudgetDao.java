@@ -1,6 +1,7 @@
 package budjetointisovellus.dao;
 
 import budjetointisovellus.domain.Budget;
+import budjetointisovellus.domain.User;
 import java.sql.*;
 
 /**
@@ -18,7 +19,7 @@ public class SQLBudgetDao implements BudgetDao<Budget, Integer> {
     
     public final void initTables() throws SQLException {
         try (PreparedStatement stmt = connection.prepareStatement("CREATE TABLE IF NOT EXISTS budgets "
-                + "(id INTEGER PRIMARY KEY AUTOINCREMENT, "
+                + "(budget_id INTEGER PRIMARY KEY AUTOINCREMENT, "
                 + "name    VARCHAR(255)  UNIQUE, "
                 + "moneyToUse   FLOAT, "
                 + "user_id INTEGER,"
@@ -30,7 +31,8 @@ public class SQLBudgetDao implements BudgetDao<Budget, Integer> {
     @Override
     public void create(Budget budget) throws SQLException {
         System.out.println("Create(budget) for " + budget.getBudgetUser().getName());
-        try (PreparedStatement stmt = connection.prepareStatement("INSERT INTO Budget"
+        
+        try (PreparedStatement stmt = connection.prepareStatement("INSERT INTO budgets"
                 + " (name, moneyToUse, user_id)"
                 + " VALUES (?, ?, ?)")) {
             stmt.setString(1, budget.getName());
@@ -42,14 +44,27 @@ public class SQLBudgetDao implements BudgetDao<Budget, Integer> {
     }
 
     @Override
-    public Budget findByUsername(String username) throws SQLException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public Budget findByUser(User user) throws SQLException {
+        ResultSet rs;
+        Budget b;
+        try (PreparedStatement stmt = connection.prepareStatement("SELECT * FROM budgets WHERE user_id = ?")) {
+            stmt.setInt(1, user.getId());
+            rs = stmt.executeQuery();
+            if (!rs.next()) {
+                return null;
+            }
+            b = new Budget(rs.getInt("budget_id"), rs.getString("name"), 
+                    rs.getDouble("moneyToUse"), user);
+        }
+        rs.close();
+        
+        return b;
     }
 
     @Override
     @SuppressWarnings("empty-statement")
     public void update(Budget budget) throws SQLException {
-        String sql = "UPDATE Budget SET moneyToUse=? WHERE name=?";
+        String sql = "UPDATE budgets SET moneyToUse=? WHERE name=?";
  
         PreparedStatement statement = connection.prepareStatement(sql);
         statement.setDouble(1, budget.getMoneyToUse());
@@ -63,7 +78,7 @@ public class SQLBudgetDao implements BudgetDao<Budget, Integer> {
 
     @Override
     public void delete(Budget budget) throws SQLException {
-        String sql = "DELETE FROM Budget WHERE name=?";
+        String sql = "DELETE FROM budgets WHERE name=?";
  
         PreparedStatement statement = connection.prepareStatement(sql);
         statement.setString(1, budget.getName());

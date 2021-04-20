@@ -53,7 +53,7 @@ public class SQLUserDao implements UserDao<User, Integer> {
             if (!rs.next()) {
                 return null;
             }
-            u = new User(rs.getString("name"), rs.getString("username"),
+            u = new User(rs.getInt("user_id"), rs.getString("name"), rs.getString("username"),
             rs.getString("password"));
         }
         rs.close();
