@@ -24,12 +24,12 @@ public class SQLCostDao implements CostDao<Cost, Integer> {
     
     public void initTable() throws SQLException {
         try (PreparedStatement stmt = connection.prepareStatement("CREATE TABLE IF NOT EXISTS costs "
-            + "(cost_id INTEGER PRIMARY KEY AUTOINCREMENT, "
-            + "name    VARCHAR(255)  NOT NULL, "
-            + "amount    FLOAT,  "
-            + "category_id INTEGER,"
-            + "FOREIGN KEY (category_id) REFERENCES categories (category_id))")) {
-        stmt.executeUpdate();
+                + "(cost_id INTEGER PRIMARY KEY AUTOINCREMENT, "
+                + "name    VARCHAR(255)  NOT NULL, "
+                + "amount    FLOAT,  "
+                + "category_id INTEGER,"
+                + "FOREIGN KEY (category_id) REFERENCES categories (category_id))")) {
+            stmt.executeUpdate();
         }
     }
 

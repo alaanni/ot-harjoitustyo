@@ -34,7 +34,7 @@ public class SQLUserDaoTest {
         var properties = new Properties();
         properties.load(new FileInputStream("config.properties")); 
         String dbAddr = properties.getProperty("testdb");
-        userDao = new FakeUserDao(dbAddr);
+        userDao = new SQLUserDao(dbAddr);
         user = new User("test", "test", "test");
     }
     
