@@ -13,4 +13,6 @@
 | 15.4. | 2    | käyttöliittymän korjailua |
 | 19.4. | 3    | chekstyle käyttöönotto, Category toteutusta |
 | 20.4. | 8    | suunniteltu rakennetta, lisää metodeja sovelluslogiikkaan, testausta jatkettu |
-| yht.  | 42   | | 
+| 22.4  | 2    | virheilmoitukset lomakkeiden täyttövirheisiin |
+¦ 23.4. | 1    | testausta laajennettu |
+| yht.  | 45   | | 
