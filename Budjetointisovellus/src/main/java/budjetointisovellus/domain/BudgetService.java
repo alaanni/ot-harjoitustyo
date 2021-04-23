@@ -95,12 +95,17 @@ public class BudgetService {
          * @param name nimi
          * @param username käyttäjätunnus
          * @param password salasana
+     * @return 
      * @throws java.sql.SQLException
     */ 
 
-    public void createUser(String name, String username, String password) throws SQLException {
+    public boolean createUser(String name, String username, String password) throws SQLException {
+        if (name.isEmpty() || username.isEmpty() || password.isEmpty()) {
+            return false;
+        }
         User user = new User(name, username, password);
         userDao.create(user);
+        return true;
     }
     
     /**
@@ -109,18 +114,25 @@ public class BudgetService {
      * @param name
      * @param moneyToUse
      * @param username
+     * @return 
      * @throws java.sql.SQLException
     */ 
     
-    public void createNewBudget(String name, Double moneyToUse, String username) throws SQLException {
+    public boolean createNewBudget(String name, Double moneyToUse, String username) throws SQLException {
+        if (name.isEmpty()) {
+            return false;
+        }
+        
         User user = (User) userDao.findByUsername(username);
         Budget budget = new Budget(name, moneyToUse, user);
         budgetDao.create(budget);
+        return true;
     }
     
     /**
     * Etsi käyttäjän budjetti
     * 
+     * @return 
     * @throws java.sql.SQLException 
     */ 
     

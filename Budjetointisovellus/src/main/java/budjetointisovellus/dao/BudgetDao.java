@@ -8,4 +8,5 @@ public interface BudgetDao<Budget, Integer> {
     Budget findByUser(User user) throws SQLException;
     void update(Budget budget) throws SQLException;
     void delete(Budget budget) throws SQLException;
+    void dropTable() throws SQLException;
 }

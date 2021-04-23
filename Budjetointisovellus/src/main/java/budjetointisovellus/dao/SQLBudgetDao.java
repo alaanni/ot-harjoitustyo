@@ -88,5 +88,10 @@ public class SQLBudgetDao implements BudgetDao<Budget, Integer> {
             System.out.println("A budget was deleted successfully!");
         }
     }
+
+    @Override
+    public void dropTable() throws SQLException {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
     
 }

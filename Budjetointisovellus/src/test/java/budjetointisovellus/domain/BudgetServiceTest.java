@@ -6,16 +6,12 @@ import budjetointisovellus.dao.UserDao;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.nio.charset.Charset;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
-import java.util.Random;
 import org.junit.After;
-import org.junit.AfterClass;
 import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
@@ -50,13 +46,20 @@ public class BudgetServiceTest {
         testService = new BudgetService(userDao, budgetDao, categoryDao);
         
     }
+    
+    @After
+    public void tearDown() throws SQLException {
+        userDao.dropTable();
+        budgetDao.dropTable();
+    }
 
     @Test
     public void createUserAndloginWorks() throws SQLException {
-        testService.createUser("test", "test", "test");
-        testService.login("test", "test");
+        testService.createUser("testName", "testUsername", "testPw");
+        testService.login("testUsername", "testPw");
         
-        assertEquals("test", testService.getLoggedUser().getUsername());
+        assertEquals("testName", testService.getLoggedUser().getName());
+        assertEquals("testUsername", testService.getLoggedUser().getUsername());
     }
     
     @Test
@@ -66,5 +69,19 @@ public class BudgetServiceTest {
         testService.logout();
         
         assertEquals(null, testService.getLoggedUser());
+    }
+    
+    /**
+     *
+     * @throws java.sql.SQLException
+     */
+    @Test
+    public void createAndFindNewBudgetWorks() throws SQLException {
+        testService.createUser("test", "test", "test");
+        testService.login("test", "test");
+        testService.createNewBudget("testbudget", 100.0 , "test");
+        testService.findUsersBudget();
+        
+        assertEquals("testbudget", testService.getUsersBudget().getName());
     }
 }

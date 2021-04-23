@@ -103,34 +103,39 @@ public class BudgetUi extends Application {
         TextField budgetName = new TextField();
         TextField budgetMoneyToUse = new TextField();
         
-        budgetName.getStyleClass().add("textbox-normal");
-        budgetName.setPrefColumnCount(20);
-        budgetName.setPromptText("Budjetin nimi");
+        Label bn = new Label("Budjetin nimi: ");
 
-        budgetMoneyToUse.getStyleClass().add("textbox-normal");
-        budgetMoneyToUse.setPrefColumnCount(20);
-        budgetMoneyToUse.setPromptText("Rahaa käytettävissä");
+        Label mtu = new Label("Rahaa käytettävissä:      (voi jättää myös tyhjäksi ja lisätä myöhemmin) ");
         
         HBox btns = new HBox();
         Button createNewBudget = new Button("Luo budjetti");
         createNewBudget.setOnAction(e -> {
+            double moneyToUse;
             String bName = budgetName.getText();
-            double moneyToUse = Double.parseDouble(budgetMoneyToUse.getText());
+            if (!budgetMoneyToUse.getText().isEmpty()) {
+                moneyToUse = Double.parseDouble(budgetMoneyToUse.getText());
+            } else {
+                moneyToUse = 0.0;
+            }
             try {
-                budgetService.createNewBudget(bName, moneyToUse, budgetService.getLoggedUser().getName());
+                if (budgetService.createNewBudget(bName, moneyToUse, budgetService.getLoggedUser().getName())) {
+                    primaryStage.setScene(budgetScene);
+                    topLabel.setText("");
+                    budgetName.setText("");
+                    budgetMoneyToUse.setText("");
+                    bn.setText("Budjetin nimi: ");
+                    try {
+                        budgetService.findUsersBudget();
+                    } catch (SQLException ex) {
+                        Logger.getLogger(BudgetUi.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                    redrawBudgetLines();
+                } else {
+                    bn.setText("Budjetille tulee antaa nimi");
+                }
             } catch (SQLException ex) {
                 Logger.getLogger(BudgetUi.class.getName()).log(Level.SEVERE, null, ex);
             }
-            primaryStage.setScene(budgetScene);
-            topLabel.setText("");
-            budgetName.setText("");
-            budgetMoneyToUse.setText("");
-            try {
-                budgetService.findUsersBudget();
-            } catch (SQLException ex) {
-                Logger.getLogger(BudgetUi.class.getName()).log(Level.SEVERE, null, ex);
-            }
-            redrawBudgetLines();
         });
         
         Button canc = new Button("Peruuta");
@@ -140,7 +145,7 @@ public class BudgetUi extends Application {
         
         btns.getChildren().addAll(createNewBudget, canc);
         
-        newBudgetPane.getChildren().addAll(topLabel, budgetName, 
+        newBudgetPane.getChildren().addAll(topLabel, bn, budgetName, mtu,
                 budgetMoneyToUse, btns);
         
         
@@ -152,22 +157,13 @@ public class BudgetUi extends Application {
         Label registerLabel = new Label("Luo uusi käyttäjä");
         
         TextField newName = new TextField();
+        Label newUn = new Label("Nimi: ");
         TextField newUsername = new TextField();
+        Label newUsern = new Label("Käyttäjätunnus: ");
         PasswordField newPassword = new PasswordField();
+        Label newPw = new Label("Salasana: ");
         
         VBox registerPane = new VBox();
-        
-        newName.getStyleClass().add("textbox-normal");
-        newName.setPrefColumnCount(20);
-        newName.setPromptText("Nimi");
-
-        newUsername.getStyleClass().add("textbox-normal");
-        newUsername.setPrefColumnCount(20);
-        newUsername.setPromptText("Käyttäjätunnus");
-        
-        newPassword.getStyleClass().add("textbox-normal");
-        newPassword.setPrefColumnCount(20);
-        newPassword.setPromptText("Salasana");
         
         HBox createAndCancelBtns = new HBox();
         
@@ -177,26 +173,32 @@ public class BudgetUi extends Application {
             String username = newUsername.getText();
             String password = newPassword.getText();
             try {
-                budgetService.createUser(name, username, password);
+                if (budgetService.createUser(name, username, password)) {
+                    primaryStage.setScene(loginScene);
+                    topLabel.setText("Kirjaudu sisään");
+                    newName.setText("");
+                    newUsername.setText("");
+                    newPassword.setText("");
+                    registerLabel.setText("Luo uusi käyttäjä");
+                } else {
+                    registerLabel.setText("Täytä kaikki kentät");
+                }
             } catch (SQLException ex) {
                 Logger.getLogger(BudgetUi.class.getName()).log(Level.SEVERE, null, ex);
             }
-            primaryStage.setScene(loginScene);
-            topLabel.setText("Kirjaudu sisään");
-            newName.setText("");
-            newUsername.setText("");
-            newPassword.setText("");
+            
         });
         
         Button cancel = new Button("Peruuta");
         cancel.setOnAction(e -> {
             primaryStage.setScene(loginScene);
+            registerLabel.setText("Luo uusi käyttäjä");
         });
         
         createAndCancelBtns.getChildren().addAll(createNewUser, cancel);
         
-        registerPane.getChildren().addAll(registerLabel, newName, newUsername, 
-                newPassword, createAndCancelBtns);
+        registerPane.getChildren().addAll(registerLabel, newUn, newName, newUsern,newUsername, 
+                newPw, newPassword, createAndCancelBtns);
         
         createUserScene = new Scene(registerPane, 500, 300);
         
@@ -208,15 +210,9 @@ public class BudgetUi extends Application {
         VBox loginPane = new VBox();
         
         TextField usernameTxt = new TextField();
-        
-        usernameTxt.getStyleClass().add("textbox-normal");
-        usernameTxt.setPrefColumnCount(20);
-        usernameTxt.setPromptText("Käyttäjätunnus");
-        
+        Label usern = new Label("Käyttäjätunnus: ");
         PasswordField passwordTxt = new PasswordField();
-        passwordTxt.getStyleClass().add("textbox-normal");
-        passwordTxt.setPrefColumnCount(20);
-        passwordTxt.setPromptText("Salasana");
+        Label pwf = new Label("Salasana: ");
         
         HBox buttonPane = new HBox();
         buttonPane.setAlignment(Pos.CENTER_LEFT);
@@ -250,7 +246,7 @@ public class BudgetUi extends Application {
         
         buttonPane.getChildren().addAll(loginButton, registerButton);
 
-        loginPane.getChildren().addAll(topLabel, usernameTxt, passwordTxt, buttonPane);
+        loginPane.getChildren().addAll(topLabel, usern, usernameTxt, pwf, passwordTxt, buttonPane);
         
         loginScene = new Scene(loginPane, 500, 300);
         

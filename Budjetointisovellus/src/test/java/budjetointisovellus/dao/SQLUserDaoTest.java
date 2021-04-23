@@ -6,40 +6,48 @@
 package budjetointisovellus.dao;
 
 import org.junit.After;
-import org.junit.AfterClass;
 import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
-import static org.junit.Assert.*;
+import budjetointisovellus.domain.FakeUserDao;
+import budjetointisovellus.domain.User;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.sql.SQLException;
+import java.util.Properties;
+import static org.junit.Assert.assertEquals;
+
 
 /**
  *
  * @author alaanni
  */
 public class SQLUserDaoTest {
+    UserDao userDao;
+    User user;
     
     public SQLUserDaoTest() {
     }
     
-    @BeforeClass
-    public static void setUpClass() {
-    }
-    
-    @AfterClass
-    public static void tearDownClass() {
-    }
-    
     @Before
-    public void setUp() {
+    public void setUp() throws FileNotFoundException, IOException, SQLException {
+        var properties = new Properties();
+        properties.load(new FileInputStream("config.properties")); 
+        String dbAddr = properties.getProperty("testdb");
+        userDao = new FakeUserDao(dbAddr);
+        user = new User("test", "test", "test");
     }
     
     @After
-    public void tearDown() {
+    public void tearDown() throws SQLException {
+        userDao.dropTable();
     }
 
-    // TODO add test methods here.
-    // The methods must be annotated with annotation @Test. For example:
-    //
-    // @Test
-    // public void hello() {}
+    @Test
+    public void createUserWorks() throws SQLException {
+        userDao.create(user);
+        User u = (User) userDao.findByUsername("test");
+        
+        assertEquals("test", u.getName());
+    }
 }

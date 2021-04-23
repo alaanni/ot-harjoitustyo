@@ -25,8 +25,15 @@ public class FakeUserDao implements UserDao<User, Integer> {
         try (PreparedStatement stmt = connection.prepareStatement("CREATE TABLE IF NOT EXISTS users "
                 + "(user_id INTEGER PRIMARY KEY AUTOINCREMENT, "
                 + "name    VARCHAR(255)  NOT NULL, "
-                + "username    VARCHAR(255)  NOT NULL,  "
+                + "username    VARCHAR(255)  UNIQUE,  "
                 + "password   VARCHAR(255)  NOT NULL)")) {
+            stmt.executeUpdate();
+        }
+    }
+    
+    @Override
+    public void dropTable() throws SQLException {
+        try (PreparedStatement stmt = connection.prepareStatement("DROP TABLE users")) {
             stmt.executeUpdate();
         }
     }
@@ -95,4 +102,5 @@ public class FakeUserDao implements UserDao<User, Integer> {
             System.out.println("A user was deleted successfully");
         }
     }   
+
 }

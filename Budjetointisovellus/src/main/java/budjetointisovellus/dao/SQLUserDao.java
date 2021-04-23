@@ -90,5 +90,10 @@ public class SQLUserDao implements UserDao<User, Integer> {
             System.out.println("A user was deleted successfully");
         }
     }
+
+    @Override
+    public void dropTable() throws SQLException {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
     
 }
