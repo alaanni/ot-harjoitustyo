@@ -16,7 +16,7 @@ Sovellus on Helsingin yliopiston Ohjelmistotekniikka, kevät 2021 -kurssin harjo
 
 ### Suoritus
 
-Sovellus voidaan ajaa kansiosta Budjetointisovellus komennolla:
+Sovellus voidaan ajaa kansiosta Budjetointisovellus/ komennolla:
 
 ```
 mvn compile exec:java -Dexec.mainClass=budjetointisovellus.Main
