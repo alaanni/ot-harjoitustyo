@@ -9,10 +9,18 @@ import java.util.*;
 
 public class Cost {
     
+    int id;
     private String name;
     private double amount;
     private Category category;
     private Date date;
+    
+    public Cost(int id, String name, double amount, Category category) {
+        this.id = id;
+        this.name = name;
+        this.amount = amount;
+        this.category = category;
+    }
     
     public Cost(String name, double amount, Category category) {
         this.name = name;

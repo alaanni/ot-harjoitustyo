@@ -2,6 +2,7 @@ package budjetointisovellus.domain;
 
 import budjetointisovellus.dao.BudgetDao;
 import budjetointisovellus.dao.CategoryDao;
+import budjetointisovellus.dao.CostDao;
 import budjetointisovellus.dao.UserDao;
 import java.sql.SQLException;
 import java.util.*;
@@ -15,14 +16,17 @@ public class BudgetService {
     private final UserDao userDao;
     private final BudgetDao budgetDao;
     private final CategoryDao categoryDao;
+    private final CostDao costDao;
     private User logged;
     private Budget usersBudget;
     private List<Category> categories = new ArrayList<>();
+    private List<Cost> costs = new ArrayList<>();
     
-    public BudgetService(UserDao userdao, BudgetDao budgetdao, CategoryDao categorydao) {
+    public BudgetService(UserDao userdao, BudgetDao budgetdao, CategoryDao categorydao, CostDao costdao) {
         this.userDao = userdao;
         this.budgetDao = budgetdao;
         this.categoryDao = categorydao;
+        this.costDao = costdao;
     }
 
 
@@ -164,10 +168,13 @@ public class BudgetService {
     /**
     * Etsi kategoriaan kuuluvat kulut
     * 
+     * @param category
+     * @return lista kategoriaan sisältyvistä kuluista
     * @throws java.sql.SQLException 
     */ 
     
-    public void findCategorysCosts() throws SQLException {
-        
+    public List findCategorysCosts(Category category) throws SQLException {
+        costs = costDao.findAllByCategory(category);
+        return costs;
     }
 }

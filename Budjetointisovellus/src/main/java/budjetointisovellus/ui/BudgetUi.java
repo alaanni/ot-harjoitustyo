@@ -2,13 +2,17 @@ package budjetointisovellus.ui;
 
 import budjetointisovellus.dao.SQLBudgetDao;
 import budjetointisovellus.dao.SQLCategoryDao;
+import budjetointisovellus.dao.SQLCostDao;
 import budjetointisovellus.domain.BudgetService;
 import budjetointisovellus.dao.SQLUserDao;
 import budjetointisovellus.domain.Budget;
+import budjetointisovellus.domain.Category;
+import budjetointisovellus.domain.Cost;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.List;
 import java.util.Properties;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -29,6 +33,7 @@ public class BudgetUi extends Application {
     private SQLUserDao userDao;
     private SQLBudgetDao budgetDao;
     private SQLCategoryDao  categoryDao;
+    private SQLCostDao costDao;
     
     private Scene loginScene;
     private Scene createUserScene;
@@ -48,16 +53,29 @@ public class BudgetUi extends Application {
         userDao = new SQLUserDao(dbAddr);
         budgetDao = new SQLBudgetDao(dbAddr);
         categoryDao = new SQLCategoryDao(dbAddr);
-        budgetService = new BudgetService(userDao, budgetDao, categoryDao);
+        costDao = new SQLCostDao(dbAddr);
+        budgetService = new BudgetService(userDao, budgetDao, categoryDao, costDao);
     }
     
-    public void redrawBudgetLines() {
-        System.out.println("Täällä renderöidään budjetti");
+    //render budget lines
+    
+    public void redrawBudgetLines() throws SQLException {
         budgetLines.getChildren().clear();
         
         if (budgetService.getUsersBudget() != null) {
-            budgetLines.getChildren().add(new Label("Olet jo luonut yhden budjetin"));
-            Budget budgetCategories = budgetService.getUsersBudget();
+            Budget bud = budgetService.getUsersBudget();
+            Label budgetName = new Label(bud.getName());
+            budgetLines.getChildren().add(budgetName);
+            List<Category> budgetCategories = budgetService.findBudgetCategories();
+            List<Cost> categoryCosts;
+            for (Category c : budgetCategories) {
+                budgetLines.getChildren().add(new Label(c.getName()));
+                categoryCosts = budgetService.findCategorysCosts(c);
+                for (Cost cost : categoryCosts) {
+                    budgetLines.getChildren().add(new Label(cost.getName()));
+                }
+                
+            }
         }        
     }
     
@@ -85,8 +103,9 @@ public class BudgetUi extends Application {
         
         budgetLines = new VBox();
         redrawBudgetLines();
-        
+         
         Label budgetLabel = new Label("Sinun budjettisi");
+        
         Button newBudget = new Button("Aloita budjetointi");
         newBudget.setOnAction(e -> {
             primaryStage.setScene(newBudgetScene);
@@ -119,6 +138,8 @@ public class BudgetUi extends Application {
             }
             try {
                 if (budgetService.createNewBudget(bName, moneyToUse, budgetService.getLoggedUser().getName())) {
+                    budgetPane.getChildren().clear();
+                    budgetPane.getChildren().addAll(logoutAndInfo, budgetLabel, budgetLines);
                     primaryStage.setScene(budgetScene);
                     topLabel.setText("");
                     budgetName.setText("");
@@ -228,7 +249,8 @@ public class BudgetUi extends Application {
                     passwordTxt.setText("");
                     userInfo.setText("Tervetuloa "+budgetService.getLoggedUser().getName());
                     if (budgetService.findUsersBudget()) {
-                        System.out.println("Käyttäjälle löytyi budjetti");
+                        budgetPane.getChildren().clear();
+                        budgetPane.getChildren().addAll(logoutAndInfo, budgetLabel, budgetLines);
                     }
                     redrawBudgetLines();
                 } else {
@@ -253,8 +275,9 @@ public class BudgetUi extends Application {
         primaryStage.setScene(loginScene);
         
         primaryStage.show();
+        
     }
-
+    
     public static void main(String[] args) {
         launch(args);
     }

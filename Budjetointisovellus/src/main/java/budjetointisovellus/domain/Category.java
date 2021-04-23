@@ -1,6 +1,7 @@
 package budjetointisovellus.domain;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -24,6 +25,10 @@ public class Category {
         this.budget = budget;
         this.name = name;
         costs = new ArrayList();
+    }
+    
+    public int getId() {
+        return this.id;
     }
     
     public Budget getBudget() {
@@ -51,6 +56,10 @@ public class Category {
         double sum = 0;
         sum = costs.stream().map((c) -> c.getAmount()).reduce(sum, (accumulator, item) -> accumulator + item);
         return sum;
+    }
+    
+    public List getCosts() {
+        return this.costs;
     }
 }
 

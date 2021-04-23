@@ -2,6 +2,7 @@ package budjetointisovellus.domain;
 
 import budjetointisovellus.dao.BudgetDao;
 import budjetointisovellus.dao.CategoryDao;
+import budjetointisovellus.dao.CostDao;
 import budjetointisovellus.dao.UserDao;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -25,6 +26,7 @@ public class BudgetServiceTest {
     private UserDao userDao;
     private BudgetDao budgetDao;
     private CategoryDao categoryDao;
+    private CostDao costDao;
     private User logged;
     private Budget usersBudget;
     private List<Category> categories = new ArrayList<>();
@@ -42,8 +44,9 @@ public class BudgetServiceTest {
         userDao = new FakeUserDao(dbAddr);
         budgetDao = new FakeBudgetDao(dbAddr);
         categoryDao = new FakeCategoryDao(dbAddr);
+        costDao = new FakeCostDao(dbAddr);
         
-        testService = new BudgetService(userDao, budgetDao, categoryDao);
+        testService = new BudgetService(userDao, budgetDao, categoryDao, costDao);
         
     }
     

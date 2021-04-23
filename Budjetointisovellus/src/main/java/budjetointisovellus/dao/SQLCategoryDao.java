@@ -20,10 +20,10 @@ public class SQLCategoryDao implements CategoryDao<Category, Integer> {
     
     public SQLCategoryDao(String url) throws SQLException {
         connection = DriverManager.getConnection("jdbc:sqlite:" + url);
-        initTables();
+        initTable();
     }
     
-    public final void initTables() throws SQLException {
+    public final void initTable() throws SQLException {
         try (PreparedStatement stmt = connection.prepareStatement("CREATE TABLE IF NOT EXISTS categories "
                 + "(category_id INTEGER PRIMARY KEY AUTOINCREMENT, "
                 + "name    VARCHAR(255)  NOT NULL, "
@@ -35,7 +35,19 @@ public class SQLCategoryDao implements CategoryDao<Category, Integer> {
 
     @Override
     public void create(Category category) throws SQLException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        System.out.println("Create(category): " + category.getName());
+        try (PreparedStatement stmt = connection.prepareStatement("INSERT INTO categories"
+                + " (name, budget_id)"
+                + " VALUES (?, ?)")) {
+            stmt.setString(1, category.getName());
+            //toimiiko .getId?
+            stmt.setInt(2, category.getBudget().getId());
+            
+            int rowsDeleted = stmt.executeUpdate();
+            if (rowsDeleted > 0) {
+                System.out.println("A category was created successfully");
+            }
+        }
     }
 
     @Override
