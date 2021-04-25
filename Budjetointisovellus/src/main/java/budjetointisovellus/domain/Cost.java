@@ -44,6 +44,10 @@ public class Cost {
     }
     
     public double getAmount() {
-        return amount;
+        return this.amount;
+    }
+    
+    public Category getCategory() {
+        return this.category;
     }
 }

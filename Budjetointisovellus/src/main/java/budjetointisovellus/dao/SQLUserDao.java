@@ -63,7 +63,7 @@ public class SQLUserDao implements UserDao<User, Integer> {
     
     @Override
     public void update(User user) throws SQLException {
-        String sql = "UPDATE User SET password=?, name=? WHERE username=?";
+        String sql = "UPDATE users SET password=?, name=? WHERE username=?";
         
         User u = user;
         
@@ -80,7 +80,7 @@ public class SQLUserDao implements UserDao<User, Integer> {
 
     @Override
     public void delete(User user) throws SQLException {
-        String sql = "DELETE FROM User WHERE username=?";
+        String sql = "DELETE FROM users WHERE username=?";
  
         PreparedStatement statement = connection.prepareStatement(sql);
         statement.setString(1, user.getName());

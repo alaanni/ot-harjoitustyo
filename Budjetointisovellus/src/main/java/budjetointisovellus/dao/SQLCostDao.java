@@ -35,7 +35,20 @@ public class SQLCostDao implements CostDao<Cost, Integer> {
 
     @Override
     public void create(Cost cost) throws SQLException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        System.out.println("Create(cost): " + cost.getName());
+        try (PreparedStatement stmt = connection.prepareStatement("INSERT INTO costs"
+                + " (name, amount, category_id)"
+                + " VALUES (?, ?, ?)")) {
+            stmt.setString(1, cost.getName());
+            stmt.setDouble(2, cost.getAmount());
+            //toimiiko category.getId?
+            stmt.setInt(3, cost.getCategory().getId());
+            
+            int rowsDeleted = stmt.executeUpdate();
+            if (rowsDeleted > 0) {
+                System.out.println("A cost was created successfully");
+            }
+        }
     }
     
     @Override
@@ -67,7 +80,20 @@ public class SQLCostDao implements CostDao<Cost, Integer> {
 
     @Override
     public void update(Cost cost) throws SQLException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        String sql = "UPDATE costs SET amount=? WHERE name=? AND category_id=?";
+        
+        Cost c = cost;
+        
+        PreparedStatement statement = connection.prepareStatement(sql);
+        statement.setDouble(1, c.getAmount());
+        statement.setString(2, c.getName());
+        //toimiiko category.getId?
+        statement.setInt(3, c.getCategory().getId());
+
+        int rowsUpdated = statement.executeUpdate();
+        if (rowsUpdated > 0) {
+            System.out.println("An existing cost was updated");
+        }
     }
 
     @Override

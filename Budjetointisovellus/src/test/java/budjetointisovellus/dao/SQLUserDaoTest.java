@@ -8,7 +8,6 @@ package budjetointisovellus.dao;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-import budjetointisovellus.domain.FakeUserDao;
 import budjetointisovellus.domain.User;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;

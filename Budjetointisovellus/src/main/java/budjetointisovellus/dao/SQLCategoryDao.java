@@ -40,7 +40,6 @@ public class SQLCategoryDao implements CategoryDao<Category, Integer> {
                 + " (name, budget_id)"
                 + " VALUES (?, ?)")) {
             stmt.setString(1, category.getName());
-            //toimiiko .getId?
             stmt.setInt(2, category.getBudget().getId());
             
             int rowsDeleted = stmt.executeUpdate();

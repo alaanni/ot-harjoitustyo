@@ -15,4 +15,5 @@
 | 20.4. | 8    | suunniteltu rakennetta, lisää metodeja sovelluslogiikkaan, testausta jatkettu |
 | 22.4  | 2    | virheilmoitukset lomakkeiden täyttövirheisiin |
 ¦ 23.4. | 6    | testausta laajennettu ja CostDao toteutusta |
-| yht.  | 50   | | 
+| 25.4. | 3    | toteutettu mahdollisuus kulujen lisäämiseen |
+| yht.  | 53   | | 

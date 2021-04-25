@@ -122,13 +122,12 @@ public class BudgetService {
      * @throws java.sql.SQLException
     */ 
     
-    public boolean createNewBudget(String name, Double moneyToUse, String username) throws SQLException {
+    public boolean createNewBudget(String name, Double moneyToUse) throws SQLException {
         if (name.isEmpty()) {
             return false;
         }
         
-        User user = (User) userDao.findByUsername(username);
-        Budget budget = new Budget(name, moneyToUse, user);
+        Budget budget = new Budget(name, moneyToUse, logged);
         budgetDao.create(budget);
         return true;
     }
@@ -141,13 +140,13 @@ public class BudgetService {
     */ 
     
     public boolean findUsersBudget() throws SQLException {
-        User user = (User) userDao.findByUsername(logged.getName());
-        Budget budget = (Budget) budgetDao.findByUser(user);
+        Budget budget = (Budget) budgetDao.findByUser(logged);
         
         if (budget == null) {
-            System.out.println("Ei löydy");
+            System.out.println("Budjettia ei löydy");
             return false;
         }
+        
         usersBudget = budget;
         return true;
     }
@@ -176,5 +175,32 @@ public class BudgetService {
     public List findCategorysCosts(Category category) throws SQLException {
         costs = costDao.findAllByCategory(category);
         return costs;
+    }
+    
+    public boolean createNewCategory(String name) throws SQLException {
+        if (name.isEmpty()) {
+            return false;
+        }
+        
+        Category c = new Category(usersBudget, name);
+        categoryDao.create(c);
+        return true;
+    }
+    
+    public boolean createNewCost(String name, Double amount, String categoryName) throws SQLException {
+        if (name.isEmpty() || categoryName.isEmpty()) {
+            return false;
+        }
+        
+        Category cat = (Category) categoryDao.findOneByBudget(categoryName, usersBudget);
+        if (cat == null) {
+            categoryDao.create(new Category(usersBudget, categoryName));
+            cat = (Category) categoryDao.findOneByBudget(categoryName, usersBudget);
+        }
+        
+        Cost c = new Cost(name, amount, cat);
+        costDao.create(c);
+        
+        return true;
     }
 }

@@ -62,9 +62,12 @@ public class BudgetUi extends Application {
     public void redrawBudgetLines() throws SQLException {
         budgetLines.getChildren().clear();
         
+        System.out.println("TÄÄLLÄ redrawbudgetlines");
+        System.out.println("Käyttäjän budjetti: " + budgetService.getUsersBudget());
+        
         if (budgetService.getUsersBudget() != null) {
             Budget bud = budgetService.getUsersBudget();
-            Label budgetName = new Label(bud.getName());
+            Label budgetName = new Label(bud.getName().toUpperCase());
             budgetLines.getChildren().add(budgetName);
             List<Category> budgetCategories = budgetService.findBudgetCategories();
             List<Cost> categoryCosts;
@@ -72,10 +75,52 @@ public class BudgetUi extends Application {
                 budgetLines.getChildren().add(new Label(c.getName()));
                 categoryCosts = budgetService.findCategorysCosts(c);
                 for (Cost cost : categoryCosts) {
-                    budgetLines.getChildren().add(new Label(cost.getName()));
+                    TextField amount = new TextField();
+                    amount.setText(String.valueOf(cost.getAmount()));
+                    Label title = new Label(cost.getName());
+                    Button editButton = new Button("Tallenna muutokset");
+                    //editButton.setOnAction(arg0);
+                    
+                    budgetLines.getChildren().add(new HBox(title, amount, editButton));
                 }
-                
             }
+            Label addCostLabel = new Label("Lisää uusi kulu: ");
+            HBox addCostFields = new HBox();
+            Label newCostLabel = new Label("Kulun nimi: ");
+            TextField newCostField = new TextField();
+            TextField newAmountField = new TextField();
+            Label euroLabel = new Label(" Kustannus (€): ");
+            Label categLabel = new Label(" Kategoria: ");
+            TextField categoryField = new TextField();
+            Button addCostBtn = new Button("Tallenna");
+            addCostBtn.setOnAction(e -> {
+            String cName = newCostField.getText();
+            Double cAmount;
+            if (!newAmountField.getText().isEmpty()) {
+                cAmount = Double.parseDouble(newAmountField.getText());
+            } else {
+                cAmount = 0.0;
+            }
+            String cCategory = categoryField.getText();
+            try {
+                if (budgetService.createNewCost(cName, cAmount, cCategory)) {
+                    redrawBudgetLines();
+                    newCostField.setText("");
+                    newAmountField.setText("");
+                    categoryField.setText("");
+                } else {
+                    addCostLabel.setText("Täytä kaikki kentät!");
+                }
+            } catch (SQLException ex) {
+                Logger.getLogger(BudgetUi.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            
+            });
+            
+            addCostFields.getChildren().addAll(newCostLabel, newCostField, 
+                    euroLabel, newAmountField, categLabel, categoryField, 
+                    addCostBtn);
+            budgetLines.getChildren().addAll(addCostLabel, addCostFields);
         }        
     }
     
@@ -104,7 +149,7 @@ public class BudgetUi extends Application {
         budgetLines = new VBox();
         redrawBudgetLines();
          
-        Label budgetLabel = new Label("Sinun budjettisi");
+        Label budgetLabel = new Label("Sinun budjettisi: ");
         
         Button newBudget = new Button("Aloita budjetointi");
         newBudget.setOnAction(e -> {
@@ -112,7 +157,7 @@ public class BudgetUi extends Application {
         }); 
         
         budgetPane.getChildren().addAll(logoutAndInfo, budgetLabel, budgetLines, newBudget);
-        budgetScene = new Scene(budgetPane, 500, 300);
+        budgetScene = new Scene(budgetPane, 800, 500);
         
         
         //create new budget scene
@@ -137,7 +182,7 @@ public class BudgetUi extends Application {
                 moneyToUse = 0.0;
             }
             try {
-                if (budgetService.createNewBudget(bName, moneyToUse, budgetService.getLoggedUser().getName())) {
+                if (budgetService.createNewBudget(bName, moneyToUse)) {
                     budgetPane.getChildren().clear();
                     budgetPane.getChildren().addAll(logoutAndInfo, budgetLabel, budgetLines);
                     primaryStage.setScene(budgetScene);
@@ -152,7 +197,7 @@ public class BudgetUi extends Application {
                     }
                     redrawBudgetLines();
                 } else {
-                    bn.setText("Budjetille tulee antaa nimi");
+                    bn.setText("Budjetille tulee antaa nimi!");
                 }
             } catch (SQLException ex) {
                 Logger.getLogger(BudgetUi.class.getName()).log(Level.SEVERE, null, ex);
@@ -170,7 +215,7 @@ public class BudgetUi extends Application {
                 budgetMoneyToUse, btns);
         
         
-        newBudgetScene = new Scene(newBudgetPane,  500, 300);
+        newBudgetScene = new Scene(newBudgetPane,  800, 500);
         
         
         //create new user scene
@@ -202,7 +247,7 @@ public class BudgetUi extends Application {
                     newPassword.setText("");
                     registerLabel.setText("Luo uusi käyttäjä");
                 } else {
-                    registerLabel.setText("Täytä kaikki kentät");
+                    registerLabel.setText("Täytä kaikki kentät!");
                 }
             } catch (SQLException ex) {
                 Logger.getLogger(BudgetUi.class.getName()).log(Level.SEVERE, null, ex);
@@ -221,7 +266,7 @@ public class BudgetUi extends Application {
         registerPane.getChildren().addAll(registerLabel, newUn, newName, newUsern,newUsername, 
                 newPw, newPassword, createAndCancelBtns);
         
-        createUserScene = new Scene(registerPane, 500, 300);
+        createUserScene = new Scene(registerPane, 800, 500);
         
  
         //login scene
@@ -251,8 +296,10 @@ public class BudgetUi extends Application {
                     if (budgetService.findUsersBudget()) {
                         budgetPane.getChildren().clear();
                         budgetPane.getChildren().addAll(logoutAndInfo, budgetLabel, budgetLines);
+                        redrawBudgetLines();
+                    } else {
+                        System.out.println("Käyttäjällä ei ole budjettia");
                     }
-                    redrawBudgetLines();
                 } else {
                     topLabel.setText("Anna käyttäjätunnus ja salasana tai luo uusi käyttäjä ");
                 }
@@ -270,7 +317,7 @@ public class BudgetUi extends Application {
 
         loginPane.getChildren().addAll(topLabel, usern, usernameTxt, pwf, passwordTxt, buttonPane);
         
-        loginScene = new Scene(loginPane, 500, 300);
+        loginScene = new Scene(loginPane, 800, 500);
         
         primaryStage.setScene(loginScene);
         

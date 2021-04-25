@@ -53,6 +53,7 @@ public class SQLBudgetDao implements BudgetDao<Budget, Integer> {
             if (!rs.next()) {
                 return null;
             }
+            
             b = new Budget(rs.getInt("budget_id"), rs.getString("name"), 
                     rs.getDouble("moneyToUse"), user);
         }
