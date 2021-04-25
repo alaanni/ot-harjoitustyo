@@ -82,7 +82,8 @@ public class BudgetServiceTest {
     public void createAndFindNewBudgetWorks() throws SQLException {
         testService.createUser("test", "test", "test");
         testService.login("test", "test");
-        testService.createNewBudget("testbudget", 100.0 , "test");
+        testService.login("test", "test");
+        testService.createNewBudget("testbudget", 100.0);
         testService.findUsersBudget();
         
         assertEquals("testbudget", testService.getUsersBudget().getName());
