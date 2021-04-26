@@ -12,6 +12,10 @@ Sovellus on Helsingin yliopiston Ohjelmistotekniikka, kevät 2021 -kurssin harjo
 
 [Arkkitehtuuri](dokumentaatio/arkkitehtuuri.md)
 
+## Releaset
+
+
+
 ## Komentorivitoiminnot
 
 ### Suoritus
