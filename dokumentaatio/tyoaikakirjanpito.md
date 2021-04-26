@@ -16,4 +16,5 @@
 | 22.4  | 2    | virheilmoitukset lomakkeiden täyttövirheisiin |
 ¦ 23.4. | 6    | testausta laajennettu ja CostDao toteutusta |
 | 25.4. | 3    | toteutettu mahdollisuus kulujen lisäämiseen |
-| yht.  | 53   | | 
+| 26.4. | 3    | lisää testejä |
+| yht.  | 56   | | 
