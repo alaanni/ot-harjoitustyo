@@ -14,3 +14,8 @@ Esimerkkejä ohjelman toiminnallisuuksista sekvenssikaavioina:
 
 ![Uuden käyttäjän luonti](https://user-images.githubusercontent.com/48988852/116069288-e22dfc80-a693-11eb-9340-0bd2de480b21.png)
 
+### Käyttäjän budjetin luominen
+
+![Uuden budjetin luonti](https://user-images.githubusercontent.com/48988852/116081751-4e642c80-a6a3-11eb-9a2a-e80bf4e76d13.png)
+
+
