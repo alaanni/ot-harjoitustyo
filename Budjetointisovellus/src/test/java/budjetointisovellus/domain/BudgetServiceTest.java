@@ -119,4 +119,16 @@ public class BudgetServiceTest {
         }
         assertEquals(1, costs.size());
     }
+    
+    @Test
+    public void editBudgetsMoneyworks() throws SQLException {
+        testService.createUser("test", "test", "test");
+        testService.login("test", "test");
+        testService.createNewBudget("testbudget", 100.0);
+        testService.findUsersBudget();
+        testService.editBudgetsMoneyToUse(2000.0);
+        testService.findUsersBudget();
+        
+        assertEquals(2000, testService.getUsersBudget().getMoneyToUse(), 0);
+    }
 }

@@ -107,6 +107,11 @@ public class BudgetService {
         if (name.isEmpty() || username.isEmpty() || password.isEmpty()) {
             return false;
         }
+        
+        if (userDao.findByUsername(username) != null) {
+            return false;
+        }
+        
         User user = new User(name, username, password);
         userDao.create(user);
         return true;
@@ -130,6 +135,11 @@ public class BudgetService {
         Budget budget = new Budget(name, moneyToUse, logged);
         budgetDao.create(budget);
         return true;
+    }
+    
+    public void editBudgetsMoneyToUse(Double moneyToUse) throws SQLException {
+        Budget budget = new Budget(usersBudget.getName(), moneyToUse, logged);
+        budgetDao.update(budget);
     }
     
     /**

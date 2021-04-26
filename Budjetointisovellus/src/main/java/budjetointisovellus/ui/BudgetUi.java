@@ -66,12 +66,35 @@ public class BudgetUi extends Application {
 
         if (budgetService.getUsersBudget() != null) {
             Budget bud = budgetService.getUsersBudget();
+            HBox budgetInfo = new HBox();
+            budgetInfo.setSpacing(10);
             Label budgetName = new Label(bud.getName().toUpperCase());
-            budgetLines.getChildren().add(budgetName);
+            TextField moneyToUse = new TextField();
+            moneyToUse.setPrefColumnCount(7);
+            moneyToUse.setText(String.valueOf(bud.getMoneyToUse()));
+            Label euroChar = new Label("€");
+            Button editMoneyToUse = new Button("Tallenna muutokset");
+            editMoneyToUse.setOnAction(e -> {
+            Double mToUse;
+            if (!moneyToUse.getText().isEmpty()) {
+                mToUse = Double.parseDouble(moneyToUse.getText());
+            } else {
+                mToUse = 0.0;
+            }
+            try {
+                budgetService.editBudgetsMoneyToUse(mToUse);
+                
+            } catch (SQLException ex) {
+                Logger.getLogger(BudgetUi.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            
+            });
+            budgetInfo.getChildren().addAll(budgetName, moneyToUse, euroChar, editMoneyToUse);
+            budgetLines.getChildren().add(budgetInfo);
             List<Category> budgetCategories = budgetService.findBudgetCategories();
             List<Cost> categoryCosts;
             for (Category c : budgetCategories) {
-                budgetLines.getChildren().add(new Label(c.getName()));
+                budgetLines.getChildren().add(new Label(c.getName().toUpperCase()));
                 categoryCosts = budgetService.findCategorysCosts(c);
                 for (Cost cost : categoryCosts) {
                     TextField amount = new TextField();
@@ -79,8 +102,11 @@ public class BudgetUi extends Application {
                     Label title = new Label(cost.getName());
                     Button editButton = new Button("Tallenna muutokset");
                     //editButton.setOnAction(arg0);
-                    
-                    budgetLines.getChildren().add(new HBox(title, amount, editButton));
+                    Button deleteButton = new Button("Poista kulu");
+                    //deleteButton.setOnAction(arg0);
+                    HBox lines = new HBox(title, amount, editButton, deleteButton);
+                    lines.setSpacing(10);
+                    budgetLines.getChildren().add(lines);
                 }
             }
             Label addCostLabel = new Label("Lisää uusi kulu: ");
@@ -120,6 +146,7 @@ public class BudgetUi extends Application {
                     euroLabel, newAmountField, categLabel, categoryField, 
                     addCostBtn);
             budgetLines.getChildren().addAll(addCostLabel, addCostFields);
+            budgetLines.setSpacing(10);
         }        
     }
     
@@ -156,6 +183,7 @@ public class BudgetUi extends Application {
         }); 
         
         budgetPane.getChildren().addAll(logoutAndInfo, budgetLabel, budgetLines, newBudget);
+        budgetPane.setSpacing(10);
         budgetScene = new Scene(budgetPane, 800, 500);
         
         
@@ -212,7 +240,7 @@ public class BudgetUi extends Application {
         
         newBudgetPane.getChildren().addAll(topLabel, bn, budgetName, mtu,
                 budgetMoneyToUse, btns);
-        
+        newBudgetPane.setSpacing(10);
         
         newBudgetScene = new Scene(newBudgetPane,  800, 500);
         
@@ -240,11 +268,15 @@ public class BudgetUi extends Application {
             try {
                 if (budgetService.createUser(name, username, password)) {
                     primaryStage.setScene(loginScene);
-                    topLabel.setText("Kirjaudu sisään");
+                    topLabel.setText("Kirjaudu sisään, " + name);
                     newName.setText("");
                     newUsername.setText("");
                     newPassword.setText("");
                     registerLabel.setText("Luo uusi käyttäjä");
+                } 
+                else if (!newName.getText().isEmpty() || !newUsername.getText().isEmpty() ||
+                        !newPassword.getText().isEmpty()) {
+                    registerLabel.setText("Käyttäjänimi on jo varattu.");         
                 } else {
                     registerLabel.setText("Täytä kaikki kentät!");
                 }
@@ -264,6 +296,7 @@ public class BudgetUi extends Application {
         
         registerPane.getChildren().addAll(registerLabel, newUn, newName, newUsern,newUsername, 
                 newPw, newPassword, createAndCancelBtns);
+        registerPane.setSpacing(10);
         
         createUserScene = new Scene(registerPane, 800, 500);
         
@@ -316,8 +349,10 @@ public class BudgetUi extends Application {
         });
         
         buttonPane.getChildren().addAll(loginButton, registerButton);
+        buttonPane.setSpacing(10);
 
         loginPane.getChildren().addAll(topLabel, usern, usernameTxt, pwf, passwordTxt, buttonPane);
+        loginPane.setSpacing(10);
         
         loginScene = new Scene(loginPane, 800, 500);
         
