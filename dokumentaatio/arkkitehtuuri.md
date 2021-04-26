@@ -8,7 +8,7 @@ Ohjelman rakenne luokka-/pakkauskaaviona:
 
 ## Päätoiminnallisuudet
 
-Ohjelman päätoiminnallisuudet sekvenssikaavioina:
+Esimerkkejä ohjelman toiminnallisuuksista sekvenssikaavioina:
 
 ### Uuden käyttäjän luominen
 
