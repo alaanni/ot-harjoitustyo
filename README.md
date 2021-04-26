@@ -14,7 +14,8 @@ Sovellus on Helsingin yliopiston Ohjelmistotekniikka, kevät 2021 -kurssin harjo
 
 ## Releaset
 
-
+Viikko 5:
+[Release 1](https://github.com/alaanni/ot-harjoitustyo/releases/tag/viikko5)
 
 ## Komentorivitoiminnot
 
