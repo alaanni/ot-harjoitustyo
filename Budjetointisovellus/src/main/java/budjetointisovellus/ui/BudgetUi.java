@@ -130,7 +130,7 @@ public class BudgetUi extends Application {
             }
             String cCategory = categoryField.getText();
             try {
-                if (budgetService.createNewCost(cName, cAmount, cCategory)) {
+                if (budgetService.createNewCost(cName, cAmount, cCategory.trim().toLowerCase())) {
                     redrawBudgetLines();
                     newCostField.setText("");
                     newAmountField.setText("");
