@@ -83,6 +83,8 @@ public class BudgetUi extends Application {
             }
             try {
                 budgetService.editBudgetsMoneyToUse(mToUse);
+                budgetService.findUsersBudget();
+                moneyToUse.setText(String.valueOf(budgetService.getUsersBudget().getMoneyToUse()));
                 
             } catch (SQLException ex) {
                 Logger.getLogger(BudgetUi.class.getName()).log(Level.SEVERE, null, ex);
