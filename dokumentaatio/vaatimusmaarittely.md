@@ -11,14 +11,15 @@ Sovelluksella on yksi käyttäjärooli eli normaali käyttäjä.
 ## Toiminnallisuudet
 
 - Ennen kirjautumista
-  - Voidaan luoda uusi käyttäjätunnus
-  - Käyttäjä voi kirjautua sisään
+  - Voidaan luoda uusi käyttäjätunnus (tehty)
+  - Käyttäjä voi kirjautua sisään (tehty)
 
 - Kirjautumisen jälkeen käyttäjä
   - voi lisätä, muokata ja nähdä käytettävissä olevan rahamäärään
-  - voi luoda uuden suunnitelman
-  - voi muokata käytössä olevaa suunnitelmaa
-  - voi lisätä toteutuneen kulun
+  - voi luoda suunnitelmaan (budjetin) (tehty)
+  - voi muokata omaa suunnitelmaa
+  - voi lisätä suunnitellun kulun ja sen kategorian (tehty)
+  - näkee suunnitelman kulut listattuna ja jaoteltuna omiin kategorioihinsa (tehty)
   - näkee onko toteutunut kulu pysynyt budjetissa (näkyy vihreänä) vai ylittänyt budjetin (punaisena)
 
 ## Jatkokehitysideoita
