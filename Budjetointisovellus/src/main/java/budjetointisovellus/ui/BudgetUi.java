@@ -62,9 +62,8 @@ public class BudgetUi extends Application {
     public void redrawBudgetLines() throws SQLException {
         budgetLines.getChildren().clear();
         
-        System.out.println("TÄÄLLÄ redrawbudgetlines");
         System.out.println("Käyttäjän budjetti: " + budgetService.getUsersBudget());
-        
+
         if (budgetService.getUsersBudget() != null) {
             Budget bud = budgetService.getUsersBudget();
             Label budgetName = new Label(bud.getName().toUpperCase());
@@ -296,10 +295,13 @@ public class BudgetUi extends Application {
                     if (budgetService.findUsersBudget()) {
                         budgetPane.getChildren().clear();
                         budgetPane.getChildren().addAll(logoutAndInfo, budgetLabel, budgetLines);
-                        redrawBudgetLines();
+                        //redrawBudgetLines();
                     } else {
                         System.out.println("Käyttäjällä ei ole budjettia");
+                        budgetPane.getChildren().clear();
+                        budgetPane.getChildren().addAll(logoutAndInfo, budgetLabel, budgetLines, newBudget);
                     }
+                    redrawBudgetLines();
                 } else {
                     topLabel.setText("Anna käyttäjätunnus ja salasana tai luo uusi käyttäjä ");
                 }
