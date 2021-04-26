@@ -92,7 +92,9 @@ public class SQLBudgetDao implements BudgetDao<Budget, Integer> {
 
     @Override
     public void dropTable() throws SQLException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        try (PreparedStatement stmt = connection.prepareStatement("DROP TABLE budgets")) {
+            stmt.executeUpdate();
+        }
     }
     
 }

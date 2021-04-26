@@ -11,4 +11,5 @@ public interface CategoryDao<Category, Integer> {
     List<Category> findAllByBudget(Budget budget) throws SQLException;
     void update(Category category) throws SQLException;
     void delete(Category category) throws SQLException;
+    void dropTable() throws SQLException;
 }

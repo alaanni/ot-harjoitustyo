@@ -30,6 +30,7 @@ public class BudgetServiceTest {
     private User logged;
     private Budget usersBudget;
     private List<Category> categories = new ArrayList<>();
+    private List<Cost> costs = new ArrayList<>();
     
     public BudgetServiceTest() {
     }
@@ -54,6 +55,8 @@ public class BudgetServiceTest {
     public void tearDown() throws SQLException {
         userDao.dropTable();
         budgetDao.dropTable();
+        categoryDao.dropTable();
+        costDao.dropTable();
     }
 
     @Test
@@ -82,10 +85,38 @@ public class BudgetServiceTest {
     public void createAndFindNewBudgetWorks() throws SQLException {
         testService.createUser("test", "test", "test");
         testService.login("test", "test");
-        testService.login("test", "test");
         testService.createNewBudget("testbudget", 100.0);
         testService.findUsersBudget();
         
         assertEquals("testbudget", testService.getUsersBudget().getName());
+    }
+    
+    @Test
+    public void createsAndFindsBudgetCategories() throws SQLException {
+        testService.createUser("test", "test", "test");
+        testService.login("test", "test");
+        testService.createNewBudget("testbudget", 100.0);
+        testService.findUsersBudget();
+        testService.createNewCategory("testCategory1");
+        testService.createNewCategory("testCategory2");
+        testService.createNewCategory("testCategory3");
+        categories = testService.findBudgetCategories();
+        
+        assertEquals(3, categories.size());
+    }
+    
+    @Test
+    public void createsAndFindsCategoryCosts() throws SQLException {
+        testService.createUser("test", "test", "test");
+        testService.login("test", "test");
+        testService.createNewBudget("testbudget", 100.0);
+        testService.findUsersBudget();
+        testService.createNewCategory("testCategory1");
+        testService.createNewCost("testCost", 20.0, "testCategory1");
+        categories = testService.findBudgetCategories();
+        for (Category cat : categories) {
+            costs = testService.findCategorysCosts(cat);
+        }
+        assertEquals(1, costs.size());
     }
 }

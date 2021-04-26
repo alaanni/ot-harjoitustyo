@@ -34,7 +34,7 @@ public class SQLUserDaoTest {
         properties.load(new FileInputStream("config.properties")); 
         String dbAddr = properties.getProperty("testdb");
         userDao = new SQLUserDao(dbAddr);
-        user = new User("test", "test", "test");
+        user = new User("Testaaja", "test", "test");
     }
     
     @After
@@ -43,10 +43,11 @@ public class SQLUserDaoTest {
     }
 
     @Test
-    public void createUserWorks() throws SQLException {
+    public void createUserAndFindsByUsername() throws SQLException {
         userDao.create(user);
         User u = (User) userDao.findByUsername("test");
         
-        assertEquals("test", u.getName());
+        assertEquals("Testaaja", u.getName());
+        assertEquals("test", u.getUsername());
     }
 }

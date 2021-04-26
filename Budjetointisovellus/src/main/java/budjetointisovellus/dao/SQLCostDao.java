@@ -74,11 +74,6 @@ public class SQLCostDao implements CostDao<Cost, Integer> {
     }
 
     @Override
-    public Cost findByCategory(Category category) throws SQLException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
     public void update(Cost cost) throws SQLException {
         String sql = "UPDATE costs SET amount=? WHERE name=? AND category_id=?";
         
@@ -87,7 +82,6 @@ public class SQLCostDao implements CostDao<Cost, Integer> {
         PreparedStatement statement = connection.prepareStatement(sql);
         statement.setDouble(1, c.getAmount());
         statement.setString(2, c.getName());
-        //toimiiko category.getId?
         statement.setInt(3, c.getCategory().getId());
 
         int rowsUpdated = statement.executeUpdate();
@@ -98,12 +92,23 @@ public class SQLCostDao implements CostDao<Cost, Integer> {
 
     @Override
     public void delete(Cost cost) throws SQLException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        String sql = "DELETE FROM costs WHERE name=? AND category_id=?";
+ 
+        PreparedStatement statement = connection.prepareStatement(sql);
+        statement.setString(1, cost.getName());
+        statement.setInt(2, cost.getCategory().getId());
+
+        int rowsDeleted = statement.executeUpdate();
+        if (rowsDeleted > 0) {
+            System.out.println("A cost was deleted successfully");
+        }
     }
 
     @Override
     public void dropTable() throws SQLException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        try (PreparedStatement stmt = connection.prepareStatement("DROP TABLE costs")) {
+            stmt.executeUpdate();
+        }
     }
     
 }
