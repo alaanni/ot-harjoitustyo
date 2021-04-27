@@ -15,11 +15,11 @@ Sovelluksella on yksi käyttäjärooli eli normaali käyttäjä.
   - Käyttäjä voi kirjautua sisään **(tehty)**
 
 - Kirjautumisen jälkeen käyttäjä
-  - voi lisätä, muokata ja nähdä käytettävissä olevan rahamäärään **(tehty)**
   - voi luoda suunnitelmaan (budjetin) **(tehty)**
-  - voi muokata omaa suunnitelmaa
+  - voi lisätä, muokata ja nähdä käytettävissä olevan rahamäärään **(tehty)**
   - voi lisätä suunnitellun kulun ja sen kategorian **(tehty)**
   - näkee suunnitelman kulut listattuna ja jaoteltuna omiin kategorioihinsa **(tehty)**
+  - voi muokata ja poistaa suunnitelmaan lisättyjä kuluja **(tehty)**
   - näkee onko toteutunut kulu pysynyt budjetissa (näkyy vihreänä) vai ylittänyt budjetin (punaisena)
 
 ## Jatkokehitysideoita
