@@ -35,6 +35,10 @@ public class Cost {
         this.date = date;
     }
     
+    public int getId() {
+        return this.id;
+    }
+    
     public String getName() {
         return this.name;
     }

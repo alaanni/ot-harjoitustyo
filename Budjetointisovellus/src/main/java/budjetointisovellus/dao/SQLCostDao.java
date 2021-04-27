@@ -75,14 +75,13 @@ public class SQLCostDao implements CostDao<Cost, Integer> {
 
     @Override
     public void update(Cost cost) throws SQLException {
-        String sql = "UPDATE costs SET amount=? WHERE name=? AND category_id=?";
+        String sql = "UPDATE costs SET amount=? WHERE cost_id=?";
         
         Cost c = cost;
         
         PreparedStatement statement = connection.prepareStatement(sql);
         statement.setDouble(1, c.getAmount());
-        statement.setString(2, c.getName());
-        statement.setInt(3, c.getCategory().getId());
+        statement.setDouble(2, c.getId());
 
         int rowsUpdated = statement.executeUpdate();
         if (rowsUpdated > 0) {
@@ -92,11 +91,10 @@ public class SQLCostDao implements CostDao<Cost, Integer> {
 
     @Override
     public void delete(Cost cost) throws SQLException {
-        String sql = "DELETE FROM costs WHERE name=? AND category_id=?";
+        String sql = "DELETE FROM costs WHERE cost_id=?";
  
         PreparedStatement statement = connection.prepareStatement(sql);
-        statement.setString(1, cost.getName());
-        statement.setInt(2, cost.getCategory().getId());
+        statement.setInt(1, cost.getId());
 
         int rowsDeleted = statement.executeUpdate();
         if (rowsDeleted > 0) {

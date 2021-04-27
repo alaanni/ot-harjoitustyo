@@ -128,7 +128,7 @@ public class BudgetService {
     */ 
     
     public boolean createNewBudget(String name, Double moneyToUse) throws SQLException {
-        if (name.isEmpty()) {
+        if (name.isEmpty() || moneyToUse == -1.0) {
             return false;
         }
         
@@ -137,9 +137,13 @@ public class BudgetService {
         return true;
     }
     
-    public void editBudgetsMoneyToUse(Double moneyToUse) throws SQLException {
+    public boolean editBudgetsMoneyToUse(Double moneyToUse) throws SQLException {
+        if (moneyToUse == -1.0) {
+            return false;
+        }
         Budget budget = new Budget(usersBudget.getName(), moneyToUse, logged);
         budgetDao.update(budget);
+        return true;
     }
     
     /**
@@ -198,7 +202,7 @@ public class BudgetService {
     }
     
     public boolean createNewCost(String name, Double amount, String categoryName) throws SQLException {
-        if (name.isEmpty() || categoryName.isEmpty()) {
+        if (name.isEmpty() || categoryName.isEmpty() || amount == -1.0) {
             return false;
         }
         
@@ -211,6 +215,19 @@ public class BudgetService {
         Cost c = new Cost(name, amount, cat);
         costDao.create(c);
         
+        return true;
+    }
+    
+    public boolean editCost(Cost cost) throws SQLException {
+        if (cost.getAmount() == -1.0) {
+            return false;
+        }
+        costDao.update(cost);
+        return true;
+    }
+    
+    public boolean removeCost(Cost cost) throws SQLException {
+        costDao.delete(cost);
         return true;
     }
 }

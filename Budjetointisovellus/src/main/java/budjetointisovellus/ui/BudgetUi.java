@@ -18,6 +18,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.application.Application;
 import javafx.geometry.Pos;
+import javafx.scene.Node;
 import javafx.stage.Stage;
 import javafx.scene.control.TextField;
 import javafx.scene.control.PasswordField;
@@ -57,6 +58,48 @@ public class BudgetUi extends Application {
         budgetService = new BudgetService(userDao, budgetDao, categoryDao, costDao);
     }
     
+    //create one budget line
+    
+    public Node createBudgetLine(Cost cost) {
+        HBox bLine = new HBox();
+        TextField amount = new TextField();
+        amount.setText(String.valueOf(cost.getAmount()));
+        Label title = new Label(cost.getName());
+        Button editButton = new Button("Tallenna muutokset");
+        editButton.setOnAction(e -> {
+            if (!amount.getText().isEmpty()) {
+                try { cost.setAmount(Double.parseDouble(amount.getText()));
+                } catch (NumberFormatException ex) {
+                    cost.setAmount(-1.0);
+                }
+            } else {
+                cost.setAmount(0.0);
+            }
+            try {
+                if (budgetService.editCost(cost)) {
+                    redrawBudgetLines();
+                } 
+            } catch (SQLException ex) {
+                Logger.getLogger(BudgetUi.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            
+            });
+        Button deleteButton = new Button("Poista kulu");
+        deleteButton.setOnAction(e -> {
+            try {
+                if (budgetService.removeCost(cost)) {
+                    redrawBudgetLines();
+                } 
+            } catch (SQLException ex) {
+                Logger.getLogger(BudgetUi.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            });
+        bLine.getChildren().addAll(title, amount, editButton, deleteButton);
+        bLine.setSpacing(10);
+        
+        return bLine;
+    }
+    
     //render budget lines
     
     public void redrawBudgetLines() throws SQLException {
@@ -77,14 +120,18 @@ public class BudgetUi extends Application {
             editMoneyToUse.setOnAction(e -> {
             Double mToUse;
             if (!moneyToUse.getText().isEmpty()) {
-                mToUse = Double.parseDouble(moneyToUse.getText());
+                try { mToUse = Double.parseDouble(moneyToUse.getText());
+                } catch (NumberFormatException ex) {
+                    mToUse = -1.0;
+                }
             } else {
                 mToUse = 0.0;
             }
             try {
-                budgetService.editBudgetsMoneyToUse(mToUse);
-                budgetService.findUsersBudget();
-                moneyToUse.setText(String.valueOf(budgetService.getUsersBudget().getMoneyToUse()));
+                if (budgetService.editBudgetsMoneyToUse(mToUse)) {
+                    budgetService.findUsersBudget();
+                    moneyToUse.setText(String.valueOf(budgetService.getUsersBudget().getMoneyToUse()));
+                } 
                 
             } catch (SQLException ex) {
                 Logger.getLogger(BudgetUi.class.getName()).log(Level.SEVERE, null, ex);
@@ -99,16 +146,7 @@ public class BudgetUi extends Application {
                 budgetLines.getChildren().add(new Label(c.getName().toUpperCase()));
                 categoryCosts = budgetService.findCategorysCosts(c);
                 for (Cost cost : categoryCosts) {
-                    TextField amount = new TextField();
-                    amount.setText(String.valueOf(cost.getAmount()));
-                    Label title = new Label(cost.getName());
-                    Button editButton = new Button("Tallenna muutokset");
-                    //editButton.setOnAction(arg0);
-                    Button deleteButton = new Button("Poista kulu");
-                    //deleteButton.setOnAction(arg0);
-                    HBox lines = new HBox(title, amount, editButton, deleteButton);
-                    lines.setSpacing(10);
-                    budgetLines.getChildren().add(lines);
+                    budgetLines.getChildren().add(createBudgetLine(cost));
                 }
             }
             Label addCostLabel = new Label("Lisää uusi kulu: ");
@@ -122,11 +160,12 @@ public class BudgetUi extends Application {
             Button addCostBtn = new Button("Tallenna");
             addCostBtn.setOnAction(e -> {
             String cName = newCostField.getText();
-            Double cAmount;
+            Double cAmount = 0.0;
             if (!newAmountField.getText().isEmpty()) {
-                cAmount = Double.parseDouble(newAmountField.getText());
-            } else {
-                cAmount = 0.0;
+                try { cAmount = Double.parseDouble(newAmountField.getText());
+                } catch (NumberFormatException ex) {
+                    cAmount = -1.0;
+                }
             }
             String cCategory = categoryField.getText();
             try {
@@ -136,7 +175,7 @@ public class BudgetUi extends Application {
                     newAmountField.setText("");
                     categoryField.setText("");
                 } else {
-                    addCostLabel.setText("Täytä kaikki kentät!");
+                    addCostLabel.setText("Täytä kaikki kentät ja ilmoita kustannus numeroina!");
                 }
             } catch (SQLException ex) {
                 Logger.getLogger(BudgetUi.class.getName()).log(Level.SEVERE, null, ex);
@@ -206,7 +245,10 @@ public class BudgetUi extends Application {
             double moneyToUse;
             String bName = budgetName.getText();
             if (!budgetMoneyToUse.getText().isEmpty()) {
-                moneyToUse = Double.parseDouble(budgetMoneyToUse.getText());
+                try { moneyToUse = Double.parseDouble(budgetMoneyToUse.getText());
+                } catch (NumberFormatException ex) {
+                    moneyToUse = -1.0;
+                }
             } else {
                 moneyToUse = 0.0;
             }
@@ -226,7 +268,7 @@ public class BudgetUi extends Application {
                     }
                     redrawBudgetLines();
                 } else {
-                    bn.setText("Budjetille tulee antaa nimi!");
+                    bn.setText("Anna nimi ja käytettävissä oleva rahamäärä numeroina.");
                 }
             } catch (SQLException ex) {
                 Logger.getLogger(BudgetUi.class.getName()).log(Level.SEVERE, null, ex);
