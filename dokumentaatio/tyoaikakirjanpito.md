@@ -16,5 +16,6 @@
 | 22.4  | 2    | virheilmoitukset lomakkeiden täyttövirheisiin |
 ¦ 23.4. | 6    | testausta laajennettu ja CostDao toteutusta |
 | 25.4. | 3    | toteutettu mahdollisuus kulujen lisäämiseen |
-| 26.4. | 6    | lisätty käyttäjälle näkyvää toiminnallisuutta ja laajennettu testausta, 1. release |
-| yht.  | 59   | | 
+| 26.4. | 6    | paranneltu käyttäjälle näkyvää toiminnallisuutta ja laajennettu testausta |
+| 27.4. | 4    | lisätty mahdollisuus poistaa ja muokata kulua ja laajennettu testausta |
+| yht.  | 63   | | 
