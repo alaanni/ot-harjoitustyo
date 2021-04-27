@@ -78,8 +78,13 @@ public class SQLCostDaoTest {
         costDao.create(cost1);
         costDao.create(cost2);
         costDao.create(cost3);
-        cost2 = new Cost("secCost", 150, category1);
-        costDao.update(cost2);
+        List<Cost> costs  = costDao.findAllByCategory(category1);
+        for (Cost c : costs) {
+            if (c.getName().equals("secCost")) {
+                c.setAmount(150.0);
+                costDao.update(c);
+            }
+        }
         List<Cost> category1Costs  = costDao.findAllByCategory(category1);
         for (Cost c : category1Costs) {
             if (c.getName().equals("secCost")) {
@@ -94,7 +99,8 @@ public class SQLCostDaoTest {
         costDao.create(cost1);
         costDao.create(cost2);
         costDao.create(cost3);
-        costDao.delete(cost1);
+        List <Cost> costs = costDao.findAllByCategory(category1);
+        costDao.delete(costs.get(0));
         List<Cost> category1Costs  = costDao.findAllByCategory(category1);
         List<Cost> category2Costs  = costDao.findAllByCategory(category2);
         
