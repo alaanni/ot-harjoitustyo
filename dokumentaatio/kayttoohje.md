@@ -10,3 +10,11 @@ Tiedoston sisältö:
 db=budgetapp.db
 testdb=testdb.db
 ```
+
+## Ohjelman käynnistäminen
+
+Ohjelma käynnistyy komennolla: 
+```
+java -jar Budjetointisovellus-1.0-SNAPSHOT.jar
+```
+
