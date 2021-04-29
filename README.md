@@ -6,6 +6,8 @@ Sovellus on Helsingin yliopiston Ohjelmistotekniikka, kevät 2021 -kurssin harjo
 
 ## Dokumentaatio
 
+[Käyttöohje](dokumentaatio/kayttoohje.md)
+
 [Vaatimusmäärittely](dokumentaatio/vaatimusmaarittely.md)
 
 [Työaikakirjanpito](dokumentaatio/tyoaikakirjanpito.md)
