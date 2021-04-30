@@ -18,4 +18,5 @@
 | 25.4. | 3    | toteutettu mahdollisuus kulujen lisäämiseen |
 | 26.4. | 6    | paranneltu käyttäjälle näkyvää toiminnallisuutta ja laajennettu testausta |
 | 27.4. | 4    | lisätty mahdollisuus poistaa ja muokata kulua ja laajennettu testausta |
-| yht.  | 63   | | 
+| 30.4. | 1    | lisätty tarkistus onko konfiguraatiotiedostoa olemassa ja sen luominen tarvittaessa |
+| yht.  | 64   | | 
