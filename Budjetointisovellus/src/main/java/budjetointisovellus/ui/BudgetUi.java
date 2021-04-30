@@ -8,9 +8,12 @@ import budjetointisovellus.dao.SQLUserDao;
 import budjetointisovellus.domain.Budget;
 import budjetointisovellus.domain.Category;
 import budjetointisovellus.domain.Cost;
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.OutputStream;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.Properties;
@@ -47,6 +50,15 @@ public class BudgetUi extends Application {
     @Override
     public void init() throws FileNotFoundException, IOException, SQLException {
         Properties properties = new Properties();
+        File file = new File("config.properties");
+        if (!file.exists()) {
+           try (final OutputStream out = new FileOutputStream("config.properties")) {
+                properties.store(out, "db=budgetapp.db\n" + "testdb=testdb.db");
+              } catch (IOException e) {
+                throw new RuntimeException("Error writing the properties file", e);
+              }
+        }
+        
         properties.load(new FileInputStream("config.properties"));
         
         String dbAddr = properties.getProperty("db");
