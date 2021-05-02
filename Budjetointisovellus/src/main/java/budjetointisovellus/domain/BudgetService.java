@@ -42,24 +42,20 @@ public class BudgetService {
     */ 
 
     public boolean login(String username, String password) throws SQLException {
-        System.out.println("Kirjaudutaan sisään!");
-        
         if (username.length() == 0) {
             return false;
         }
         
         User user = (User) userDao.findByUsername(username);
         if (user == null) {
-            System.out.println("Ei löydy");
             return false;
         }
-        
-        /*if (!user.checkPassword(password, user.getPassword())) {
+
+        if (!user.checkPassword(password, user.getPassword())) {
             return false;
-        }*/
+        }
 
         logged = user;
-        System.out.println("Kirjautuneena: " + logged.getName());
         return true;
     }
 
@@ -83,6 +79,10 @@ public class BudgetService {
         return usersBudget;
     }
 
+    public List getCategories() {
+        return this.categories;
+    }
+    
     /**
     * uloskirjautuminen
     */  
@@ -229,5 +229,17 @@ public class BudgetService {
     public boolean removeCost(Cost cost) throws SQLException {
         costDao.delete(cost);
         return true;
+    }
+    
+    public Double getTotalSum() throws SQLException {
+        Double total = 0.0;
+        categories = findBudgetCategories();
+        for (Category c : categories) {
+            costs = findCategorysCosts(c);
+            for (Cost cost : costs) {
+                total += cost.getAmount();
+            }
+        }
+        return total;
     }
 }

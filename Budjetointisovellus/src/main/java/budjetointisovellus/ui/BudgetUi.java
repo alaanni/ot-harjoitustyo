@@ -46,6 +46,7 @@ public class BudgetUi extends Application {
     
     private Label topLabel = new Label();
     private VBox budgetLines;
+    private Label totalLeftLabel = new Label();
     
     @Override
     public void init() throws FileNotFoundException, IOException, SQLException {
@@ -72,13 +73,14 @@ public class BudgetUi extends Application {
     
     //create one budget line
     
-    public Node createBudgetLine(Cost cost) {
+    public Node createBudgetLine(Cost cost) throws SQLException {
         HBox bLine = new HBox();
         TextField amount = new TextField();
         amount.setText(String.valueOf(cost.getAmount()));
         Label title = new Label(cost.getName());
         Button editButton = new Button("Tallenna muutokset");
         editButton.setOnAction(e -> {
+            Double tempAmount = cost.getAmount();
             if (!amount.getText().isEmpty()) {
                 try { cost.setAmount(Double.parseDouble(amount.getText()));
                 } catch (NumberFormatException ex) {
@@ -116,8 +118,6 @@ public class BudgetUi extends Application {
     
     public void redrawBudgetLines() throws SQLException {
         budgetLines.getChildren().clear();
-        
-        System.out.println("Käyttäjän budjetti: " + budgetService.getUsersBudget());
 
         if (budgetService.getUsersBudget() != null) {
             Budget bud = budgetService.getUsersBudget();
@@ -143,6 +143,7 @@ public class BudgetUi extends Application {
                 if (budgetService.editBudgetsMoneyToUse(mToUse)) {
                     budgetService.findUsersBudget();
                     moneyToUse.setText(String.valueOf(budgetService.getUsersBudget().getMoneyToUse()));
+                    totalLeftLabel.setText(String.valueOf(budgetService.getUsersBudget().getMoneyToUse()-budgetService.getTotalSum()));
                 } 
                 
             } catch (SQLException ex) {
@@ -194,11 +195,21 @@ public class BudgetUi extends Application {
             }
             
             });
+            HBox total = new HBox();
+            HBox moneyLeft = new HBox();
+            
+            Label totalLabel = new Label("Suunnitellut kulut yhteensä (€): ");
+            Label totalAmount = new Label(Double.toString(budgetService.getTotalSum()));
+            total.getChildren().addAll(totalLabel, totalAmount);
+            
+            Label moneyLeftLabel = new Label("Rahaa käytettävissä (€): ");
+            totalLeftLabel.setText(String.valueOf(bud.getMoneyToUse()-budgetService.getTotalSum()));
+            moneyLeft.getChildren().addAll(moneyLeftLabel, totalLeftLabel);
             
             addCostFields.getChildren().addAll(newCostLabel, newCostField, 
                     euroLabel, newAmountField, categLabel, categoryField, 
                     addCostBtn);
-            budgetLines.getChildren().addAll(addCostLabel, addCostFields);
+            budgetLines.getChildren().addAll(addCostLabel, addCostFields, total, moneyLeft);
             budgetLines.setSpacing(10);
         }        
     }
@@ -384,7 +395,6 @@ public class BudgetUi extends Application {
                     if (budgetService.findUsersBudget()) {
                         budgetPane.getChildren().clear();
                         budgetPane.getChildren().addAll(logoutAndInfo, budgetLabel, budgetLines);
-                        //redrawBudgetLines();
                     } else {
                         System.out.println("Käyttäjällä ei ole budjettia");
                         budgetPane.getChildren().clear();
@@ -392,7 +402,7 @@ public class BudgetUi extends Application {
                     }
                     redrawBudgetLines();
                 } else {
-                    topLabel.setText("Anna käyttäjätunnus ja salasana tai luo uusi käyttäjä ");
+                    topLabel.setText("Anna oikea käyttäjätunnus ja salasana tai luo uusi käyttäjä ");
                 }
             } catch (SQLException ex) {
                 Logger.getLogger(BudgetUi.class.getName()).log(Level.SEVERE, null, ex);

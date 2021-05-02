@@ -226,4 +226,19 @@ public class BudgetServiceTest {
         }
         assertEquals(1, costs.size());
     }
+    
+    @Test
+    public void getTotalSumCorrect() throws SQLException {
+        testService.createUser("test", "test", "test");
+        testService.login("test", "test");
+        testService.createNewBudget("testbudget", 100.0);
+        testService.findUsersBudget();
+        testService.createNewCategory("testCategory1");
+        testService.createNewCategory("testCategory2");
+        testService.createNewCost("testCost", 20.0, "testCategory1");
+        testService.createNewCost("testCost2", 40.0, "testCategory1");
+        testService.createNewCost("testCost3", 500.0, "testCategory2");
+
+        assertEquals(560, testService.getTotalSum() ,0);
+    }
 }
