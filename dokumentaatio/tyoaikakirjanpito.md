@@ -19,4 +19,5 @@
 | 26.4. | 6    | paranneltu käyttäjälle näkyvää toiminnallisuutta ja laajennettu testausta |
 | 27.4. | 4    | lisätty mahdollisuus poistaa ja muokata kulua ja laajennettu testausta |
 | 30.4. | 1    | lisätty koodiin tarkistus, onko konfiguraatiotiedostoa olemassa ja sen luominen tarvittaessa |
-| yht.  | 64   | | 
+| 2.5.  | 3    | luotu toiminnallisuus suunnitelman summan ja jäljellä olevan rahamäärän näyttämiseen, korjailtu testausta |
+| yht.  | 67   | | 
