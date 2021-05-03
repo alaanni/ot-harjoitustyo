@@ -29,7 +29,7 @@ Uuden käyttäjän luomisen jälkeen palataan kirjautumisnäkymään.
 ![Screenshot from 2021-05-03 13-54-29](https://user-images.githubusercontent.com/48988852/116892541-98678800-ac38-11eb-9339-e65784594763.png)
 
 ### Uuden budjetin luominen
-Ensimmäisellä kirjautumisella näkymässä on vaihtoehtona kirjautua ulos tai aloittaa budjetointi.
+Ensimmäisellä kirjautumiskerralla näkymässä on vaihtoehtona kirjautua ulos tai aloittaa budjetointi.
 ![Screenshot from 2021-05-03 13-55-01](https://user-images.githubusercontent.com/48988852/116892647-b46b2980-ac38-11eb-9387-6835232a58e9.png)
 
 Uuden budjetin luomiessa tulee budjetti nimetä. Käytettävissä olevan rahamäärän voi jättää tyhjäksi tai sitä voi muuttaa myöhemmin.
