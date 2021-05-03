@@ -340,7 +340,7 @@ public class BudgetUi extends Application {
                     newPassword.setText("");
                     registerLabel.setText("Luo uusi käyttäjä");
                 } 
-                else if (!newName.getText().isEmpty() || !newUsername.getText().isEmpty() ||
+                else if (!newName.getText().isEmpty() && !newUsername.getText().isEmpty() &&
                         !newPassword.getText().isEmpty()) {
                     registerLabel.setText("Käyttäjänimi on jo varattu.");         
                 } else {
