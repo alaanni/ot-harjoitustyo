@@ -18,3 +18,23 @@ Ohjelma käynnistyy komennolla:
 java -jar Budjetointisovellus-1.0-SNAPSHOT.jar
 ```
 
+## Ohjelman käyttäminen
+
+### Kirjautuminen
+Ohjelma avautuu kirjautumisnäkymään, jossa voi syöttää käyttäjätunnuksen ja salasanan tai luoda uuden käyttäjän. 
+![Screenshot from 2021-05-03 13-54-25](https://user-images.githubusercontent.com/48988852/116892501-8f76b680-ac38-11eb-88dc-20c0db3ce060.png)
+
+### Uuden käyttäjän luominen
+Uuden käyttäjän luomisen jälkeen palataan kirjautumisnäkymään.
+![Screenshot from 2021-05-03 13-54-29](https://user-images.githubusercontent.com/48988852/116892541-98678800-ac38-11eb-9339-e65784594763.png)
+
+### Uuden budjetin luominen
+Ensimmäisellä kirjautumisella näkymässä on vaihtoehtona kirjautua ulos tai aloittaa budjetointi.
+![Screenshot from 2021-05-03 13-55-01](https://user-images.githubusercontent.com/48988852/116892647-b46b2980-ac38-11eb-9387-6835232a58e9.png)
+
+Uuden budjetin luomiessa tulee budjetti nimetä ja antaa käytettävissä oleva rahamäärä. Rahamäärän voi jättää myös tyhjäksi ja sitä voi muuttaa myöhemmin.
+![Screenshot from 2021-05-03 13-55-04](https://user-images.githubusercontent.com/48988852/116892179-3870e180-ac38-11eb-95df-e05c2aa8b583.png)
+
+### Kulujen lisääminen budjettiin
+Kun käyttäjä on luonut budjetin avautuu näkymä omaan budjettiin. Budjetin käytettävissä olevaa rahamäärää voi muokata. Käyttäjä voi lisätä uusia kuluja. Samaan kategoriaan kuuluvat kulut listautuvat oman alaotsikon alle. Käyttäjä näkee paljonko suunnitellut kulut tekevät yhteensä ja paljonko rahaa on vielä budjetoitavissa tai mikäli suunnitellut kulut ylittävät käytettävissä olevan rahamäärän. 
+![Screenshot from 2021-05-03 13-56-08](https://user-images.githubusercontent.com/48988852/116892230-49b9ee00-ac38-11eb-9893-3bdeb5067b52.png)
