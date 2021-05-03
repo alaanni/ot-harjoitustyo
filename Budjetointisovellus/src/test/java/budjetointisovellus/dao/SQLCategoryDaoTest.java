@@ -17,9 +17,9 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 
 /**
- *
- * @author alaanni
+ * Kategorioiden pysyväistallennusta testaava luokka
  */
+
 public class SQLCategoryDaoTest {
     CategoryDao categoryDao;
     Budget budget;

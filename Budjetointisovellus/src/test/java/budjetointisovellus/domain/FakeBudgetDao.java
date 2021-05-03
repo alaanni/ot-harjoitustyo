@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package budjetointisovellus.domain;
 
 import budjetointisovellus.dao.BudgetDao;
@@ -13,9 +8,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 /**
- *
- * @author alaanni
+ * FakeBudgetDao sovelluslogiikan testaamiseksi
  */
+
 public class FakeBudgetDao implements BudgetDao<Budget, Integer> {
     
     private final Connection connection;

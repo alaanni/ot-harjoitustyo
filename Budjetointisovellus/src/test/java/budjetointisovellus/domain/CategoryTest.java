@@ -5,9 +5,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 /**
- *
- * luokka kategorian toiminnan testaamiseen
- * 
+ * Luokka kategorian toiminnan testaamiseen
  */
 
 public class CategoryTest {
@@ -41,6 +39,6 @@ public class CategoryTest {
         category.addCost(cost2);
         category.addCost(cost3);
         category.removeCost(cost1);
-        assertEquals(2, category.costs.size());
+        assertEquals(2, category.getCosts().size());
     }
 }

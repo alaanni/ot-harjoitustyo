@@ -23,9 +23,9 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 
 /**
- *
- * @author alaanni
+ * Kulujen pysyväistallennusta testaava luokka
  */
+
 public class SQLCostDaoTest {
     CostDao costDao;
     Budget budget;

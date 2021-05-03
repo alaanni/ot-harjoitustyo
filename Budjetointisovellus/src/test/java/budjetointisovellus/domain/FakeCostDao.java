@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package budjetointisovellus.domain;
 
 import budjetointisovellus.dao.CostDao;
@@ -15,9 +10,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- *
- * @author alaanni
+ * FakeCostDao luokka sovelluslogiikan testaamiseksi
  */
+
 public class FakeCostDao implements CostDao<Cost, Integer> {
     private final Connection connection;
     

@@ -3,13 +3,12 @@ package budjetointisovellus.domain;
 import java.util.*;
 
 /**
- *
  * Kulua edustava luokka
  */
 
 public class Cost {
     
-    int id;
+    private int id;
     private String name;
     private double amount;
     private Category category;

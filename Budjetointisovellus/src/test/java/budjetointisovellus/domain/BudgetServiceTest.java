@@ -17,9 +17,9 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 
 /**
- *
- * @author alaanni
+ * Luokka sovelluslogiikan testaamiseen
  */
+
 public class BudgetServiceTest {
     private BudgetService testService;
     
@@ -91,10 +91,6 @@ public class BudgetServiceTest {
         assertEquals(null, testService.getLoggedUser());
     }
     
-    /**
-     *
-     * @throws java.sql.SQLException
-     */
     @Test
     public void createAndFindNewBudgetWorks() throws SQLException {
         testService.createUser("test", "test", "test");

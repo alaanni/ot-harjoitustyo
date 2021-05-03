@@ -4,7 +4,6 @@ package budjetointisovellus.domain;
 import java.util.*;
 
 /**
- *
  * Suunniteltua budjettia edustava luokka
  */
 

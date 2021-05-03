@@ -11,9 +11,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- *
- * @author alaanni
+ * Kulujen pysyväistalletuksesta vastaava luokka
  */
+
 public class SQLCostDao implements CostDao<Cost, Integer> {
     private final Connection connection;
     

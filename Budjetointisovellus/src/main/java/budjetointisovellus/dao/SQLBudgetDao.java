@@ -5,8 +5,7 @@ import budjetointisovellus.domain.User;
 import java.sql.*;
 
 /**
- *
- * @author alaanni
+ * Budjettien pysyväistalletuksesta vastaava luokka
  */
 
 public class SQLBudgetDao implements BudgetDao<Budget, Integer> {

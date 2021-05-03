@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package budjetointisovellus.dao;
 
 import org.junit.After;
@@ -18,9 +13,9 @@ import static org.junit.Assert.assertEquals;
 
 
 /**
- *
- * @author alaanni
+ * Käyttäjien pysyväistallennusta testaava luokka
  */
+
 public class SQLUserDaoTest {
     UserDao userDao;
     User user;

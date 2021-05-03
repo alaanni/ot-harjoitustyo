@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- *
  * Kategorioita edustava luokka
  */
 
@@ -12,7 +11,7 @@ public class Category {
     private int id;
     private final Budget budget;
     private final String name;
-    ArrayList<Cost> costs;
+    private ArrayList<Cost> costs;
     
     public Category(int id, Budget budget, String name) {
         this.id = id;

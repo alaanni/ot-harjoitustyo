@@ -311,7 +311,6 @@ public class BudgetUi extends Application {
         
         newBudgetScene = new Scene(newBudgetPane,  800, 500);
         
-        
         //create new user scene
         
         Label registerLabel = new Label("Luo uusi käyttäjä");

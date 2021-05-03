@@ -4,8 +4,7 @@ import java.sql.*;
 import budjetointisovellus.domain.User;
 
 /**
- *
- * @author alaanni
+ * Käyttäjien pysyväistalletuksesta vastaava luokka
  */
 
 public class SQLUserDao implements UserDao<User, Integer> {
@@ -59,36 +58,6 @@ public class SQLUserDao implements UserDao<User, Integer> {
         rs.close();
         
         return u;
-    }
-    
-    @Override
-    public void update(User user) throws SQLException {
-        String sql = "UPDATE users SET password=?, name=? WHERE username=?";
-        
-        User u = user;
-        
-        PreparedStatement statement = connection.prepareStatement(sql);
-        statement.setString(1, u.getPassword());
-        statement.setString(2, u.getName());
-        statement.setString(3, u.getUsername());
-
-        int rowsUpdated = statement.executeUpdate();
-        if (rowsUpdated > 0) {
-            System.out.println("An existing user was updated");
-        }
-    }
-
-    @Override
-    public void delete(User user) throws SQLException {
-        String sql = "DELETE FROM users WHERE username=?";
- 
-        PreparedStatement statement = connection.prepareStatement(sql);
-        statement.setString(1, user.getName());
-
-        int rowsDeleted = statement.executeUpdate();
-        if (rowsDeleted > 0) {
-            System.out.println("A user was deleted successfully");
-        }
     }
 
     @Override

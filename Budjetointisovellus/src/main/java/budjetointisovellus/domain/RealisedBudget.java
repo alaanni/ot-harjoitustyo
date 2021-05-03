@@ -3,7 +3,6 @@ package budjetointisovellus.domain;
 import java.util.*;
 
 /**
- *
  * Toteutuneita kustannuksia edustava luokka
  */
 

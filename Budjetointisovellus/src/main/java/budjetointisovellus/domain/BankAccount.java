@@ -1,8 +1,7 @@
 package budjetointisovellus.domain;
 
 /**
- *
- * käyttäjän pankkitiliä edustva luokka
+ * Käyttäjän pankkitiliä edustva luokka
  */
 
 public class BankAccount {

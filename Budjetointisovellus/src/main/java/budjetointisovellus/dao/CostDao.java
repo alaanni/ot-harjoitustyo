@@ -4,12 +4,7 @@ import budjetointisovellus.domain.Category;
 import java.sql.SQLException;
 import java.util.List;
 
-/**
- *
- * @author alaanni
- * @param <Cost>
- * @param <Integer>
- */
+
 public interface CostDao<Cost, Integer> {
     void create(Cost cost) throws SQLException;
     List<Cost> findAllByCategory(Category category) throws SQLException;

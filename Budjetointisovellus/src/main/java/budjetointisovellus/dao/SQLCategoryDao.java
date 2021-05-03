@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package budjetointisovellus.dao;
 
 import budjetointisovellus.domain.Budget;
@@ -12,9 +7,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- *
- * @author alaanni
+ * Kategorioiden pysyväistalletuksesta vastaava luokka
  */
+
 public class SQLCategoryDao implements CategoryDao<Category, Integer> {
     private final Connection connection;
     
@@ -87,11 +82,6 @@ public class SQLCategoryDao implements CategoryDao<Category, Integer> {
             System.out.println(e.getMessage());
         }
         return categories;
-    }
-
-    @Override
-    public void update(Category category) throws SQLException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override

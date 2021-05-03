@@ -8,7 +8,6 @@ import java.sql.SQLException;
 import java.util.*;
 
 /**
- *
  * Sovelluslogiikasta vastaava luokka
  */
 
@@ -34,9 +33,9 @@ public class BudgetService {
     * sisäänkirjautuminen
     * 
     * @param   username käyttäjätunnus
-     * @param password  salasana
+    * @param password  salasana
     * 
-    * @return true jos käyttätunnus olemassa 
+    * @return true jos käyttätunnus olemassa ja kirjautumistiedot oikein
          * @throws java.sql.SQLException 
     * 
     */ 
@@ -69,7 +68,7 @@ public class BudgetService {
         return logged;
     }
     
-        /**
+    /**
     * kirjautuneen käyttäjän budjetti
     * 
     * @return kirjautuneen käyttäjän budjetti
@@ -79,10 +78,6 @@ public class BudgetService {
         return usersBudget;
     }
 
-    public List getCategories() {
-        return this.categories;
-    }
-    
     /**
     * uloskirjautuminen
     */  
@@ -96,10 +91,10 @@ public class BudgetService {
     /**
     * luo uusi käyttäjä
     * 
-         * @param name nimi
-         * @param username käyttäjätunnus
-         * @param password salasana
-     * @return 
+     * @param name nimi
+     * @param username käyttäjätunnus
+     * @param password salasana
+     * @return true jos käyttäjän luonti onnistui
      * @throws java.sql.SQLException
     */ 
 
@@ -118,12 +113,11 @@ public class BudgetService {
     }
     
     /**
-    * Luo uusi suunnitelma (budjetti)
+    * luo uusi suunnitelma (budjetti)
     * 
-     * @param name
-     * @param moneyToUse
-     * @param username
-     * @return 
+     * @param name budjetin nimi
+     * @param moneyToUse rahaa käytettävissä
+     * @return true jos budjetin luominen onnistui
      * @throws java.sql.SQLException
     */ 
     
@@ -137,6 +131,14 @@ public class BudgetService {
         return true;
     }
     
+    /**
+    * muokkaa budjettia
+    * 
+     * @param moneyToUse rahaa käytettävissä
+     * @return true jos budjetin muokkaaminen onnistui
+     * @throws java.sql.SQLException
+    */ 
+    
     public boolean editBudgetsMoneyToUse(Double moneyToUse) throws SQLException {
         if (moneyToUse == -1.0) {
             return false;
@@ -149,8 +151,8 @@ public class BudgetService {
     /**
     * Etsi käyttäjän budjetti
     * 
-     * @return 
-    * @throws java.sql.SQLException 
+     * @return true jos käyttäjällä on budjetti
+     * @throws java.sql.SQLException 
     */ 
     
     public boolean findUsersBudget() throws SQLException {
@@ -167,7 +169,7 @@ public class BudgetService {
     
     
     /**
-    * Etsi käyttäjän budjetin kategoriat
+    * etsi käyttäjän budjetin kategoriat
     * 
      * @return lista budjettiin sisältyvistä kategorioista
     * @throws java.sql.SQLException 
@@ -179,7 +181,7 @@ public class BudgetService {
     }
     
     /**
-    * Etsi kategoriaan kuuluvat kulut
+    * etsi kategoriaan kuuluvat kulut
     * 
      * @param category
      * @return lista kategoriaan sisältyvistä kuluista
@@ -191,6 +193,14 @@ public class BudgetService {
         return costs;
     }
     
+    /**
+    * luo uusi kategoria
+    * 
+     * @param name kategorian nimi
+     * @return true jos kategorian luominen onnistui
+    * @throws java.sql.SQLException 
+    */ 
+    
     public boolean createNewCategory(String name) throws SQLException {
         if (name.isEmpty()) {
             return false;
@@ -200,6 +210,16 @@ public class BudgetService {
         categoryDao.create(c);
         return true;
     }
+    
+    /**
+    * luo uusi kulu
+    * 
+     * @param name kulun nimi
+     * @param amount kulu euroina
+     * @param categoryName kategoria johon luotu kulu kuuluu
+     * @return true jos kulun luominen onnistui
+    * @throws java.sql.SQLException 
+    */ 
     
     public boolean createNewCost(String name, Double amount, String categoryName) throws SQLException {
         if (name.isEmpty() || categoryName.isEmpty() || amount == -1.0) {
@@ -218,6 +238,14 @@ public class BudgetService {
         return true;
     }
     
+    /**
+    * muokkaa kulua
+    *
+     * @param cost muokattava kulu
+     * @return true jos kulun muokkaaminen onnistui
+    * @throws java.sql.SQLException 
+    */ 
+    
     public boolean editCost(Cost cost) throws SQLException {
         if (cost.getAmount() == -1.0) {
             return false;
@@ -226,10 +254,25 @@ public class BudgetService {
         return true;
     }
     
+    /**
+    * poista kulu
+    *
+     * @param cost poistettava kulu
+     * @return true jos kulun poistaminen onnistui
+    * @throws java.sql.SQLException 
+    */ 
+    
     public boolean removeCost(Cost cost) throws SQLException {
         costDao.delete(cost);
         return true;
     }
+    
+    /**
+    * kulut yhteensä
+    *
+     * @return budjetin kulut yhteensä euroina
+    * @throws java.sql.SQLException 
+    */ 
     
     public Double getTotalSum() throws SQLException {
         Double total = 0.0;
