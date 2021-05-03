@@ -85,11 +85,6 @@ public class SQLCategoryDao implements CategoryDao<Category, Integer> {
     }
 
     @Override
-    public void delete(Category category) throws SQLException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
     public void dropTable() throws SQLException {
         try (PreparedStatement stmt = connection.prepareStatement("DROP TABLE categories")) {
             stmt.executeUpdate();

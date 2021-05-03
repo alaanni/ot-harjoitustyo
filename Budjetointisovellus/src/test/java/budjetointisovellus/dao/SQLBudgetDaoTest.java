@@ -51,6 +51,11 @@ public class SQLBudgetDaoTest {
         assertEquals(100, b.getMoneyToUse(), 0);
     }
     
+        @Test
+    public void returnsNullIfUserNotFound() throws SQLException {
+        assertEquals(null, (Budget) budgetDao.findByUser(user));
+    }
+    
     @Test
     public void updateBudgetWorks() throws SQLException {
         budgetDao.create(budget);
@@ -61,5 +66,14 @@ public class SQLBudgetDaoTest {
         assertEquals("TestBudget", b.getName());
         assertEquals("Testaaja", b.getBudgetUser().getName());
         assertEquals(200, b.getMoneyToUse(), 0);
+    }
+    
+    @Test
+    public void deleteBudgetWorks() throws SQLException {
+        budgetDao.create(budget);
+        Budget b = (Budget) budgetDao.findByUser(user);
+        assertEquals("TestBudget", b.getName());
+        budgetDao.delete(budget);
+        assertEquals(null, (Budget) budgetDao.findByUser(user));
     }
 }

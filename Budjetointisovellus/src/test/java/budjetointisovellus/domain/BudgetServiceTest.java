@@ -69,10 +69,17 @@ public class BudgetServiceTest {
     }
     
     @Test
-    public void returnFalseIfTryLoginWithoutUsernameOrNameNotFound() throws SQLException {
+    public void returnFalseIfLoginWithoutUsernameOrNameNotFound() throws SQLException {
         testService.createUser("testName", "testUsername", "testPw");
         assertEquals(false, testService.login("", ""));
         assertEquals(false, testService.login("tesNam", "tesP"));
+    }
+    
+    @Test
+    public void returnFalseIfWrongUsernameOrPassword() throws SQLException {
+        testService.createUser("testName", "testUsername", "testPw");
+        assertEquals(false, testService.login("testNam", "testPw"));
+        assertEquals(false, testService.login("testName", "tesP"));
     }
     
     @Test
@@ -130,6 +137,16 @@ public class BudgetServiceTest {
     }
     
     @Test
+    public void createNewCategoryReturnFalseIfNameEmpty() throws SQLException {
+        testService.createUser("test", "test", "test");
+        testService.login("test", "test");
+        testService.createNewBudget("testbudget", 100.0);
+        testService.findUsersBudget();
+
+        assertEquals(false, testService.createNewCategory(""));
+    }
+    
+    @Test
     public void createsAndFindsCategoryCosts() throws SQLException {
         testService.createUser("test", "test", "test");
         testService.login("test", "test");
@@ -154,6 +171,17 @@ public class BudgetServiceTest {
         assertEquals(false, testService.createNewCost("", 20.0, "testCategory1"));
         assertEquals(false, testService.createNewCost("", -1.0, "testCategory1"));
         assertEquals(false, testService.createNewCost("", 20.0, ""));
+    }
+    
+    @Test
+    public void createsNewCategoryIfCostCategoryNotFound() throws SQLException {
+        testService.createUser("test", "test", "test");
+        testService.login("test", "test");
+        testService.createNewBudget("testbudget", 100.0);
+        testService.findUsersBudget();
+        testService.createNewCost("testCost", 20.0, "testCategory1");
+        categories = testService.findBudgetCategories();
+        assertEquals("testCategory1", categories.get(0).getName());
     }
     
     @Test
@@ -199,6 +227,23 @@ public class BudgetServiceTest {
             costs = testService.findCategorysCosts(cat);
         }
         assertEquals(50, costs.get(0).getAmount(), 0);
+    }
+    
+        @Test
+    public void editCostReturnsFalseIfAmountNegative() throws SQLException {
+        testService.createUser("test", "test", "test");
+        testService.login("test", "test");
+        testService.createNewBudget("testbudget", 100.0);
+        testService.findUsersBudget();
+        testService.createNewCategory("testCategory1");
+        testService.createNewCost("testCost", 20.0, "testCategory1");
+        categories = testService.findBudgetCategories();
+        for (Category cat : categories) {
+            costs = testService.findCategorysCosts(cat);
+        }
+        Cost c = costs.get(0);
+        c.setAmount(-1.0);
+        assertEquals(false, testService.editCost(c));
     }
     
     @Test

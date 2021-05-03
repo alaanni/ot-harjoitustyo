@@ -45,4 +45,9 @@ public class SQLUserDaoTest {
         assertEquals("Testaaja", u.getName());
         assertEquals("test", u.getUsername());
     }
+    
+    @Test
+    public void returnsNullIfUserNotFound() throws SQLException {
+        assertEquals(null, (User) userDao.findByUsername("test"));
+    }
 }
