@@ -21,7 +21,7 @@ java -jar Budjetointisovellus-1.0-SNAPSHOT.jar
 ## Ohjelman käyttäminen
 
 ### Kirjautuminen
-Ohjelma avautuu kirjautumisnäkymään, jossa voi syöttää käyttäjätunnuksen ja salasanan tai luoda uuden käyttäjän. 
+Ohjelma avautuu kirjautumisnäkymään, jossa voi syöttää käyttäjätunnuksen ja salasanan tai siirtyä luomaan uutta käyttäjää.
 ![Screenshot from 2021-05-03 13-54-25](https://user-images.githubusercontent.com/48988852/116892501-8f76b680-ac38-11eb-88dc-20c0db3ce060.png)
 
 ### Uuden käyttäjän luominen
