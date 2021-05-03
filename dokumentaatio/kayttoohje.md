@@ -37,5 +37,6 @@ Uusi budjetti tulee nimetä. Käytettävissä olevan rahamäärän voi jättää
 
 ### Kulujen lisääminen budjettiin
 Kun budjetti on luotu, avautuu näkymä omaan budjettiin. Käytettävissä olevaa rahamäärää voi muokata syöttämällä tekstikenttään uusi rahamäärä ja klikkaamalla vieresssä olevaa Tallenna muutokset -nappia. Käyttäjä voi lisätä uusia kuluja. Samaan kategoriaan kuuluvat kulut listautuvat oman alaotsikon alle. Kuluja voi muokata ja poistaa. Muokkaus tapahtuu vastaavasti kuin budjetin rahamäärän muokkaus. Käyttäjä näkee paljonko suunnitellut kulut ovat yhteensä ja paljonko rahaa on vielä budjetoitavissa tai mikäli suunnitellut kulut ylittävät käytettävissä olevan rahamäärän. 
+
 ![Screenshot from 2021-05-03 13-56-08](https://user-images.githubusercontent.com/48988852/116892230-49b9ee00-ac38-11eb-9893-3bdeb5067b52.png)
 
