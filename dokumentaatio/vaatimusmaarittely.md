@@ -10,7 +10,7 @@ Sovelluksella on yksi käyttäjärooli eli normaali käyttäjä.
 
 ## Toiminnallisuudet 
 
- **(alla olevat toiminnallisuudet tehty)**
+ **(kaikki toiminnallisuudet tehty)**
 
 - Ennen kirjautumista
   - voidaan luoda uusi käyttäjätunnus
@@ -23,6 +23,7 @@ Sovelluksella on yksi käyttäjärooli eli normaali käyttäjä.
   - näkee suunnitelman kulut listattuina ja jaoteltuina omiin kategorioihinsa
   - voi muokata ja poistaa suunnitelmaan lisättyjä kuluja
   **(viikolla 6 lisätty ominaisuus tyhjäksi jääneen kategorian poistamiseksi)**
+  - näkee kulujen summan sekä jäljellä olevan rahamäärän   **(tehty viikolla 6)**
 
 ## Jatkokehitysideoita
 - Pääkäyttäjä joka voi tehdä muutoksia ja lisäyksiä sovellukseen ja normaalilla käyttäjällä katseluoikeus
