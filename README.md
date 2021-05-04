@@ -64,3 +64,13 @@ Virheilmoitukset löytyvät tiedostosta _target/site/checkstyle.html_
 mvn package
 ```
 generoi suoritettavan tiedoston _Budjetointisovellus-1.0-SNAPSHOT.jar_ hakemistoon _target/_
+
+
+### JavaDoc
+
+Sovelluksen JavaDoc generoidaan komennolla
+
+```
+mvn javadoc:javadoc
+```
+ja sitä voidaan tarkastella avaamalla tiedosto _target/site/apidocs/index.html_
