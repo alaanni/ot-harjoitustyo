@@ -29,7 +29,7 @@ Sovelluslogiikan toiminnoista vastaava luokka [BudgetService](https://github.com
 
 Pakkauksessa [budjetointisovellus.dao](https://github.com/alaanni/ot-harjoitustyo/tree/master/Budjetointisovellus/src/main/java/budjetointisovellus/dao) olevat luokat vastaavat tietojen tallentamisesta _sqlite_-tietokantaan. 
 
-Luokat on toteutettu _Data Acces Object_ -suunnittelumallilla eli sovelluksessa käytettävät luokat _SQLUserDao_, _SQLBudgetDao_, _SQLCategoryDao_ ja _SQLCostDao_ on eristetty omien rajapintojensa taakse. Koska sovellus käyttää rajapintoja, SQLDao -toteutuksia on helppo muuttaa joutumatta muokata muuta sovellusta. 
+Luokat on toteutettu _Data Acces Object_ -suunnittelumallilla eli sovelluksessa käytettävät luokat _SQLUserDao_, _SQLBudgetDao_, _SQLCategoryDao_ ja _SQLCostDao_ on eristetty omien rajapintojensa taakse. Koska sovellus käyttää rajapintoja, SQLDao-toteutuksia on helppo muuttaa joutumatta muokata muuta sovellusta. 
 
 ## Päätoiminnallisuudet
 
@@ -43,4 +43,7 @@ Esimerkkejä ohjelman toiminnallisuuksista sekvenssikaavioina:
 
 ![Uuden budjetin luonti](https://user-images.githubusercontent.com/48988852/116081751-4e642c80-a6a3-11eb-9a2a-e80bf4e76d13.png)
 
+## Kehityskohdat ohjelman rakenteessa
 
+- Graafisen käyttöliittymän koodia voisi selkeyttää erittelemällä se useampiin metodeihin tai luokkiin. Näyttääkseen ammattimaiselta käyttöliittymän ulkoasua voisi vähintään tyylitellä tai sen voisi kokonaan korvata FXML-tekniikalla. 
+- SQLDao-toteutuksissa tietokantayhteyden muodostus toistuu samanlaisena kaikissa metodeissa. Yhteyden muodostamiseksi olisi voinut toteuttaa oman erillisen luokan. 
