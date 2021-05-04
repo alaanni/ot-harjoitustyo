@@ -10,4 +10,5 @@
 
 ### Testikattavuus
 
-![Screenshot from 2021-05-04 22-20-33](https://user-images.githubusercontent.com/48988852/117060009-1a36de80-ad29-11eb-9d12-3e16ef343e69.png)
+![Screenshot from 2021-05-04 22-42-18](https://user-images.githubusercontent.com/48988852/117060812-0d66ba80-ad2a-11eb-922e-ee683beb13d7.png)
+
