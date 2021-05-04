@@ -143,8 +143,21 @@ public class BudgetService {
         if (moneyToUse == -1.0) {
             return false;
         }
-        Budget budget = new Budget(usersBudget.getName(), moneyToUse, logged);
+        Budget budget = new Budget(usersBudget.getId(), usersBudget.getName(), moneyToUse, logged);
         budgetDao.update(budget);
+        return true;
+    }
+    
+    /**
+    * poista käyttäjän budjetti
+    * 
+     * @param budget
+     * @return true
+     * @throws java.sql.SQLException
+    */ 
+    
+    public boolean removeBudget(Budget budget) throws SQLException {
+        budgetDao.delete(budget);
         return true;
     }
     

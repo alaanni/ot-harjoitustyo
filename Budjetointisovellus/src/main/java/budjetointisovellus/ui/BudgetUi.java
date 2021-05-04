@@ -151,7 +151,21 @@ public class BudgetUi extends Application {
             }
             
             });
-            budgetInfo.getChildren().addAll(budgetName, moneyToUse, euroChar, editMoneyToUse);
+            
+            Button deleteBudget = new Button("Poista budjetti");
+            deleteBudget.setOnAction(e -> {
+            try {
+                if(budgetService.removeBudget(bud)) {
+                    budgetLines.getChildren().clear();
+                    Label info = new Label("Budjettisi on poistettu. Mikäli haluat luoda uuden, kirjaudu ulos ja palaa takasin.");
+                    budgetLines.getChildren().add(info);
+                }
+            } catch (SQLException ex) {
+                Logger.getLogger(BudgetUi.class.getName()).log(Level.SEVERE, null, ex);
+            } 
+            });
+            
+            budgetInfo.getChildren().addAll(budgetName, moneyToUse, euroChar, editMoneyToUse, deleteBudget);
             budgetLines.getChildren().add(budgetInfo);
             List<Category> budgetCategories = budgetService.findBudgetCategories();
             List<Cost> categoryCosts;

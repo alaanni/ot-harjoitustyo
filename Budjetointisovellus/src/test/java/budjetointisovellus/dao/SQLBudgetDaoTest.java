@@ -33,7 +33,7 @@ public class SQLBudgetDaoTest {
         String dbAddr = properties.getProperty("testdb");
         budgetDao = new SQLBudgetDao(dbAddr);
         user = new User("Testaaja", "test", "test");
-        budget = new Budget("TestBudget", 100, user);
+        budget = new Budget(1, "TestBudget", 100, user);
     }
     
     @After
@@ -59,7 +59,7 @@ public class SQLBudgetDaoTest {
     @Test
     public void updateBudgetWorks() throws SQLException {
         budgetDao.create(budget);
-        budget = new Budget("TestBudget", 200, user);
+        budget = new Budget(1, "TestBudget", 200, user);
         budgetDao.update(budget);
         Budget b = (Budget) budgetDao.findByUser(user);
         

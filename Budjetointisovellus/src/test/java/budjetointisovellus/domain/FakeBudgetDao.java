@@ -23,7 +23,7 @@ public class FakeBudgetDao implements BudgetDao<Budget, Integer> {
     public final void initTables() throws SQLException {
         try (PreparedStatement stmt = connection.prepareStatement("CREATE TABLE IF NOT EXISTS budgets "
                 + "(budget_id INTEGER PRIMARY KEY AUTOINCREMENT, "
-                + "name    VARCHAR(255) UNIQUE, "
+                + "name    VARCHAR(255), "
                 + "moneyToUse   FLOAT, "
                 + "user_id INTEGER,"
                 + "FOREIGN KEY (user_id) REFERENCES users (user_id))")) {
@@ -74,11 +74,11 @@ public class FakeBudgetDao implements BudgetDao<Budget, Integer> {
     @Override
     @SuppressWarnings("empty-statement")
     public void update(Budget budget) throws SQLException {
-        String sql = "UPDATE budgets SET moneyToUse=? WHERE name=?";
+        String sql = "UPDATE budgets SET moneyToUse=? WHERE budget_id=?";
  
         PreparedStatement statement = connection.prepareStatement(sql);
         statement.setDouble(1, budget.getMoneyToUse());
-        statement.setString(2, budget.getName());
+        statement.setInt(2, budget.getId());
 
         int rowsUpdated = statement.executeUpdate();
         if (rowsUpdated > 0) {
@@ -88,10 +88,10 @@ public class FakeBudgetDao implements BudgetDao<Budget, Integer> {
 
     @Override
     public void delete(Budget budget) throws SQLException {
-        String sql = "DELETE FROM budgets WHERE name=?";
+        String sql = "DELETE FROM budgets WHERE budget_id=?";
  
         PreparedStatement statement = connection.prepareStatement(sql);
-        statement.setString(1, budget.getName());
+        statement.setInt(1, budget.getId());
 
         int rowsDeleted = statement.executeUpdate();
         if (rowsDeleted > 0) {
