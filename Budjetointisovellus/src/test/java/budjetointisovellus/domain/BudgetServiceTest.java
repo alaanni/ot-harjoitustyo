@@ -247,7 +247,7 @@ public class BudgetServiceTest {
     }
     
     @Test
-    public void deleteCostWorks() throws SQLException {
+    public void deleteCostAndDeleteCategoryWorks() throws SQLException {
         testService.createUser("test", "test", "test");
         testService.login("test", "test");
         testService.createNewBudget("testbudget", 100.0);
@@ -261,11 +261,13 @@ public class BudgetServiceTest {
         }
         Cost c = costs.get(0);
         testService.removeCost(c);
-        categories = testService.findBudgetCategories();
         for (Category cat : categories) {
             costs = testService.findCategorysCosts(cat);
         }
         assertEquals(1, costs.size());
+        costs = testService.findCategorysCosts(categories.get(0));
+        testService.removeCost(costs.get(0));
+        assertEquals(0, testService.findBudgetCategories().size());
     }
     
     @Test

@@ -77,19 +77,6 @@ public class SQLBudgetDao implements BudgetDao<Budget, Integer> {
     }
 
     @Override
-    public void delete(Budget budget) throws SQLException {
-        String sql = "DELETE FROM budgets WHERE budget_id=?";
- 
-        PreparedStatement statement = connection.prepareStatement(sql);
-        statement.setInt(1, budget.getId());
-
-        int rowsDeleted = statement.executeUpdate();
-        if (rowsDeleted > 0) {
-            System.out.println("A budget was deleted successfully!");
-        }
-    }
-
-    @Override
     public void dropTable() throws SQLException {
         try (PreparedStatement stmt = connection.prepareStatement("DROP TABLE budgets")) {
             stmt.executeUpdate();

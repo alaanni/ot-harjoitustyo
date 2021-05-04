@@ -149,19 +149,6 @@ public class BudgetService {
     }
     
     /**
-    * poista käyttäjän budjetti
-    * 
-     * @param budget
-     * @return true
-     * @throws java.sql.SQLException
-    */ 
-    
-    public boolean removeBudget(Budget budget) throws SQLException {
-        budgetDao.delete(budget);
-        return true;
-    }
-    
-    /**
     * Etsi käyttäjän budjetti
     * 
      * @return true jos käyttäjällä on budjetti
@@ -224,6 +211,20 @@ public class BudgetService {
         return true;
     }
     
+        
+    /**
+    * poista budjetin kategoria
+    * 
+     * @param category
+     * @return true
+     * @throws java.sql.SQLException
+    */ 
+    
+    public boolean removeCategory(Category category) throws SQLException {
+        categoryDao.delete(category);
+        return true;
+    }
+    
     /**
     * luo uusi kulu
     * 
@@ -277,6 +278,9 @@ public class BudgetService {
     
     public boolean removeCost(Cost cost) throws SQLException {
         costDao.delete(cost);
+        if (costDao.findAllByCategory(cost.getCategory()).isEmpty()) {
+            categoryDao.delete(cost.getCategory());
+        }
         return true;
     }
     

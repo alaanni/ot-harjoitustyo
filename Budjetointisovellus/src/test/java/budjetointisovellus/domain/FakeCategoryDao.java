@@ -87,6 +87,19 @@ public class FakeCategoryDao implements CategoryDao<Category, Integer> {
         }
         return categories;
     }
+    
+    @Override
+    public void delete(Category category) throws SQLException {
+        String sql = "DELETE FROM categories WHERE category_id=?";
+ 
+        PreparedStatement statement = connection.prepareStatement(sql);
+        statement.setInt(1, category.getId());
+
+        int rowsDeleted = statement.executeUpdate();
+        if (rowsDeleted > 0) {
+            System.out.println("A category was deleted successfully!");
+        }
+    }
 
     @Override
     public void dropTable() throws SQLException {

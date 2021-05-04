@@ -152,20 +152,7 @@ public class BudgetUi extends Application {
             
             });
             
-            Button deleteBudget = new Button("Poista budjetti");
-            deleteBudget.setOnAction(e -> {
-            try {
-                if(budgetService.removeBudget(bud)) {
-                    budgetLines.getChildren().clear();
-                    Label info = new Label("Budjettisi on poistettu. Mikäli haluat luoda uuden, kirjaudu ulos ja palaa takasin.");
-                    budgetLines.getChildren().add(info);
-                }
-            } catch (SQLException ex) {
-                Logger.getLogger(BudgetUi.class.getName()).log(Level.SEVERE, null, ex);
-            } 
-            });
-            
-            budgetInfo.getChildren().addAll(budgetName, moneyToUse, euroChar, editMoneyToUse, deleteBudget);
+            budgetInfo.getChildren().addAll(budgetName, moneyToUse, euroChar, editMoneyToUse);
             budgetLines.getChildren().add(budgetInfo);
             List<Category> budgetCategories = budgetService.findBudgetCategories();
             List<Cost> categoryCosts;
@@ -176,6 +163,7 @@ public class BudgetUi extends Application {
                     budgetLines.getChildren().add(createBudgetLine(cost));
                 }
             }
+            
             Label addCostLabel = new Label("Lisää uusi kulu: ");
             HBox addCostFields = new HBox();
             Label newCostLabel = new Label("Kulun nimi: ");
@@ -194,6 +182,7 @@ public class BudgetUi extends Application {
                     cAmount = -1.0;
                 }
             }
+            
             String cCategory = categoryField.getText();
             try {
                 if (budgetService.createNewCost(cName, cAmount, cCategory.trim().toLowerCase())) {
@@ -207,8 +196,8 @@ public class BudgetUi extends Application {
             } catch (SQLException ex) {
                 Logger.getLogger(BudgetUi.class.getName()).log(Level.SEVERE, null, ex);
             }
-            
             });
+            
             HBox total = new HBox();
             HBox moneyLeft = new HBox();
             
@@ -232,7 +221,6 @@ public class BudgetUi extends Application {
     @Override
     public void start(Stage primaryStage) throws IOException, FileNotFoundException, SQLException {
         primaryStage.setTitle("Budjetointisovellus");
-        
         
         //budget scene
         
@@ -263,7 +251,7 @@ public class BudgetUi extends Application {
         budgetPane.getChildren().addAll(logoutAndInfo, budgetLabel, budgetLines, newBudget);
         budgetPane.setSpacing(10);
         budgetScene = new Scene(budgetPane, 800, 500);
-        
+    
         
         //create new budget scene
         
@@ -324,6 +312,7 @@ public class BudgetUi extends Application {
         newBudgetPane.setSpacing(10);
         
         newBudgetScene = new Scene(newBudgetPane,  800, 500);
+        
         
         //create new user scene
         

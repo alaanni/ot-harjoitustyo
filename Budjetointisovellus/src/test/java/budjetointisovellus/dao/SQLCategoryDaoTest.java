@@ -61,4 +61,13 @@ public class SQLCategoryDaoTest {
         
         assertEquals(2, cList.size());
     }
+        
+    @Test
+    public void deleteCategoryWorks() throws SQLException {
+        categoryDao.create(category1);
+        Category c = (Category) categoryDao.findOneByBudget("cat1", budget);
+        assertEquals("cat1", c.getName());
+        categoryDao.delete(c);
+        assertEquals(null, (Category) categoryDao.findOneByBudget("cat1", budget));
+    }
 }

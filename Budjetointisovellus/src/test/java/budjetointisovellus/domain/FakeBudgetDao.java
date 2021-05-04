@@ -85,18 +85,4 @@ public class FakeBudgetDao implements BudgetDao<Budget, Integer> {
             System.out.println("An existing budget was updated successfully!");
         }
     }
-
-    @Override
-    public void delete(Budget budget) throws SQLException {
-        String sql = "DELETE FROM budgets WHERE budget_id=?";
- 
-        PreparedStatement statement = connection.prepareStatement(sql);
-        statement.setInt(1, budget.getId());
-
-        int rowsDeleted = statement.executeUpdate();
-        if (rowsDeleted > 0) {
-            System.out.println("A budget was deleted successfully!");
-        }
-    }
-
 }

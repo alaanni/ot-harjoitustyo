@@ -67,13 +67,4 @@ public class SQLBudgetDaoTest {
         assertEquals("Testaaja", b.getBudgetUser().getName());
         assertEquals(200, b.getMoneyToUse(), 0);
     }
-    
-    @Test
-    public void deleteBudgetWorks() throws SQLException {
-        budgetDao.create(budget);
-        Budget b = (Budget) budgetDao.findByUser(user);
-        assertEquals("TestBudget", b.getName());
-        budgetDao.delete(budget);
-        assertEquals(null, (Budget) budgetDao.findByUser(user));
-    }
 }
