@@ -29,6 +29,8 @@ Sovelluslogiikan toiminnoista vastaava luokka [BudgetService](https://github.com
 
 Pakkauksessa [budjetointisovellus.dao](https://github.com/alaanni/ot-harjoitustyo/tree/master/Budjetointisovellus/src/main/java/budjetointisovellus/dao) olevat luokat vastaavat tietojen tallentamisesta _sqlite_-tietokantaan. 
 
+Tietokannat on määritelty tiedostossa _config.properties_. Käyttöliittymän koodissa tarkistetaan onko kyseistä tiedostoa olemassa ja se luodaan mikäli näin ei ole.
+
 Luokat on toteutettu _Data Acces Object_ -suunnittelumallilla eli sovelluksessa käytettävät luokat _SQLUserDao_, _SQLBudgetDao_, _SQLCategoryDao_ ja _SQLCostDao_ on eristetty omien rajapintojensa taakse. Koska sovellus käyttää rajapintoja, SQLDao-toteutuksia on helppo muuttaa joutumatta muokata muuta sovellusta. 
 
 ## Päätoiminnallisuudet
