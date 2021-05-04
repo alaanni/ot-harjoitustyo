@@ -4,7 +4,7 @@
 
 Ohjelman rakenne luokka-/pakkauskaaviona:
 
-![pakkauskaavio](https://user-images.githubusercontent.com/48988852/115379882-a64def80-a1da-11eb-9461-97eba953a3ff.png)
+![pakkauskaavio](https://user-images.githubusercontent.com/48988852/116991973-06b25600-acde-11eb-9f07-eaa922dfae87.png)
 
 ## Päätoiminnallisuudet
 
