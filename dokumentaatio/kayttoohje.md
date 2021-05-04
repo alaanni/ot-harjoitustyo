@@ -35,10 +35,6 @@ Ensimmäisellä kirjautumiskerralla näkymässä on vaihtoehtona kirjautua ulos 
 Uusi budjetti tulee nimetä. Käytettävissä olevan rahamäärän voi jättää tyhjäksi tai sitä voi muuttaa myöhemmin.
 ![Screenshot from 2021-05-03 13-55-04](https://user-images.githubusercontent.com/48988852/116892179-3870e180-ac38-11eb-95df-e05c2aa8b583.png)
 
-### Budjetin poistaminen
-Sovelluksessa on myös toiminnallisuus budjetin poistamiselle. 
-![Screenshot from 2021-05-04 15-58-40](https://user-images.githubusercontent.com/48988852/117021961-80f3d200-ad00-11eb-8a23-af1b1ad13cb0.png)
-
 ### Kulujen lisääminen budjettiin
 Kun budjetti on luotu, avautuu näkymä omaan budjettiin. Käytettävissä olevaa rahamäärää voi muokata syöttämällä tekstikenttään uusi rahamäärä ja klikkaamalla vieresssä olevaa Tallenna muutokset -nappia. Käyttäjä voi lisätä uusia kuluja. Samaan kategoriaan kuuluvat kulut listautuvat oman alaotsikon alle. Kuluja voi muokata ja poistaa. Muokkaus tapahtuu vastaavasti kuin budjetin rahamäärän muokkaus. Käyttäjä näkee paljonko suunnitellut kulut ovat yhteensä ja paljonko rahaa on vielä budjetoitavissa tai mikäli suunnitellut kulut ylittävät käytettävissä olevan rahamäärän. 
 
