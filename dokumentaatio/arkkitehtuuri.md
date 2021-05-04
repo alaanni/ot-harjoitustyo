@@ -33,6 +33,16 @@ Luokat on toteutettu _Data Acces Object_ -suunnittelumallilla eli sovelluksessa 
 
 ## Päätoiminnallisuudet
 
+Ohjelman toiminnallisuuden toteutuvat pääpiirteissään seuraavasti:
+
+- Käyttöliittymästä klikataan nappia
+- Tapahtumankäsittelijästä kutsutaan jotain sovelluslogiikan metodia
+- Sovelluslogiikka luo tarvittaessa uuden olion
+- Sovelluslogiikasta kutsutaan sopivaa tietojen pysyväistallennuksesta vastaavan luokan metodia
+- Tietokantaan tallennetaan, sieltä haetaan, muokataan tai poistetaan tietoa
+- Sovelluslogiikka palauttaa käyttöliittymään tiedon toiminnon onnistumisesta 
+- Käyttäjälle renderöidään uusi näkymä käyttöliittymän metodin _redrawBudgetLines_ avulla
+
 Esimerkkejä ohjelman toiminnallisuuksista sekvenssikaavioina:
 
 ### Uuden käyttäjän luominen
