@@ -45,5 +45,6 @@ Esimerkkejä ohjelman toiminnallisuuksista sekvenssikaavioina:
 
 ## Kehityskohdat ohjelman rakenteessa
 
-- Graafisen käyttöliittymän koodia voisi selkeyttää erittelemällä se useampiin metodeihin tai luokkiin. Näyttääkseen ammattimaiselta käyttöliittymän ulkoasua voisi vähintään tyylitellä tai sen voisi kokonaan korvata FXML-tekniikalla. 
-- SQLDao-toteutuksissa tietokantayhteyden muodostus toistuu samanlaisena kaikissa metodeissa. Yhteyden muodostamiseksi olisi voinut toteuttaa oman erillisen luokan. 
+Graafisen käyttöliittymän koodia voisi selkeyttää erittelemällä se useampiin metodeihin tai luokkiin. Käyttöliittymän toteutus FXML-tekniikalla parantaisi koodin luettavuutta ja helpottaisi tyylittelyä. 
+
+SQLDao-toteutuksissa tietokantayhteyden muodostus toistuu samanlaisena kaikissa metodeissa. Yhteyden muodostamiseksi olisi voinut toteuttaa oman erillisen luokan. 
