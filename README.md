@@ -1,6 +1,6 @@
-# Rakennusprojektin budjetointisovellus
+# Budjetointisovellus
 
-Sovellus rakennusprojektin budjetointiin ja kulujen hallintaan. Sovelluksen avulla voi seurata pysyvätkö toteutuneet kulut annetussa budjetissa, muokata budjettia sekä tarkastella kulujen jakaumaa ympyräkaavioista.
+Sovellus budjetointiin ja kulujen hallintaan. Sovelluksen inspiraationa oli tarve suunnitella budjetti talonrakennusprojektille. Sovellukseen voi listata suunnitellut kulut ja jaotella ne sopiviin kategorioihin. Sovellus laskee kulut yhteen ja näyttää paljonko rahaa on vielä käytettävissä.
 
 Sovellus on Helsingin yliopiston Ohjelmistotekniikka, kevät 2021 -kurssin harjoitustyö.
 
