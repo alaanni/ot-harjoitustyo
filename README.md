@@ -52,7 +52,7 @@ Tiedoston [checkstyle.xml](Budjetointisovellus/checkstyle.xml) määrittelemät 
 ```
 Virheilmoitukset löytyvät tiedostosta _target/site/checkstyle.html_
 
-### Suoritettavan jar-tiedoston generointi
+### Jar-tiedoston generointi
 ```
 mvn package
 ```
