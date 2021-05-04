@@ -36,8 +36,8 @@ Uusi budjetti tulee nimetä. Käytettävissä olevan rahamäärän voi jättää
 ![Screenshot from 2021-05-03 13-55-04](https://user-images.githubusercontent.com/48988852/116892179-3870e180-ac38-11eb-95df-e05c2aa8b583.png)
 
 ### Budjetin muokkaus
-Kun budjetti on luotu, avautuu näkymä omaan budjettiin. Käytettävissä olevaa rahamäärää voi muokata syöttämällä tekstikenttään uusi rahamäärä ja klikkaamalla vieresssä olevaa Tallenna muutokset -nappia. Budjetin voi poistaa kokonaan klikkaamalla Poista budjetti -nappia. Käyttäjä voi lisätä uusia kuluja. Samaan kategoriaan kuuluvat kulut listautuvat oman alaotsikon alle. Kuluja voi muokata ja poistaa. Muokkaus tapahtuu vastaavasti kuin budjetin rahamäärän muokkaus. Käyttäjä näkee paljonko suunnitellut kulut ovat yhteensä ja paljonko rahaa on vielä budjetoitavissa tai mikäli suunnitellut kulut ylittävät käytettävissä olevan rahamäärän. 
+Kun budjetti on luotu, avautuu näkymä omaan budjettiin. Käytettävissä olevaa rahamäärää voi muokata syöttämällä tekstikenttään uusi rahamäärä ja klikkaamalla vieresssä olevaa Tallenna muutokset -nappia. Käyttäjä voi lisätä uusia kuluja. Samaan kategoriaan kuuluvat kulut listautuvat oman alaotsikon alle. Kuluja voi muokata ja poistaa. Muokkaus tapahtuu vastaavasti kuin budjetin rahamäärän muokkaus. Käyttäjä näkee paljonko suunnitellut kulut ovat yhteensä ja paljonko rahaa on vielä budjetoitavissa tai mikäli suunnitellut kulut ylittävät käytettävissä olevan rahamäärän. 
 
-![Screenshot from 2021-05-04 17-49-56](https://user-images.githubusercontent.com/48988852/117022783-2dce4f00-ad01-11eb-91ba-ce0789a67976.png)
+
 
 
