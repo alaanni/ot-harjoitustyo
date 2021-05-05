@@ -22,7 +22,7 @@ public class SQLCostDao implements CostDao<Cost, Integer> {
         initTable();
     }
     
-    public void initTable() throws SQLException {
+    public final void initTable() throws SQLException {
         try (PreparedStatement stmt = connection.prepareStatement("CREATE TABLE IF NOT EXISTS costs "
                 + "(cost_id INTEGER PRIMARY KEY AUTOINCREMENT, "
                 + "name    VARCHAR(255)  NOT NULL, "
@@ -35,19 +35,14 @@ public class SQLCostDao implements CostDao<Cost, Integer> {
 
     @Override
     public void create(Cost cost) throws SQLException {
-        System.out.println("Create(cost): " + cost.getName());
         try (PreparedStatement stmt = connection.prepareStatement("INSERT INTO costs"
                 + " (name, amount, category_id)"
                 + " VALUES (?, ?, ?)")) {
             stmt.setString(1, cost.getName());
             stmt.setDouble(2, cost.getAmount());
-            //toimiiko category.getId?
             stmt.setInt(3, cost.getCategory().getId());
             
-            int rowsDeleted = stmt.executeUpdate();
-            if (rowsDeleted > 0) {
-                System.out.println("A cost was created successfully");
-            }
+            stmt.executeUpdate();
         }
     }
     
@@ -83,10 +78,7 @@ public class SQLCostDao implements CostDao<Cost, Integer> {
         statement.setDouble(1, c.getAmount());
         statement.setDouble(2, c.getId());
 
-        int rowsUpdated = statement.executeUpdate();
-        if (rowsUpdated > 0) {
-            System.out.println("An existing cost was updated");
-        }
+        statement.executeUpdate();
     }
 
     @Override
@@ -96,10 +88,7 @@ public class SQLCostDao implements CostDao<Cost, Integer> {
         PreparedStatement statement = connection.prepareStatement(sql);
         statement.setInt(1, cost.getId());
 
-        int rowsDeleted = statement.executeUpdate();
-        if (rowsDeleted > 0) {
-            System.out.println("A cost was deleted successfully");
-        }
+        statement.executeUpdate();
     }
 
     @Override

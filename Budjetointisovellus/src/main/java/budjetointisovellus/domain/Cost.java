@@ -26,14 +26,7 @@ public class Cost {
         this.amount = amount;
         this.category = category;
     }
-    
-    public Cost(String name, double amount, Category category, Date date) {
-        this.name = name;
-        this.amount = amount;
-        this.category = category;
-        this.date = date;
-    }
-    
+
     public int getId() {
         return this.id;
     }

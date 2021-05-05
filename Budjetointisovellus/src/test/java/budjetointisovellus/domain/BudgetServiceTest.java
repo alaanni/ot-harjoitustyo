@@ -169,8 +169,8 @@ public class BudgetServiceTest {
         testService.findUsersBudget();
         testService.createNewCategory("testCategory1");
         assertEquals(false, testService.createNewCost("", 20.0, "testCategory1"));
-        assertEquals(false, testService.createNewCost("", -1.0, "testCategory1"));
-        assertEquals(false, testService.createNewCost("", 20.0, ""));
+        assertEquals(false, testService.createNewCost("test", -1.0, "testCategory1"));
+        assertEquals(false, testService.createNewCost("test", 20.0, ""));
     }
     
     @Test
@@ -256,17 +256,14 @@ public class BudgetServiceTest {
         testService.createNewCost("testCost", 20.0, "testCategory1");
         testService.createNewCost("testCost2", 20.0, "testCategory1");
         categories = testService.findBudgetCategories();
-        for (Category cat : categories) {
-            costs = testService.findCategorysCosts(cat);
-        }
-        Cost c = costs.get(0);
-        testService.removeCost(c);
-        for (Category cat : categories) {
-            costs = testService.findCategorysCosts(cat);
-        }
-        assertEquals(1, costs.size());
         costs = testService.findCategorysCosts(categories.get(0));
         testService.removeCost(costs.get(0));
+        costs = testService.findCategorysCosts(categories.get(0));
+        
+        assertEquals(1, costs.size());
+        
+        testService.removeCost(costs.get(0));
+        
         assertEquals(0, testService.findBudgetCategories().size());
     }
     

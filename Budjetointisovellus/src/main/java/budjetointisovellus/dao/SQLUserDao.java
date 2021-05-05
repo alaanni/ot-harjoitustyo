@@ -35,10 +35,7 @@ public class SQLUserDao implements UserDao<User, Integer> {
             stmt.setString(2, user.getUsername());
             stmt.setString(3, user.getPassword());
             
-            int rowsDeleted = stmt.executeUpdate();
-            if (rowsDeleted > 0) {
-                System.out.println("A user was created successfully");
-            }
+            stmt.executeUpdate();
         }
     }
     

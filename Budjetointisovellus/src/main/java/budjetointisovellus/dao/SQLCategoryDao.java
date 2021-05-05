@@ -30,17 +30,13 @@ public class SQLCategoryDao implements CategoryDao<Category, Integer> {
 
     @Override
     public void create(Category category) throws SQLException {
-        System.out.println("Create(category): " + category.getName());
         try (PreparedStatement stmt = connection.prepareStatement("INSERT INTO categories"
                 + " (name, budget_id)"
                 + " VALUES (?, ?)")) {
             stmt.setString(1, category.getName());
             stmt.setInt(2, category.getBudget().getId());
             
-            int rowsDeleted = stmt.executeUpdate();
-            if (rowsDeleted > 0) {
-                System.out.println("A category was created successfully");
-            }
+            stmt.executeUpdate();
         }
     }
 
@@ -91,10 +87,7 @@ public class SQLCategoryDao implements CategoryDao<Category, Integer> {
         PreparedStatement statement = connection.prepareStatement(sql);
         statement.setInt(1, category.getId());
 
-        int rowsDeleted = statement.executeUpdate();
-        if (rowsDeleted > 0) {
-            System.out.println("A category was deleted successfully!");
-        }
+        statement.executeUpdate();
     }
 
     @Override

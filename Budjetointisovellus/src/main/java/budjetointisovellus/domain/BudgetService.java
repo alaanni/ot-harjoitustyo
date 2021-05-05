@@ -159,7 +159,6 @@ public class BudgetService {
         Budget budget = (Budget) budgetDao.findByUser(logged);
         
         if (budget == null) {
-            System.out.println("Budjettia ei löydy");
             return false;
         }
         
@@ -210,21 +209,7 @@ public class BudgetService {
         categoryDao.create(c);
         return true;
     }
-    
-        
-    /**
-    * poista budjetin kategoria
-    * 
-     * @param category
-     * @return true
-     * @throws java.sql.SQLException
-    */ 
-    
-    public boolean removeCategory(Category category) throws SQLException {
-        categoryDao.delete(category);
-        return true;
-    }
-    
+
     /**
     * luo uusi kulu
     * 

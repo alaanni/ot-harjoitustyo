@@ -39,7 +39,6 @@ public class FakeUserDao implements UserDao<User, Integer> {
     
     @Override
     public void create(User user) throws SQLException {
-        System.out.println("Create(user): " + user.getName());
         try (PreparedStatement stmt = connection.prepareStatement("INSERT INTO users"
                 + " (name, username, password)"
                 + " VALUES (?, ?, ?)")) {
@@ -47,10 +46,7 @@ public class FakeUserDao implements UserDao<User, Integer> {
             stmt.setString(2, user.getUsername());
             stmt.setString(3, user.getPassword());
             
-            int rowsDeleted = stmt.executeUpdate();
-            if (rowsDeleted > 0) {
-                System.out.println("A user was created successfully");
-            }
+            stmt.executeUpdate();
         }
     }
     

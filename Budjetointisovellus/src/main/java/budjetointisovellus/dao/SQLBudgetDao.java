@@ -29,8 +29,6 @@ public class SQLBudgetDao implements BudgetDao<Budget, Integer> {
     
     @Override
     public void create(Budget budget) throws SQLException {
-        System.out.println("Create(budget) for " + budget.getBudgetUser().getName());
-        
         try (PreparedStatement stmt = connection.prepareStatement("INSERT INTO budgets"
                 + " (name, moneyToUse, user_id)"
                 + " VALUES (?, ?, ?)")) {
@@ -70,10 +68,7 @@ public class SQLBudgetDao implements BudgetDao<Budget, Integer> {
         statement.setDouble(1, budget.getMoneyToUse());
         statement.setInt(2, budget.getId());
 
-        int rowsUpdated = statement.executeUpdate();
-        if (rowsUpdated > 0) {
-            System.out.println("An existing budget was updated successfully!");
-        }
+        statement.executeUpdate();
     }
 
     @Override
