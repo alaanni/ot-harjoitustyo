@@ -22,4 +22,5 @@
 | 2.5.  | 3    | luotu toiminnallisuus suunnitelman summan ja jäljellä olevan rahamäärän näyttämiseen, korjailtu testausta |
 | 3.5.  | 2    | siistitty koodia, päivitetty testejä, javadoc |
 | 4.5.  | 2    | dokumentointia |
-| yht.  | 71   | | 
+| 5.5.  | 1    | korjailua |
+| yht.  | 72   | | 
