@@ -78,5 +78,4 @@ public class SQLBudgetDao implements BudgetDao<Budget, Integer> {
             stmt.executeUpdate();
         }
     }
-    
 }
