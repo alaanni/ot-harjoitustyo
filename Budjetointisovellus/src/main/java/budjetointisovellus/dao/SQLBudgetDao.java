@@ -16,6 +16,7 @@ public class SQLBudgetDao implements BudgetDao<Budget, Integer> {
         initTable();
     }
     
+    @Override
     public final void initTable() throws SQLException {
         try (PreparedStatement stmt = connection.prepareStatement("CREATE TABLE IF NOT EXISTS budgets "
                 + "(budget_id INTEGER PRIMARY KEY AUTOINCREMENT, "

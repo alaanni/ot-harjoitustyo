@@ -6,6 +6,7 @@ import java.util.List;
 
 
 public interface CostDao<Cost, Integer> {
+    void initTable() throws SQLException;
     void create(Cost cost) throws SQLException;
     List<Cost> findAllByCategory(Category category) throws SQLException;
     void update(Cost cost) throws SQLException;

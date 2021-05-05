@@ -27,8 +27,6 @@ public class BudgetServiceTest {
     private BudgetDao budgetDao;
     private CategoryDao categoryDao;
     private CostDao costDao;
-    private User logged;
-    private Budget usersBudget;
     private List<Category> categories = new ArrayList<>();
     private List<Cost> costs = new ArrayList<>();
     
@@ -70,7 +68,6 @@ public class BudgetServiceTest {
     
     @Test
     public void returnFalseIfLoginWithoutUsernameOrNameNotFound() throws SQLException {
-        testService.createUser("testName", "testUsername", "testPw");
         assertEquals(false, testService.login("", ""));
         assertEquals(false, testService.login("tesNam", "tesP"));
     }

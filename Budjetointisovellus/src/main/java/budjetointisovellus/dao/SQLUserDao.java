@@ -15,6 +15,7 @@ public class SQLUserDao implements UserDao<User, Integer> {
         initTable();
     }
     
+    @Override
     public final void initTable() throws SQLException {
         try (PreparedStatement stmt = connection.prepareStatement("CREATE TABLE IF NOT EXISTS users "
                 + "(user_id INTEGER PRIMARY KEY AUTOINCREMENT, "

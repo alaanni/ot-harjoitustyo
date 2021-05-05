@@ -17,10 +17,11 @@ public class FakeUserDao implements UserDao<User, Integer> {
     
     public FakeUserDao(String url) throws SQLException {
         connection = DriverManager.getConnection("jdbc:sqlite:" + url);
-        initTables();
+        initTable();
     }
     
-    public final void initTables() throws SQLException {
+    @Override
+    public final void initTable() throws SQLException {
         try (PreparedStatement stmt = connection.prepareStatement("CREATE TABLE IF NOT EXISTS users "
                 + "(user_id INTEGER PRIMARY KEY AUTOINCREMENT, "
                 + "name    VARCHAR(255)  NOT NULL, "

@@ -18,6 +18,7 @@ public class SQLCategoryDao implements CategoryDao<Category, Integer> {
         initTable();
     }
     
+    @Override
     public final void initTable() throws SQLException {
         try (PreparedStatement stmt = connection.prepareStatement("CREATE TABLE IF NOT EXISTS categories "
                 + "(category_id INTEGER PRIMARY KEY AUTOINCREMENT, "

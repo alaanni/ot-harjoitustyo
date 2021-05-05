@@ -21,6 +21,7 @@ public class FakeCostDao implements CostDao<Cost, Integer> {
         initTable();
     }
     
+    @Override
     public final void initTable() throws SQLException {
         try (PreparedStatement stmt = connection.prepareStatement("CREATE TABLE IF NOT EXISTS costs "
                 + "(cost_id INTEGER PRIMARY KEY AUTOINCREMENT, "

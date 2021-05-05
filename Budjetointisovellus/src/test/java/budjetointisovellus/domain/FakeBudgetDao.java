@@ -17,10 +17,11 @@ public class FakeBudgetDao implements BudgetDao<Budget, Integer> {
 
     public FakeBudgetDao(String url) throws SQLException {
         connection = DriverManager.getConnection("jdbc:sqlite:" + url);
-        initTables();
+        initTable();
     }
     
-    public final void initTables() throws SQLException {
+    @Override
+    public final void initTable() throws SQLException {
         try (PreparedStatement stmt = connection.prepareStatement("CREATE TABLE IF NOT EXISTS budgets "
                 + "(budget_id INTEGER PRIMARY KEY AUTOINCREMENT, "
                 + "name    VARCHAR(255), "
