@@ -16,7 +16,7 @@ DAO-luokat on testattu käyttäen tiedostossa _config.properties_ määriteltyä
 
 ### Testikattavuus
 
-![Screenshot from 2021-05-04 22-42-18](https://user-images.githubusercontent.com/48988852/117060812-0d66ba80-ad2a-11eb-922e-ee683beb13d7.png)
+![Screenshot from 2021-05-05 11-24-16](https://user-images.githubusercontent.com/48988852/117114411-7e42bc80-ad94-11eb-9e09-d5c6e13d816f.png)
 
  Testauksen rivikattavuus on 98 % ja haarautumakattavuus 85 %. 
  
