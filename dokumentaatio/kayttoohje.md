@@ -1,6 +1,6 @@
 # Käyttöohje
 
-Lataa tiedosto  [Budjetointisovellus-1.0-SNAPSHOT.jar](https://github.com/alaanni/ot-harjoitustyo/releases/tag/viikko6).
+Lataa tiedosto  [Budjetointisovellus-1.0-SNAPSHOT.jar](https://github.com/alaanni/ot-harjoitustyo/releases/tag/loppupalautus).
 
 ## Konfigurointi
 
