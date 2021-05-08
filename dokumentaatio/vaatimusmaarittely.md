@@ -10,24 +10,22 @@ Sovelluksella on yksi käyttäjärooli eli normaali käyttäjä.
 
 ## Toiminnallisuudet 
 
- **(kaikki toiminnallisuudet tehty)**
-
 - Ennen kirjautumista
   - voidaan luoda uusi käyttäjätunnus
   - käyttäjä voi kirjautua sisään
 
 - Kirjautumisen jälkeen käyttäjä
-  - voi luoda suunnitelman (budjetin)
+  - voi aloittaa budjetoinnin tai kirjautua ulos
   - voi lisätä, muokata ja nähdä käytettävissä olevan rahamäärään
   - voi lisätä suunnitellun kulun ja sen kategorian
   - näkee suunnitelman kulut listattuina ja jaoteltuina omiin kategorioihinsa
   - voi muokata ja poistaa suunnitelmaan lisättyjä kuluja
-  **(viikolla 6 lisätty ominaisuus tyhjäksi jääneen kategorian poistamiseksi)**
-  - näkee kulujen summan sekä jäljellä olevan rahamäärän   **(tehty viikolla 6)**
+  - näkee kulujen summan sekä jäljellä olevan rahamäärän
 
 ## Jatkokehitysideoita
-- Pääkäyttäjä joka voi tehdä muutoksia ja lisäyksiä sovellukseen ja normaalilla käyttäjällä katseluoikeus
-- Alkuperäisen ja toteutuneen suunnitelman vertailu, jonka avulla tehdä jatkuvaa seurantaa yksittäisten kulujen pysymisestä budjetissa
+
+- Pääkäyttäjä joka voi tehdä muutoksia ja lisäyksiä budjettin ja normaalilla käyttäjällä katseluoikeus
+- Alkuperäisen ja toteutuneen suunnitelman vertailu, jonka avulla voi tehdä jatkuvaa seurantaa yksittäisten kulujen pysymisestä budjetissa
 - Muokattavat ja tallennettavat budjettipohjat joissa valmiina oletuskategorioita
 - Värikoodatut kategoriat ja kaaviot kulujen jakautumisesta niiden kesken
 - Mahdollisuus tallentaa valokuvat kuluihin liittyvistä kuiteista ja järjestää ne päivänmäärän ja kategorian mukaisesti
