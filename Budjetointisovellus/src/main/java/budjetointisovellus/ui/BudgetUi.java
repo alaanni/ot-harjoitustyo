@@ -393,12 +393,11 @@ public class BudgetUi extends Application {
                     primaryStage.setScene(budgetScene);
                     usernameTxt.setText("");
                     passwordTxt.setText("");
-                    userInfo.setText("Tervetuloa "+budgetService.getLoggedUser().getName());
+                    userInfo.setText("Tervetuloa "+budgetService.getLoggedUser().getName()+"! ");
                     if (budgetService.findUsersBudget()) {
                         budgetPane.getChildren().clear();
                         budgetPane.getChildren().addAll(logoutAndInfo, budgetLabel, budgetLines);
                     } else {
-                        System.out.println("Käyttäjällä ei ole budjettia");
                         budgetPane.getChildren().clear();
                         budgetPane.getChildren().addAll(logoutAndInfo, budgetLabel, budgetLines, newBudget);
                     }

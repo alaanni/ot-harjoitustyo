@@ -8,9 +8,7 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.util.Properties;
 import org.junit.After;
-import org.junit.AfterClass;
 import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
@@ -51,8 +49,8 @@ public class SQLBudgetDaoTest {
         assertEquals(100, b.getMoneyToUse(), 0);
     }
     
-        @Test
-    public void returnsNullIfUserNotFound() throws SQLException {
+    @Test
+    public void returnsNullIfNotFound() throws SQLException {
         assertEquals(null, (Budget) budgetDao.findByUser(user));
     }
     

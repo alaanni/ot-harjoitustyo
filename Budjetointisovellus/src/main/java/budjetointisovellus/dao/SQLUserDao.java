@@ -28,7 +28,6 @@ public class SQLUserDao implements UserDao<User, Integer> {
     
     @Override
     public void create(User user) throws SQLException {
-        System.out.println("Create(user): " + user.getName());
         try (PreparedStatement stmt = connection.prepareStatement("INSERT INTO users"
                 + " (name, username, password)"
                 + " VALUES (?, ?, ?)")) {

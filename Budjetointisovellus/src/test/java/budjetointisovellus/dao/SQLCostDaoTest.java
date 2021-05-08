@@ -34,6 +34,8 @@ public class SQLCostDaoTest {
     Cost cost2;
     Cost cost3;
     Cost testCost;
+    List<Cost> category1Costs;
+    List<Cost> category2Costs;
     
     public SQLCostDaoTest() {
     }
@@ -51,6 +53,13 @@ public class SQLCostDaoTest {
         cost1 = new Cost("firstCost", 10, category1);
         cost2 = new Cost("secCost", 100, category1);
         cost3 = new Cost("thirdCost", 1000, category2);
+        
+        costDao.create(cost1);
+        costDao.create(cost2);
+        costDao.create(cost3);
+        
+        category1Costs  = costDao.findAllByCategory(category1);
+        category2Costs  = costDao.findAllByCategory(category2);
     }
     
     @After
@@ -59,49 +68,24 @@ public class SQLCostDaoTest {
     }
 
     @Test
-    public void createsCostsAndFindsAllByCategory() throws SQLException {
-        costDao.create(cost1);
-        costDao.create(cost2);
-        costDao.create(cost3);
-        
-        List<Cost> category1Costs  = costDao.findAllByCategory(category1);
-        List<Cost> category2Costs  = costDao.findAllByCategory(category2);
-        
+    public void createsCostsAndFindsAllByCategory() throws SQLException { 
         assertEquals(2, category1Costs.size());
         assertEquals(1, category2Costs.size());
     }
     
     @Test
     public void updateCostWorks() throws SQLException {
-        costDao.create(cost1);
-        costDao.create(cost2);
-        costDao.create(cost3);
-        List<Cost> costs  = costDao.findAllByCategory(category1);
-        for (Cost c : costs) {
-            if (c.getName().equals("secCost")) {
-                c.setAmount(150.0);
-                costDao.update(c);
-            }
-        }
-        List<Cost> category1Costs  = costDao.findAllByCategory(category1);
-        for (Cost c : category1Costs) {
-            if (c.getName().equals("secCost")) {
-                testCost = c;
-            }
-        }
-        assertEquals(150, testCost.getAmount(), 0);
+        category2Costs.get(0).setAmount(150.0);
+        costDao.update(category2Costs.get(0));
+        category2Costs  = costDao.findAllByCategory(category2);
+        assertEquals(150, category2Costs.get(0).getAmount(), 0);
     }
     
     @Test
     public void deleteCostWorks() throws SQLException {
-        costDao.create(cost1);
-        costDao.create(cost2);
-        costDao.create(cost3);
-        List <Cost> costs = costDao.findAllByCategory(category1);
-        costDao.delete(costs.get(0));
-        List<Cost> category1Costs  = costDao.findAllByCategory(category1);
-        List<Cost> category2Costs  = costDao.findAllByCategory(category2);
-        
+        costDao.delete(category1Costs.get(0));
+        category1Costs  = costDao.findAllByCategory(category1);
+        category2Costs  = costDao.findAllByCategory(category2);        
         assertEquals(1, category1Costs.size());
         assertEquals(1, category2Costs.size());
     }

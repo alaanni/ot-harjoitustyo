@@ -113,7 +113,7 @@ public class BudgetService {
     }
     
     /**
-    * luo uusi suunnitelma (budjetti)
+    * luo uusi budjetti
     * 
      * @param name budjetin nimi
      * @param moneyToUse rahaa käytettävissä
@@ -149,7 +149,7 @@ public class BudgetService {
     }
     
     /**
-    * Etsi käyttäjän budjetti
+    * etsi käyttäjän budjetti
     * 
      * @return true jos käyttäjällä on budjetti
      * @throws java.sql.SQLException 
