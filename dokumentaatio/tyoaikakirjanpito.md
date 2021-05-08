@@ -23,4 +23,5 @@
 | 3.5.  | 2    | siistitty koodia, päivitetty testejä, javadoc |
 | 4.5.  | 2    | dokumentointia |
 | 5.5.  | 1    | korjailua |
-| yht.  | 72   | | 
+| 8.5.  | 1    | siistitty testejä |
+| yht.  | 73   | | 
