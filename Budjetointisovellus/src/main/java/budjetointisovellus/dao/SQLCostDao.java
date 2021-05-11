@@ -22,6 +22,11 @@ public class SQLCostDao implements CostDao<Cost, Integer> {
         initTable();
     }
     
+    /**
+    * luo tietokantaan taulun costs, mikäli sitä ei ole
+     * @throws java.sql.SQLException
+    */
+    
     @Override
     public final void initTable() throws SQLException {
         try (PreparedStatement stmt = connection.prepareStatement("CREATE TABLE IF NOT EXISTS costs "
@@ -33,6 +38,12 @@ public class SQLCostDao implements CostDao<Cost, Integer> {
             stmt.executeUpdate();
         }
     }
+    
+    /**
+    * tallentaa uuden kustannuksen tietokantaan
+     * @param cost
+     * @throws java.sql.SQLException
+    */
 
     @Override
     public void create(Cost cost) throws SQLException {
@@ -46,6 +57,13 @@ public class SQLCostDao implements CostDao<Cost, Integer> {
             stmt.executeUpdate();
         }
     }
+    
+    /**
+    * etsii tietokannasta kaikki kategoriaan liittyvät kustannukset
+     * @param category kategoria, mihin liittyviä kustannuksia etsitään
+     * @return lista kategorian kustannuksista
+     * @throws java.sql.SQLException
+    */
     
     @Override
     public List<Cost> findAllByCategory(Category category) throws SQLException {
@@ -68,6 +86,12 @@ public class SQLCostDao implements CostDao<Cost, Integer> {
         }
         return costs;
     }
+    
+    /**
+    * muokkaa tietokannassa olevaa kulua
+     * @param cost muokattava kulu
+     * @throws java.sql.SQLException
+    */
 
     @Override
     public void update(Cost cost) throws SQLException {
@@ -81,7 +105,13 @@ public class SQLCostDao implements CostDao<Cost, Integer> {
 
         statement.executeUpdate();
     }
-
+    
+    /**
+    * poistaa kustannuksen tietokannasta
+     * @param cost poistettava kulu
+     * @throws java.sql.SQLException
+    */
+    
     @Override
     public void delete(Cost cost) throws SQLException {
         String sql = "DELETE FROM costs WHERE cost_id=?";
@@ -92,6 +122,11 @@ public class SQLCostDao implements CostDao<Cost, Integer> {
         statement.executeUpdate();
     }
 
+    /**
+    * poistaa tietokannasta taulun costs (käytetään testeissä)
+     * @throws java.sql.SQLException
+    */
+    
     @Override
     public void dropTable() throws SQLException {
         try (PreparedStatement stmt = connection.prepareStatement("DROP TABLE costs")) {

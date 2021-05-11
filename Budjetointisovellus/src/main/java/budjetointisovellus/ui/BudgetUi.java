@@ -31,6 +31,9 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
+/**
+ * Käyttöliittymä
+ */
 
 public class BudgetUi extends Application {
     private BudgetService budgetService;
@@ -71,7 +74,11 @@ public class BudgetUi extends Application {
         budgetService = new BudgetService(userDao, budgetDao, categoryDao, costDao);
     }
     
-    //create one budget line
+    /**
+    * luo rivin budjettiin
+     * @param cost
+     * @throws java.sql.SQLException
+    */
     
     public Node createBudgetLine(Cost cost) throws SQLException {
         HBox bLine = new HBox();
@@ -114,7 +121,10 @@ public class BudgetUi extends Application {
         return bLine;
     }
     
-    //render budget lines
+    /**
+    * uudelleenrenderöi budjettinäkymän
+     * @throws java.sql.SQLException
+    */
     
     public void redrawBudgetLines() throws SQLException {
         budgetLines.getChildren().clear();

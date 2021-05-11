@@ -18,6 +18,11 @@ public class SQLCategoryDao implements CategoryDao<Category, Integer> {
         initTable();
     }
     
+    /**
+    * luo tietokantaan taulun categories, mikäli sitä ei ole
+     * @throws java.sql.SQLException
+    */
+    
     @Override
     public final void initTable() throws SQLException {
         try (PreparedStatement stmt = connection.prepareStatement("CREATE TABLE IF NOT EXISTS categories "
@@ -28,6 +33,12 @@ public class SQLCategoryDao implements CategoryDao<Category, Integer> {
             stmt.executeUpdate();
         }
     }
+    
+    /**
+    * tallentaa uuden kategorian tietokantaan
+     * @param category
+     * @throws java.sql.SQLException
+    */
 
     @Override
     public void create(Category category) throws SQLException {
@@ -40,6 +51,14 @@ public class SQLCategoryDao implements CategoryDao<Category, Integer> {
             stmt.executeUpdate();
         }
     }
+    
+    /**
+    * etsii yhden kategorian
+     * @param categoryName kategorian nimi
+     * @param budget budjetti, johon etsittävä kategoria kuuluu
+     * @return null jos kategoriaa ei löydy, muuten halutun kategorian
+     * @throws java.sql.SQLException
+    */
 
     @Override
     public Category findOneByBudget(String categoryName, Budget budget) throws SQLException {
@@ -58,6 +77,13 @@ public class SQLCategoryDao implements CategoryDao<Category, Integer> {
         
         return c;
     }
+    
+    /**
+    * etsii kaikki budjettiin kuuluvat kategoriat
+     * @param budget
+     * @return palauttaa listan kategorioista
+     * @throws java.sql.SQLException
+    */
 
     @Override
     public List findAllByBudget(Budget budget) throws SQLException {
@@ -81,6 +107,12 @@ public class SQLCategoryDao implements CategoryDao<Category, Integer> {
         return categories;
     }
     
+    /**
+    * poistaa kategorian tietokannasta
+     * @param category poistettava kategoria
+     * @throws java.sql.SQLException
+    */
+    
     @Override
     public void delete(Category category) throws SQLException {
         String sql = "DELETE FROM categories WHERE category_id=?";
@@ -90,6 +122,11 @@ public class SQLCategoryDao implements CategoryDao<Category, Integer> {
 
         statement.executeUpdate();
     }
+    
+    /**
+    * poistaa tietokannasta taulun categories (käytetään testeissä)
+     * @throws java.sql.SQLException
+    */
 
     @Override
     public void dropTable() throws SQLException {

@@ -16,6 +16,11 @@ public class SQLBudgetDao implements BudgetDao<Budget, Integer> {
         initTable();
     }
     
+    /**
+    * luo tietokantaan taulun budgets, mikäli sitä ei ole
+     * @throws java.sql.SQLException
+    */
+    
     @Override
     public final void initTable() throws SQLException {
         try (PreparedStatement stmt = connection.prepareStatement("CREATE TABLE IF NOT EXISTS budgets "
@@ -27,6 +32,13 @@ public class SQLBudgetDao implements BudgetDao<Budget, Integer> {
             stmt.executeUpdate();
         }
     }
+    
+    
+    /**
+    * tallentaa uuden budjetin tietokantaan
+     * @param budget
+     * @throws java.sql.SQLException
+    */
     
     @Override
     public void create(Budget budget) throws SQLException {
@@ -41,6 +53,14 @@ public class SQLBudgetDao implements BudgetDao<Budget, Integer> {
         }
     }
 
+    
+    /**
+    * etsii käyttäjän budjetin
+     * @param user
+     * @return null jos käyttäjällä ei ole budjettia, muuten käyttäjän budjetti
+     * @throws java.sql.SQLException
+    */
+    
     @Override
     public Budget findByUser(User user) throws SQLException {
         ResultSet rs;
@@ -59,6 +79,12 @@ public class SQLBudgetDao implements BudgetDao<Budget, Integer> {
         
         return b;
     }
+    
+    
+    /**
+    * päivittää tietokannassa olevan budjetin saldoa
+     * @param budget
+    */
 
     @Override
     @SuppressWarnings("empty-statement")
@@ -71,6 +97,12 @@ public class SQLBudgetDao implements BudgetDao<Budget, Integer> {
 
         statement.executeUpdate();
     }
+    
+    
+    /**
+    * poistaa tietokannasta taulun budgets (käytetään testeissä)
+     * @throws java.sql.SQLException
+    */
 
     @Override
     public void dropTable() throws SQLException {

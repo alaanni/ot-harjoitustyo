@@ -15,6 +15,11 @@ public class SQLUserDao implements UserDao<User, Integer> {
         initTable();
     }
     
+    /**
+    * luo tietokantaan taulun users, mikäli sitä ei ole
+     * @throws java.sql.SQLException
+    */
+    
     @Override
     public final void initTable() throws SQLException {
         try (PreparedStatement stmt = connection.prepareStatement("CREATE TABLE IF NOT EXISTS users "
@@ -25,6 +30,12 @@ public class SQLUserDao implements UserDao<User, Integer> {
             stmt.executeUpdate();
         }
     }
+    
+    /**
+    * tallentaa uuden käyttäjän tietokantaan
+     * @param user
+     * @throws java.sql.SQLException
+    */
     
     @Override
     public void create(User user) throws SQLException {
@@ -38,6 +49,13 @@ public class SQLUserDao implements UserDao<User, Integer> {
             stmt.executeUpdate();
         }
     }
+    
+    /**
+    * etsii käyttäjän tietokannasta
+     * @param username käyttäjänimi, jonka perusteella käyttäjää etsitään
+     * @return null jos käyttäjää ei löydy tietokannasta, muuten löydetyn käyttäjän
+     * @throws java.sql.SQLException
+    */
     
     @Override
     public User findByUsername(String username) throws SQLException {
@@ -57,6 +75,11 @@ public class SQLUserDao implements UserDao<User, Integer> {
         return u;
     }
 
+    /**
+    * poistaa tietokannasta taulun users (käytetään testeissä)
+     * @throws java.sql.SQLException
+    */
+    
     @Override
     public void dropTable() throws SQLException {
         try (PreparedStatement stmt = connection.prepareStatement("DROP TABLE users")) {
