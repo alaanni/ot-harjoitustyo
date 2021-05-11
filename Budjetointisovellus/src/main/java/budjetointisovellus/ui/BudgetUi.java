@@ -201,7 +201,7 @@ public class BudgetUi extends Application {
                     newAmountField.setText("");
                     categoryField.setText("");
                 } else {
-                    addCostLabel.setText("Täytä kaikki kentät ja ilmoita kustannus numeroina!");
+                    addCostLabel.setText("Täytä kaikki kentät ja ilmoita kustannus positiivisena lukuna!");
                 }
             } catch (SQLException ex) {
                 Logger.getLogger(BudgetUi.class.getName()).log(Level.SEVERE, null, ex);
@@ -303,7 +303,7 @@ public class BudgetUi extends Application {
                     }
                     redrawBudgetLines();
                 } else {
-                    bn.setText("Anna nimi ja käytettävissä oleva rahamäärä numeroina.");
+                    bn.setText("Anna nimi ja käytettävissä oleva rahamäärä positiivisena lukuna.");
                 }
             } catch (SQLException ex) {
                 Logger.getLogger(BudgetUi.class.getName()).log(Level.SEVERE, null, ex);
