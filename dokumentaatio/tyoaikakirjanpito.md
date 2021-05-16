@@ -24,4 +24,6 @@
 | 4.5.  | 2    | dokumentointia |
 | 5.5.  | 1    | korjailua |
 | 8.5.  | 1    | siistitty testejä |
-| yht.  | 73   | | 
+| 11.5. | 2    | viimeistelyt koodiin, loppupalautus |
+| 16.5. | 1    | viimeistelyt dokumentointiin |
+| yht.  | 76   | | 
