@@ -14,7 +14,7 @@
 | 19.4. | 3    | chekstyle käyttöönotto, Category toteutusta |
 | 20.4. | 8    | suunniteltu rakennetta, lisää metodeja sovelluslogiikkaan, testausta jatkettu |
 | 22.4. | 2    | virheilmoitukset lomakkeiden täyttövirheisiin |
-¦ 23.4. | 6    | testausta laajennettu ja CostDao toteutusta |
+| 23.4. | 6    | testausta laajennettu ja CostDao toteutusta |
 | 25.4. | 3    | toteutettu mahdollisuus kulujen lisäämiseen |
 | 26.4. | 6    | paranneltu käyttäjälle näkyvää toiminnallisuutta ja laajennettu testausta |
 | 27.4. | 4    | lisätty mahdollisuus poistaa ja muokata kulua ja laajennettu testausta |
